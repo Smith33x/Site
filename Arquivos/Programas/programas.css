@@ -1,257 +1,288 @@
-@import url('https://fonts.googleapis.com/css2?family=Orbitron&family=Share+Tech+Mono&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Orbitron&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
 
-/* Cores e variáveis CSS para o tema hacker */
 :root {
-    --hacker-green: #00ff00; /* Verde vibrante */
-    --hacker-green-light: #00cc00; /* Verde um pouco mais claro para hover */
-    --hacker-dark: #0a0a0a; /* Fundo bem escuro */
-    --hacker-grey: #a0a0a0; /* Texto secundário */
-    --glow-strength: 0 0 5px var(--hacker-green),
-                     0 0 10px var(--hacker-green),
-                     0 0 20px var(--hacker-green),
-                     0 0 40px var(--hacker-green);
-    --inner-glow-strength: inset 0 0 5px var(--hacker-green-light),
-                           inset 0 0 10px var(--hacker-green);
+    --primary-color: #7f8cfa;
+    --secondary-color: #5d6edc;
+    --text-color: #ccd6f6;
+    --bg-dark: #0a0a0a;
+    --glass-bg: rgba(255, 255, 255, 0.08);
+    --glass-border: rgba(255, 255, 255, 0.2);
+    --shadow-color: rgba(0, 0, 0, 0.4);
+    --header-height-desktop: 80px;
+    --header-height-mobile: 60px;
 }
 
 body {
     margin: 0;
-    /* Wallpaper de fundo do Freepik */
-    background: url('https://img.freepik.com/vector-premium/cyber-hacker-ataque-fondo-craneo-vector_42077-7852.jpg?semt=ais_hybrid&w=740') no-repeat center center fixed;
+    background: url('config/background.jpg') no-repeat center center fixed; /* Verifique o caminho da imagem de fundo */
     background-size: cover;
-    color: #fff; /* Cor padrão do texto, mas usaremos variáveis para específico */
-    font-family: 'Share Tech Mono', monospace; /* Fonte com estilo de terminal */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
+    background-color: var(--bg-dark);
+    color: var(--text-color);
+    font-family: 'Poppins', sans-serif;
     min-height: 100vh;
-    padding: 20px;
-    box-sizing: border-box;
-    position: relative;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
 }
 
-/* Camada escura sobre o fundo para melhorar o contraste */
-body::before {
-    content: '';
-    position: fixed;
+h1, h2, h3 {
+    font-family: 'Orbitron', sans-serif;
+    color: var(--text-color);
+    text-shadow:
+        0 0 5px var(--primary-color),
+        0 0 10px var(--primary-color);
+}
+
+/* --- Header da página de Programas --- */
+.page-header-programas {
+    display: flex;
+    justify-content: center; /* Centraliza o título */
+    align-items: center;
+    padding: 0 5%;
+    height: var(--header-height-desktop);
+    background-color: rgba(0, 0, 0, 0.6);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    position: sticky;
     top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.7); /* Camada escura com mais opacidade para o tema hacker */
-    z-index: -1;
+    z-index: 1000;
 }
 
-/* Garante que todos os elementos de conteúdo fiquem acima do fundo e da camada escura */
-header, main, .back-to-menu, .credits, .program-category-item {
-    position: relative; /* Permite que z-index funcione */
-    z-index: 1; /* Valor maior que -1 para ficarem visíveis */
-}
-
-header {
-    width: 100%;
-    text-align: center;
-    margin-bottom: 40px;
-    padding-top: 20px;
-}
-
-h1 {
-    font-family: 'Orbitron', sans-serif; /* Mantém Orbitron para o título principal */
-    font-size: 3rem;
-    letter-spacing: 6px;
-    text-transform: uppercase;
-    color: var(--hacker-green);
-    text-shadow: var(--glow-strength); /* Efeito de brilho verde */
-    text-align: center;
-}
-
-main.program-category-container {
-    width: 100%;
-    max-width: 1200px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.program-category-list {
-    list-style: none;
-    padding: 0;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 30px;
-    justify-content: center;
-    width: 100%;
-    max-width: 90%;
-}
-
-.program-category-item {
-    background-color: var(--hacker-dark); /* Fundo escuro */
-    border: 2px solid var(--hacker-green);
-    border-radius: 15px;
-    box-shadow: var(--glow-strength), var(--inner-glow-strength); /* Brilho externo e interno */
-    transition: all 0.3s ease;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-}
-
-.program-category-item:hover {
-    background-color: rgba(0, 255, 0, 0.2); /* Fundo mais transparente com verde no hover */
-    box-shadow: var(--glow-strength),
-                0 0 30px var(--hacker-green-light), /* Brilho mais forte no hover */
-                var(--inner-glow-strength);
-    transform: translateY(-5px) scale(1.02);
-}
-
-.program-category-item a {
-    display: flex;
-    flex-direction: column;
-    color: var(--hacker-green); /* Cor padrão dos links dos itens */
+.page-header-programas .back-button-programas {
+    position: absolute; /* Posição absoluta para o botão de voltar */
+    left: 5%;
+    color: var(--primary-color);
     text-decoration: none;
-    height: 100%;
+    font-size: 1.1rem;
+    padding: 8px 15px;
+    border: 1px solid var(--primary-color);
+    border-radius: 8px;
+    background-color: rgba(255, 255, 255, 0.05);
+    transition: background-color 0.3s ease, transform 0.2s ease, border-color 0.3s ease;
 }
 
-/* ESTILOS PARA DEIXAR OS ÍCONES REDONDOS */
-.program-icon {
-    width: 150px; /* Largura fixa para garantir um círculo perfeito */
-    height: 150px; /* Altura fixa igual à largura */
-    overflow: hidden; /* Corta qualquer parte da imagem que exceda o círculo */
-    border-bottom: none; /* Remove a borda inferior antiga */
-    border-radius: 50%; /* Transforma a div em um círculo */
-    border: 2px solid var(--hacker-green); /* Borda circular verde */
-    box-shadow: 0 0 8px var(--hacker-green), inset 0 0 10px var(--hacker-green-light); /* Brilho inicial para o círculo */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: rgba(0, 0, 0, 0.4); /* Fundo ligeiramente transparente */
-    margin: 15px auto 0; /* Centraliza o ícone dentro do card e adiciona margem superior */
+.page-header-programas .back-button-programas:hover {
+    background-color: var(--primary-color);
+    color: var(--bg-dark);
+    transform: translateY(-2px);
+    border-color: var(--secondary-color);
 }
 
-.program-category-item:hover .program-icon {
-    border-color: var(--hacker-green-light); /* Muda a cor da borda no hover */
-    box-shadow: 0 0 20px var(--hacker-green), 0 0 30px var(--hacker-green-light), inset 0 0 15px var(--hacker-green-light); /* Aumenta o glow no hover */
+.page-title-programas {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2.2rem;
+    color: var(--primary-color);
+    text-shadow: 0 0 10px var(--primary-color);
+    letter-spacing: 2px;
+    margin: 0; /* Remove margem padrão */
+    text-align: center;
+    flex-grow: 1; /* Permite que o título ocupe espaço */
 }
 
-.program-icon img {
-    width: 90%; /* A imagem preencherá 90% do círculo */
-    height: 90%; /* A imagem preencherá 90% do círculo */
-    object-fit: contain; /* Garante que o ícone se ajuste sem cortar ou esticar, mantendo suas proporções */
-    display: block;
-    filter: drop-shadow(0 0 5px var(--hacker-green)); /* Sombra para o ícone */
-    transition: transform 0.3s ease, filter 0.3s ease;
-}
-
-.program-category-item:hover .program-icon img {
-    transform: scale(1.05); /* Zoom sutil no ícone no hover */
-    filter: drop_shadow(0 0 15px var(--hacker-green-light)); /* Brilho maior no ícone no hover */
-}
-
-/* FIM DOS ESTILOS PARA ÍCONES REDONDOS */
-
-
-.program-info {
-    padding: 15px;
+/* --- Conteúdo Principal (Mesmos estilos do index.html) --- */
+.content-wrapper {
     flex-grow: 1;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    text-align: center;
-    background-color: rgba(0, 0, 0, 0.4); /* Fundo escuro para a área de texto */
-    border-top: 1px solid rgba(0, 255, 0, 0.2);
-}
-
-.program-info h2 {
-    font-size: 1.4rem;
-    margin-top: 0;
-    margin-bottom: 8px;
-    color: var(--hacker-green);
-    text-shadow: var(--glow-strength); /* Brilho verde para o título do programa */
-}
-
-.program-info p {
-    font-size: 0.95rem;
-    line-height: 1.4;
-    color: var(--hacker-grey); /* Cor cinza para a descrição */
-    text-shadow: 0 0 2px rgba(0,0,0,0.8);
-}
-
-.back-to-menu {
-    margin-top: 40px;
-    margin-bottom: 20px;
-}
-
-.back-to-menu a {
-    display: inline-block;
-    background: var(--hacker-green);
-    color: var(--hacker-dark); /* Texto escuro no botão verde */
-    padding: 12px 25px;
-    border-radius: 8px;
-    text-decoration: none;
-    font-size: 1.1rem;
-    font-weight: bold;
-    transition: background 0.3s ease, transform 0.3s ease;
-    border: 2px solid var(--hacker-green);
-    box-shadow: var(--glow-strength);
-}
-
-.back-to-menu a:hover {
-    background: var(--hacker-green-light);
-    transform: translateY(-3px);
-    box-shadow: 0 0 25px var(--hacker-green);
-}
-
-.credits {
-    margin-top: 30px;
-    font-size: 0.9rem;
-    color: var(--hacker-grey);
+    align-items: center;
+    padding: 40px 5%;
+    gap: 50px;
     width: 100%;
+    box-sizing: border-box;
+}
+
+.category-section {
+    width: 100%;
+    max-width: 1200px;
     text-align: center;
-    padding-bottom: 20px;
-    text-shadow: 0 0 2px rgba(0,0,0,0.8);
 }
 
-/* Media Queries para responsividade */
+.section-title {
+    font-size: 2.8rem;
+    margin-bottom: 40px;
+    letter-spacing: 4px;
+    color: var(--text-color);
+    text-shadow: 0 0 15px var(--primary-color);
+}
+
+.card-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    justify-content: center;
+    align-items: stretch;
+    list-style: none; /* Remove bolinhas da lista */
+    padding: 0; /* Remove padding padrão da lista */
+    margin: 0; /* Remove margem padrão da lista */
+}
+
+.card {
+    text-decoration: none;
+    color: var(--text-color);
+    padding: 30px;
+    border-radius: 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 250px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+/* Efeito Glassmorphism (Blur) */
+.blur-effect {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 8px 32px var(--shadow-color);
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6), 0 0 20px var(--primary-color);
+}
+
+.card-icon {
+    margin-bottom: 15px;
+    width: 80px; /* Tamanho fixo para o container do ícone */
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-icon img {
+    max-width: 100%; /* Garante que a imagem se ajuste ao container */
+    max-height: 100%;
+    object-fit: contain; /* Redimensiona a imagem para caber, mantendo proporções */
+    border-radius: 10px; /* Bordas suaves para ícones */
+}
+
+.card h3 {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+    color: var(--primary-color);
+    text-shadow: 0 0 8px var(--primary-color);
+}
+
+.card p {
+    font-size: 1rem;
+    margin-bottom: 25px;
+    flex-grow: 1;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.card-button {
+    background-color: var(--primary-color);
+    color: var(--bg-dark);
+    border: none;
+    border-radius: 8px;
+    padding: 12px 25px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    box-shadow: 0 0 10px var(--primary-color);
+}
+
+.card-button:hover {
+    background-color: var(--secondary-color);
+    transform: translateY(-2px);
+    box-shadow: 0 0 15px var(--secondary-color);
+}
+
+/* --- Footer da página de Programas --- */
+.site-footer-programas {
+    background-color: rgba(0, 0, 0, 0.6);
+    color: rgba(255, 255, 255, 0.7);
+    padding: 20px;
+    text-align: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    margin-top: auto; /* Empurra o footer para baixo */
+}
+
+.site-footer-programas .credits {
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+
+/* ==================================== */
+/* Responsividade para a página de Programas */
+/* ==================================== */
+
+/* Para telas menores que 1024px */
+@media (max-width: 1024px) {
+    .page-header-programas {
+        height: var(--header-height-desktop);
+        padding: 0 3%;
+    }
+    .page-title-programas { font-size: 1.8rem; }
+    .page-header-programas .back-button-programas { left: 3%; }
+    .section-title { font-size: 2.2rem; margin-bottom: 30px; }
+    .card-container { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; }
+    .card { padding: 25px; min-height: 220px; }
+    .card-icon { width: 70px; height: 70px; }
+    .card h3 { font-size: 1.6rem; }
+    .card p { font-size: 0.95rem; }
+}
+
+/* Para telas menores que 768px (Tablets em retrato, Celulares grandes) */
 @media (max-width: 768px) {
-    h1 {
-        font-size: 2.5rem;
+    .page-header-programas {
+        height: var(--header-height-mobile);
+        padding: 0 2%;
+        flex-direction: column; /* Para empilhar botão e título */
+        justify-content: center; /* Centraliza verticalmente */
+        position: relative; /* Ajuste para o botão de voltar */
     }
-    .program-category-list {
-        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-        max-width: 95%;
+
+    .page-header-programas .back-button-programas {
+        position: static; /* Volta a ser estático no fluxo */
+        margin-bottom: 10px; /* Espaço entre o botão e o título */
+        font-size: 0.9rem;
+        padding: 6px 12px;
     }
-    .program-icon {
-        width: 120px; /* Reduz o tamanho do ícone redondo em telas menores */
-        height: 120px;
+
+    .page-title-programas {
+        font-size: 1.6rem;
+        text-align: center;
     }
-    .program-info h2 {
-        font-size: 1.2rem;
-    }
+
+    .content-wrapper { padding: 30px 2%; gap: 30px; }
+    .section-title { font-size: 1.6rem; margin-bottom: 20px; letter-spacing: 2px; }
+    .card-container { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; }
+    .card { padding: 18px; min-height: 180px; }
+    .card-icon { width: 60px; height: 60px; margin-bottom: 10px; }
+    .card-icon img { border-radius: 8px; } /* Ajuste de borda para mobile */
+    .card h3 { font-size: 1.3rem; }
+    .card p { font-size: 0.85rem; margin-bottom: 15px; }
+    .card-button { padding: 8px 18px; font-size: 0.9rem; }
 }
 
+/* Para telas muito pequenas (celulares menores, como 320px de largura) */
 @media (max-width: 480px) {
-    h1 {
-        font-size: 2rem;
-        letter-spacing: 4px;
+    .page-header-programas {
+        height: auto; /* Deixa a altura se ajustar ao conteúdo */
+        padding: 10px 1%;
     }
-    .program-category-list {
-        grid-template-columns: 1fr;
-        max-width: 100%;
+    .page-header-programas .back-button-programas {
+        font-size: 0.8rem;
+        padding: 5px 10px;
     }
-    .program-category-item {
-        width: 90%;
-        margin: 0 auto;
-    }
-    .program-icon {
-        width: 100px; /* Reduz mais ainda em telas muito pequenas */
-        height: 100px;
-    }
-    .program-info h2 {
-        font-size: 1.1rem;
-    }
-    .back-to-menu a {
-        font-size: 1rem;
-        padding: 10px 20px;
-    }
+    .page-title-programas { font-size: 1.4rem; }
+
+    .content-wrapper { padding: 20px 1%; gap: 25px; }
+    .section-title { font-size: 1.4rem; margin-bottom: 15px; letter-spacing: 1px; }
+    .card-container { grid-template-columns: 1fr; gap: 10px; }
+    .card { padding: 15px; min-height: auto; }
+    .card-icon { width: 50px; height: 50px; }
+    .card-icon img { border-radius: 5px; }
+    .card h3 { font-size: 1.1rem; }
+    .card p { font-size: 0.8rem; margin-bottom: 10px; }
+    .card-button { padding: 6px 15px; font-size: 0.85rem; }
 }

@@ -4,87 +4,76 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Central de Programas</title>
-    <link rel="stylesheet" href="programas.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="programas.css"> <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
     <div id="page-transition-overlay">
         <div class="spinner"></div>
     </div>
 
-    <header>
-        <h1>Central de Programas</h1>
+    <header class="page-header-programas"> <a href="../../index.html" class="back-button-programas"> &larr; Voltar
+        </a>
+        <h1 class="page-title-programas">Central de Programas</h1>
     </header>
 
-    <main class="program-category-container">
-        <ul class="program-category-list">
-            
-            <li class="program-category-item">
-                <a href="APK/index.html"> <div class="program-icon">
-                        <img src="icons/apks.png" alt="Ícone de APKs de Celular">
-                    </div>
-                    <div class="program-info">
-                        <h2>APKs de Celular</h2>
+    <main class="content-wrapper"> <section class="category-section"> <h2 class="section-title">Programas e Ferramentas</h2> <ul class="card-container"> <li class="card blur-effect"> <a href="APK/index.html">
+                        <div class="card-icon">
+                            <img src="icons/apks.png" alt="Ícone de APKs de Celular">
+                        </div>
+                        <h3>APKs de Celular</h3>
                         <p>Aplicativos para seu dispositivo Android. Clique para ver a lista.</p>
-                    </div>
-                </a>
-            </li>
+                        <button class="card-button">Ver APKs</button>
+                    </a>
+                </li>
 
-            <li class="program-category-item">
-                <a href=https://mega.nz/file/Tlh0AJSC#UYXITH-3c_AtiBJN03onfAC7ZJbTxtCfw6A6kR0zfHM download>
-                    <div class="program-icon">
-                        <img src="icons/ocam.jpg" alt="Ícone Ocam">
-                    </div>
-                    <div class="program-info">
-                        <h2>Ocam</h2>
+                <li class="card blur-effect">
+                    <a href="https://mega.nz/file/Tlh0AJSC#UYXITH-3c_AtiBJN03onfAC7ZJbTxtCfw6A6kR0zfHM" download>
+                        <div class="card-icon">
+                            <img src="icons/ocam.jpg" alt="Ícone Ocam">
+                        </div>
+                        <h3>Ocam</h3>
                         <p>Gravador de tela e áudio leve e eficiente para Windows.</p>
-                    </div>
-                </a>
-            </li>
+                        <button class="card-button">Download</button>
+                    </a>
+                </li>
 
-            <li class="program-category-item">
-                <a href=https://cdn-fastly.obsproject.com/downloads/OBS-Studio-31.0.2-Windows-Installer.exe download>
-                    <div class="program-icon">
-                        <img src="icons/OBS_Studio_.png" alt="Ícone OBS Studio">
-                    </div>
-                    <div class="program-info">
-                        <h2>OBS Studio</h2>
+                <li class="card blur-effect">
+                    <a href="https://cdn-fastly.obsproject.com/downloads/OBS-Studio-31.0.2-Windows-Installer.exe" download>
+                        <div class="card-icon">
+                            <img src="icons/OBS_Studio_.png" alt="Ícone OBS Studio">
+                        </div>
+                        <h3>OBS Studio</h3>
                         <p>Software de gravação de vídeo e transmissão ao vivo de código aberto.</p>
-                    </div>
-                </a>
-            </li>
+                        <button class="card-button">Download</button>
+                    </a>
+                </li>
 
-            <li class="program-category-item">
-                <a href=nolink target="_blank"> <div class="program-icon">
-                        <img src="icons/filmora.png" alt="Ícone Wondershare Filmora">
-                    </div>
-                    <div class="program-info">
-                        <h2>Wondershare Filmora</h2>
+                <li class="card blur-effect">
+                    <a href="nolink" target="_blank">
+                        <div class="card-icon">
+                            <img src="icons/filmora.png" alt="Ícone Wondershare Filmora">
+                        </div>
+                        <h3>Wondershare Filmora</h3>
                         <p>Editor de vídeo intuitivo com recursos avançados para criadores.</p>
-                    </div>
-                </a>
-            </li>
+                        <button class="card-button">Saiba Mais</button>
+                    </a>
+                </li>
 
-            <li class="program-category-item">
-                <a href=https://get.videolan.org/vlc/3.0.21/win32/vlc-3.0.21-win32.exe download>
-                    <div class="program-icon">
-                        <img src="icons/VLC_Icon.svg" alt="Ícone VLC Media Player">
-                    </div>
-                    <div class="program-info">
-                        <h2>VLC Media Player</h2>
+                <li class="card blur-effect">
+                    <a href="https://get.videolan.org/vlc/3.0.21/win32/vlc-3.0.21-win32.exe" download>
+                        <div class="card-icon">
+                            <img src="icons/VLC_Icon.svg" alt="Ícone VLC Media Player">
+                        </div>
+                        <h3>VLC Media Player</h3>
                         <p>Reprodutor multimídia gratuito e de código aberto, compatível com quase todos os formatos.</p>
-                    </div>
-                </a>
-            </li>
-            
+                        <button class="card-button">Download</button>
+                    </a>
+                </li>
             </ul>
+        </section>
     </main>
 
-    <div class="back-to-menu">
-        <a href="../../index.html">Voltar ao Menu Principal</a>
-    </div>
-
-    <div class="credits">Créditos: Smith 33</div>
-
+    <footer class="site-footer-programas"> <div class="credits">Créditos: Smith 33</div>
+    </footer>
 </body>
 </html>
