@@ -4,7 +4,7 @@
   /* Color Palette */
   --primary-color: #7f8cfa; /* A vibrant blue-purple */
   --secondary-color: #ccd6f6; /* Light, cool off-white */
-  --background-dark: #0a0a0f; /* Very dark background */
+  --background-dark-overlay: rgba(10, 10, 15, 0.7); /* Dark overlay for text readability */
   --text-light: #e0e6f8;
   --glow-color: #7f8cfa;
 
@@ -26,33 +26,34 @@
 
 body {
   margin: 0;
-  background: var(--background-dark); /* Solid dark background for better contrast */
+  /* Retorno do wallpaper de fundo */
+  background: url('config/background.jpg') no-repeat center center fixed;
+  background-size: cover; /* Garante que a imagem cubra toda a área */
   color: var(--text-light);
   font-family: 'Orbitron', sans-serif;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 100vh; /* Use min-height to allow content to expand */
-  padding: var(--spacing-large) var(--spacing-small); /* Add padding for small screens */
-  box-sizing: border-box; /* Include padding in element's total width and height */
+  min-height: 100vh;
+  padding: var(--spacing-large) var(--spacing-small);
+  box-sizing: border-box;
+  /* Adiciona um overlay escuro para melhorar a legibilidade do texto sobre a imagem */
+  position: relative; /* Necessário para posicionar o pseudo-elemento */
+  z-index: 1; /* Garante que o conteúdo fique acima do overlay */
 }
 
-/* Optional: If you still want a background image, consider this: */
-/*
+/* Pseudo-elemento para criar um overlay escuro sobre o background */
 body::before {
   content: '';
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
-  background: url('config/background.jpg') no-repeat center center fixed;
-  background-size: cover;
-  opacity: 0.2; // Make it subtle
-  z-index: -1; // Keep it behind content
+  right: 0;
+  bottom: 0;
+  background: var(--background-dark-overlay); /* Usa a variável para a cor do overlay */
+  z-index: -1; /* Fica abaixo do conteúdo, mas acima do background-image */
 }
-*/
 
 h1 {
   font-size: var(--font-size-h1-desktop);
@@ -60,28 +61,30 @@ h1 {
   letter-spacing: 6px;
   text-transform: uppercase;
   color: var(--secondary-color);
-  text-align: center; /* Center text for responsiveness */
+  text-align: center;
   text-shadow:
     0 0 8px var(--glow-color),
     0 0 15px var(--glow-color),
     0 0 30px var(--glow-color),
     0 0 60px var(--glow-color);
-  padding: 0 var(--spacing-small); /* Add horizontal padding */
+  padding: 0 var(--spacing-small);
+  z-index: 2; /* Garante que o H1 fique acima do overlay */
 }
 
 nav {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-medium);
-  width: 100%; /* Full width on smaller screens */
-  max-width: 400px; /* Max width for desktop to keep it focused */
-  padding: 0 var(--spacing-small); /* Add horizontal padding */
+  width: 100%;
+  max-width: 400px;
+  padding: 0 var(--spacing-small);
+  z-index: 2; /* Garante que a navegação fique acima do overlay */
 }
 
 a {
-  background: rgba(255, 255, 255, 0.08); /* Slightly more opaque background */
+  background: rgba(255, 255, 255, 0.08);
   border: 2px solid var(--primary-color);
-  border-radius: var(--border-radius-large); /* Slightly larger border-radius for softer look */
+  border-radius: var(--border-radius-large);
   padding: var(--spacing-medium);
   font-size: var(--font-size-link-desktop);
   color: var(--secondary-color);
@@ -95,21 +98,21 @@ a {
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-wrap: wrap; /* Allow content to wrap if icons are too wide */
+  flex-wrap: wrap;
 }
 
 a img {
-  margin-right: 12px; /* Slightly increased margin for icons */
-  max-height: 1.4em; /* Ensure icons scale with font size */
+  margin-right: 12px;
+  max-height: 1.4em;
 }
 
 a:hover {
   background: var(--primary-color);
-  color: var(--background-dark); /* Darker text on hover */
+  color: var(--background-dark-overlay); /* Ajustado para um contraste melhor com o hover */
   box-shadow:
     0 0 25px var(--glow-color),
     inset 0 0 20px var(--glow-color);
-  transform: translateY(-3px) scale(1.02); /* Subtle lift and slight scale */
+  transform: translateY(-3px) scale(1.02);
 }
 
 /* --- Responsive Adjustments --- */
@@ -127,7 +130,7 @@ a:hover {
   a {
     font-size: var(--font-size-link-mobile);
     padding: var(--spacing-small);
-    border-radius: var(--border-radius-medium); /* Smaller radius for mobile */
+    border-radius: var(--border-radius-medium);
   }
 
   a img {
@@ -154,11 +157,7 @@ a:hover {
 
 /* For wider screens, center the main content on a larger canvas */
 @media (min-width: 1200px) {
-  body {
-    background-size: contain; /* Adjust if background image is used */
-  }
-
   nav {
-    max-width: 500px; /* Allow navigation to be a bit wider on large screens */
+    max-width: 500px;
   }
 }
