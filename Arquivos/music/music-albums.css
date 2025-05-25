@@ -1,0 +1,230 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron&display=swap');
+
+body {
+    margin: 0;
+    /* Novo background com a imagem fornecida */
+    background: url('https://rollingstone.com.br/media/uploads/2024/11/linkin-park-2024-james-minchin-iii.jpg') no-repeat center center fixed;
+    background-size: cover;
+    color: #fff;
+    font-family: 'Orbitron', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start; /* Permite scroll se houver muitos itens */
+    min-height: 100vh;
+    padding: 20px;
+    box-sizing: border-box;
+    /* Adiciona uma camada escura sobre o fundo para melhorar o contraste geral */
+    position: relative;
+}
+
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Camada escura */
+    z-index: -1; /* Fica atrás do conteúdo, mas na frente da imagem de fundo */
+}
+
+
+header {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 40px;
+    padding-top: 20px;
+    z-index: 1; /* Garante que o header esteja acima da camada escura */
+}
+
+h1 {
+    font-size: 3rem;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    color: #ccd6f6;
+    text-shadow:
+        0 0 5px #7f8cfa,
+        0 0 10px #7f8cfa,
+        0 0 20px #7f8cfa,
+        0 0 40px #7f8cfa;
+    text-align: center;
+}
+
+main.album-category-container {
+    width: 100%;
+    max-width: 1200px; /* Largura máxima para a grade de álbuns */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 1; /* Garante que o conteúdo principal esteja acima da camada escura */
+}
+
+.album-category-list {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    /* Colunas responsivas: 1, 2 ou 3 álbuns por linha */
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 30px;
+    justify-content: center;
+    width: 100%;
+    max-width: 90%; /* Limita a largura da grade */
+}
+
+.album-category-item {
+    background-color: rgba(0, 0, 0, 0.7); /* Fundo escuro semi-transparente para o item completo */
+    border: 2px solid #7f8cfa;
+    border-radius: 15px;
+    box-shadow:
+        0 0 8px #7f8cfa,
+        inset 0 0 10px #7f8cfa;
+    transition: all 0.3s ease;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.album-category-item:hover {
+    background-color: rgba(127, 140, 250, 0.4); /* Fundo mais claro e vibrante no hover */
+    box-shadow:
+        0 0 20px #7f8cfa,
+        inset 0 0 15px #7f8cfa;
+    transform: translateY(-5px) scale(1.02); /* Levanta e cresce um pouco */
+}
+
+.album-category-item a {
+    display: flex;
+    flex-direction: column;
+    color: #ccd6f6;
+    text-decoration: none;
+    height: 100%; /* Garante que o link ocupe todo o item */
+}
+
+.album-cover {
+    width: 100%;
+    height: 200px; /* Altura fixa para as capas */
+    overflow: hidden;
+    border-bottom: 2px solid #7f8cfa;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #1a1a2e; /* Fundo padrão se a imagem não carregar */
+}
+
+.album-cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Garante que a imagem cubra a área */
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.album-category-item:hover .album-cover img {
+    transform: scale(1.05); /* Leve zoom na capa no hover */
+}
+
+.album-info {
+    padding: 15px;
+    flex-grow: 1; /* Permite que o texto ocupe o espaço restante */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    /* Adiciona um background sutilmente mais escuro para o texto dentro do card */
+    background-color: rgba(0, 0, 0, 0.3); /* Uma camada mais escura para o texto */
+    border-top: 1px solid rgba(127, 140, 250, 0.2); /* Linha divisória sutil */
+}
+
+.album-info h2 {
+    font-size: 1.4rem;
+    margin-top: 0;
+    margin-bottom: 8px;
+    color: #fff;
+    text-shadow: 0 0 5px rgba(0,0,0,0.5); /* Sombra para o título */
+}
+
+.album-info p {
+    font-size: 0.95rem;
+    line-height: 1.4;
+    color: #ccc;
+    text-shadow: 0 0 3px rgba(0,0,0,0.5); /* Sombra para o parágrafo */
+}
+
+.back-to-menu {
+    margin-top: 40px;
+    margin-bottom: 20px;
+    z-index: 1; /* Garante que o botão esteja acima da camada escura */
+}
+
+.back-to-menu a {
+    display: inline-block;
+    background: #7f8cfa;
+    color: #fff;
+    padding: 12px 25px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 1.1rem;
+    font-weight: bold;
+    transition: background 0.3s ease, transform 0.3s ease;
+    border: 2px solid #7f8cfa;
+    box-shadow: 0 0 8px #7f8cfa;
+}
+
+.back-to-menu a:hover {
+    background: #5f6bca;
+    transform: translateY(-3px);
+    box-shadow: 0 0 15px #7f8cfa;
+}
+
+.credits {
+    margin-top: 30px;
+    font-size: 0.9rem;
+    color: #aaa;
+    width: 100%;
+    text-align: center;
+    padding-bottom: 20px;
+    z-index: 1; /* Garante que os créditos estejam acima da camada escura */
+}
+
+/* Media Queries para responsividade */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2.5rem;
+    }
+    .album-category-list {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        max-width: 95%;
+    }
+    .album-cover {
+        height: 180px;
+    }
+    .album-info h2 {
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 2rem;
+    }
+    .album-category-list {
+        grid-template-columns: 1fr; /* Uma coluna em telas muito pequenas */
+        max-width: 100%;
+    }
+    .album-category-item {
+        width: 90%; /* Ajusta a largura do item */
+        margin: 0 auto; /* Centraliza */
+    }
+    .album-cover {
+        height: 160px;
+    }
+    .album-info h2 {
+        font-size: 1.1rem;
+    }
+    .back-to-menu a {
+        font-size: 1rem;
+        padding: 10px 20px;
+    }
+}
