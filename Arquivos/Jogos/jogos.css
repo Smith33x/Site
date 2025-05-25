@@ -1,113 +1,28 @@
-@import url('https://fonts.googleapis.com/css2?family=Orbitron&family=Share+Tech+Mono&display=swap'); /* Incluindo Share Tech Mono, caso queira usar */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron&display=swap');
 
-/* Variáveis para cores e efeitos (boas para manter a consistência) */
+/* **NOVAS VARIÁVEIS PARA MELHOR CONTROLE** */
 :root {
     --primary-blue: #7f8cfa;
     --text-light: #ccd6f6;
     --text-dark: #000;
-    --background-overlay: rgba(0, 0, 0, 0.6); /* Ajustado para 60% de opacidade */
+    --background-overlay: rgba(0, 0, 0, 0.4); /* Opacidade para a camada escura sobre o blur */
     --card-bg: rgba(255, 255, 255, 0.05); /* Fundo dos cards */
-    --hover-bg: #7f8cfa; /* Fundo do card no hover (seu padrão atual) */
-    --glow-light: #7f8cfa; /* Para brilhos mais suaves */
+    --hover-bg: #7f8cfa; /* Fundo do card no hover */
 
+    /* Efeitos de sombra e brilho para o texto e cards */
     --neon-glow: 0 0 5px var(--primary-blue),
                  0 0 10px var(--primary-blue),
                  0 0 20px var(--primary-blue),
                  0 0 40px var(--primary-blue);
-    --text-glow: 0 0 3px rgba(255, 255, 255, 0.7),
-                 0 0 8px var(--primary-blue);
-    --shadow-strong: 0 0 8px var(--primary-blue), inset 0 0 10px var(--primary-blue); /* Ajustado para cards */
-    --shadow-hover: 0 0 20px var(--primary-blue), inset 0 0 15px var(--primary-blue); /* Ajustado para cards */
+    --shadow-strong: 0 0 8px var(--primary-blue), inset 0 0 10px var(--primary-blue);
+    --shadow-hover: 0 0 20px var(--primary-blue), inset 0 0 15px var(--primary-blue);
 }
 
 body {
     margin: 0;
-    /* Fundo da imagem original */
     background: url('config/background.jpg') no-repeat center center fixed;
     background-size: cover;
-    
-    /* Aplica o blur diretamente no BODY, desfocando a imagem de fundo */
-    filter: blur(8px); /* Blur forte! Ajuste o valor (ex: 5px, 10px) conforme preferir */
-    -webkit-filter: blur(8px); /* Para compatibilidade com WebKit (Safari, etc.) */
-    transform: scale(1.02); /* Pequeno zoom para esconder as bordas do blur */
-
-    /* Garante que o conteúdo seja renderizado FORA deste body borrado */
-    /* Este body agora será a "camada de fundo borrada" */
-    position: fixed; /* Fixa o body borrado no lugar */
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -2; /* Fica abaixo de tudo */
-}
-
-/* Criamos um novo container para o CONTEÚDO REAL do site */
-/* Tudo que estava no body, exceto o background, vai para este container */
-html::before { /* Usamos html::before para cobrir tudo */
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: var(--background-overlay); /* Camada escura sobre o blur */
-    z-index: -1; /* Fica acima do body borrado, mas abaixo do conteúdo */
-}
-
-/* Agora, o conteúdo visível vai em uma nova div ou usamos um elemento root */
-/* Como você não tem um wrapper para o conteúdo, vamos usar um estilo para o html e um novo body */
-/* REMOVA O BODY ACIMA E USE ESTE NOVO BLOCO DE ESTILOS */
-
-html {
-    height: 100%;
-    overflow: hidden; /* Esconde a barra de rolagem do HTML */
-}
-
-body {
-    margin: 0;
-    /* Imagem de fundo e blur aplicados diretamente aqui */
-    background: url('config/background.jpg') no-repeat center center fixed;
-    background-size: cover;
-    filter: blur(8px); /* NOVO: Blur forte na imagem de fundo! */
-    -webkit-filter: blur(8px); /* Para compatibilidade */
-    transform: scale(1.02); /* Pequeno truque para esconder as bordas do blur */
-    position: fixed; /* Fixa o body borrado no lugar */
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -2; /* Fica abaixo de tudo */
-}
-
-/* Camada escura sobre o fundo borrado */
-body::before { /* Este será o overlay escuro que você já tinha, mas agora no novo corpo */
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: var(--background-overlay); /* Camada escura sobre o blur */
-    z-index: -1; /* Fica acima do body borrado, mas abaixo do conteúdo */
-}
-
-/* --- REINICIAMOS O LAYOUT DO CONTEÚDO VISÍVEL --- */
-/* Tudo o que era do body e header original, agora precisa estar dentro de um elemento como <div id="content-wrapper"> */
-/* Se você não tem um wrapper, os estilos abaixo são genéricos, mas o IDEAL seria um container. */
-
-/* Ajustando o posicionamento do conteúdo real do site */
-header, main, .credits {
-    position: relative; /* Garante que fiquem acima do overlay */
-    z-index: 1;
-}
-
-body { /* Este é o body para o conteúdo, não o background */
-    /* Remove background, filter, transform de body (já estão no body::before) */
-    background: none;
-    filter: none;
-    transform: none;
-
-    color: #fff;
+    color: #fff; /* Mantendo o branco original */
     font-family: 'Orbitron', sans-serif;
     display: flex;
     flex-direction: column;
@@ -116,25 +31,40 @@ body { /* Este é o body para o conteúdo, não o background */
     min-height: 100vh;
     padding: 20px;
     box-sizing: border-box;
-    position: relative; /* Para posicionar elementos filhos */
-    z-index: 0; /* Fica acima do blur e overlay */
-    overflow-y: auto; /* Permite rolagem no conteúdo */
+    position: relative; /* Necessário para posicionar o pseudo-elemento */
+    overflow-x: hidden; /* Evita rolagem horizontal */
 }
 
+/* --- NOVO: Pseudo-elemento para aplicar o BLUR e a CAMADA ESCURA --- */
+body::before {
+    content: '';
+    position: fixed; /* Fixa o elemento na tela */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Aplica o desfoque NA ÁREA ATRÁS DO CONTEÚDO, que é a imagem de fundo do body */
+    backdrop-filter: blur(6px); /* **INTENSIDADE DO BLUR AQUI!** Ajuste (ex: 4px, 8px) */
+    -webkit-backdrop-filter: blur(6px); /* Compatibilidade WebKit */
+    background-color: var(--background-overlay); /* Camada escura SEMI-TRANSPARENTE */
+    z-index: -1; /* Garante que fique abaixo do conteúdo principal */
+}
 
 header {
     width: 100%;
     text-align: center;
     margin-bottom: 40px;
     padding-top: 20px;
+    position: relative; /* Garante que fique acima do pseudo-elemento blur */
+    z-index: 1;
 }
 
 h1 {
     font-size: 3rem;
     letter-spacing: 6px;
     text-transform: uppercase;
-    color: #ccd6f6;
-    text-shadow: var(--neon-glow); /* Usando a variável de glow */
+    color: var(--primary-blue); /* Usando a nova variável de cor */
+    text-shadow: var(--neon-glow); /* Usando a nova variável de neon glow */
     text-align: center;
 }
 
@@ -144,6 +74,8 @@ main {
     display: flex;
     flex-direction: column;
     align-items: center;
+    position: relative; /* Garante que fique acima do pseudo-elemento blur */
+    z-index: 1;
 }
 
 ul {
@@ -158,10 +90,10 @@ ul {
 }
 
 .game-item {
-    background: var(--card-bg); /* Usando a variável de fundo do card */
-    border: 2px solid var(--primary-blue);
+    background: var(--card-bg); /* Usando a nova variável para o fundo do card */
+    border: 2px solid var(--primary-blue); /* Usando a nova variável de cor */
     border-radius: 15px;
-    box-shadow: var(--shadow-strong); /* Usando a variável de sombra */
+    box-shadow: var(--shadow-strong); /* Usando a nova variável de sombra */
     transition: all 0.3s ease;
     overflow: hidden;
     display: flex;
@@ -172,15 +104,15 @@ ul {
 }
 
 .game-item:hover {
-    background: var(--hover-bg); /* Usando a variável de hover */
-    box-shadow: var(--shadow-hover); /* Usando a variável de sombra no hover */
+    background: var(--hover-bg); /* Usando a nova variável para o hover do card */
+    box-shadow: var(--shadow-hover); /* Usando a nova variável de sombra no hover */
     transform: scale(1.05);
 }
 
 .game-item a {
     display: flex;
     flex-direction: column;
-    color: var(--text-light); /* Usando a variável de cor de texto */
+    color: var(--text-light); /* Usando a nova variável de cor de texto */
     text-decoration: none;
     height: 100%;
 }
@@ -189,7 +121,7 @@ ul {
     width: 100%;
     height: 200px;
     overflow: hidden;
-    border-bottom: 2px solid var(--primary-blue); /* Usando a variável de cor */
+    border-bottom: 2px solid var(--primary-blue); /* Usando a nova variável de cor */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -216,7 +148,7 @@ ul {
     margin-top: 0;
     margin-bottom: 10px;
     text-align: center;
-    color: var(--text-light); /* Usando a variável de cor de texto */
+    color: var(--text-light); /* Usando a nova variável de cor de texto */
 }
 
 .game-info p {
@@ -233,6 +165,8 @@ ul {
     width: 100%;
     text-align: center;
     padding-bottom: 20px;
+    position: relative; /* Garante que fique acima do pseudo-elemento blur */
+    z-index: 1;
 }
 
 /* Media Queries para responsividade */
