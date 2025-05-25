@@ -125,96 +125,79 @@ h1, h2, h3 {
     margin: 0;
 }
 
-/* CARD INDIVIDUAL (NOVA ESTRUTURA) */
+/* CARD INDIVIDUAL */
 .card {
-    background: var(--glass-bg); /* Fundo glassmorphism */
-    border: 1px solid var(--glass-border); /* Borda glassmorphism */
-    backdrop-filter: blur(10px); /* Efeito blur */
-    -webkit-backdrop-filter: blur(10px);
-    box-shadow: 0 8px 32px var(--shadow-color);
-    border-radius: 20px; /* Bordas arredondadas do card completo */
-    text-align: center; /* Centraliza texto dentro do card por padrão */
-    overflow: hidden; /* Garante que nada saia do card */
+    text-decoration: none;
+    color: var(--text-color);
+    padding: 30px;
+    border-radius: 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* ESTE JÁ CENTRALIZA OS ITENS DO CARD, INCLUINDO O .card-icon */
+    justify-content: space-between;
+    min-height: 250px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     cursor: pointer;
-    display: flex; /* O card em si é um flex container */
-    flex-direction: column; /* Conteúdo em coluna */
-    justify-content: space-between; /* Espaço entre imagem e texto/botão */
-    padding-top: 15px; /* Adiciona um padding em cima para a imagem */
-    padding-bottom: 15px; /* Adiciona um padding em baixo para o botão */
-    padding-left: 15px; /* Adiciona um padding nas laterais para o conteúdo */
-    padding-right: 15px; /* Adiciona um padding nas laterais para o conteúdo */
-    min-height: 380px; /* Altura mínima para o card, ajuste conforme necessário */
 }
 
-/* Link que envolve o conteúdo do card */
-.game-link {
-    text-decoration: none; /* Remove sublinhado do link */
-    color: inherit; /* Herda a cor do texto */
-    display: flex; /* Transforma o link em um flex container */
-    flex-direction: column; /* Conteúdo em coluna */
-    align-items: center; /* Centraliza tudo horizontalmente (imagem, título, etc.) */
-    flex-grow: 1; /* Ocupa o espaço disponível */
-    width: 100%; /* Ocupa a largura total do card */
+/* Efeito Glassmorphism (Blur) */
+.blur-effect {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 8px 32px var(--shadow-color);
 }
-
 
 .card:hover {
     transform: translateY(-10px);
     box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6), 0 0 20px var(--primary-color);
 }
 
-/* NOVO: Wrapper da Imagem */
-.card-image-wrapper {
-    width: 150px; /* Largura do wrapper da imagem */
-    height: 150px; /* Altura do wrapper da imagem (quadrado) */
-    overflow: hidden; /* Essencial para cortar o que excede */
-    border-radius: 12px; /* Cantos arredondados do wrapper */
-    margin-bottom: 15px; /* Espaço entre a imagem e o texto */
-    flex-shrink: 0; /* Impede que o wrapper da imagem encolha */
-    display: flex; /* Faz este wrapper um flex container */
-    justify-content: center; /* Centraliza horizontalmente o conteúdo (imagem) */
-    align-items: center; /* Centraliza verticalmente o conteúdo (imagem) */
-}
-
-.card-image-wrapper img {
-    width: 100%; /* Imagem preenche 100% da largura do wrapper */
-    height: 100%; /* Imagem preenche 100% da altura do wrapper */
-    object-fit: cover; /* Corta a imagem para preencher o wrapper sem distorção */
-    object-position: center; /* Garante que o centro da imagem é o foco */
-    display: block; /* Remove espaços extras */
-    border-radius: inherit; /* Herda o border-radius do pai (.card-image-wrapper) */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Sombra para a imagem */
-}
-
-/* NOVO: Conteúdo de Texto e Botão */
-.card-content {
+/* ÍCONES/IMAGENS DOS CARDS (capas de jogos) */
+.card-icon {
+    margin-bottom: 15px;
+    /* Tamanho do container. Ajuste estes valores para o formato desejado. */
+    /* Para um quadrado, width e height devem ser iguais. */
+    width: 150px; /* Largura do "quadrado" do ícone */
+    height: 150px; /* Altura do "quadrado" do ícone */
+    
+    /* AS SEGUINTES PROPRIEDADES JÁ GARANTEM A CENTRALIZAÇÃO DA IMAGEM DENTRO DESTE CONTAINER */
     display: flex;
-    flex-direction: column;
-    align-items: center; /* Centraliza o texto e o botão horizontalmente */
-    flex-grow: 1; /* Permite que o conteúdo ocupe o espaço restante */
-    width: 100%; /* Ocupa a largura total do card */
-    justify-content: space-between; /* Espaçamento entre título, p e botão */
+    justify-content: center; /* Centraliza a imagem horizontalmente dentro de .card-icon */
+    align-items: center; /* Centraliza a imagem verticalmente dentro de .card-icon */
+    
+    flex-shrink: 0;
+    overflow: hidden; /* ESSENCIAL para cortar as partes da imagem que excedem o container */
+    border-radius: 12px; /* Cantos arredondados do "quadrado" do ícone */
 }
 
-.card-content h3 {
+.card-icon img {
+    width: 100%; /* Faz a imagem preencher a largura total do container */
+    height: 100%; /* Faz a imagem preencher a altura total do container */
+    object-fit: cover; /* ESSENCIAL: Faz a imagem "cobrir" o container, cortando o que sobra e mantendo proporção */
+    object-position: center; /* Garante que o centro da imagem fique no centro do container */
+    display: block; /* Remove espaços extras de elementos inline */
+    border-radius: inherit; /* FAZ A IMAGEM HERDAR O border-radius DO SEU PAI (.card-icon) */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.card h3 {
     font-size: 1.8rem;
-    margin-top: 0; /* Remove margem superior padrão do h3 */
     margin-bottom: 10px;
     color: var(--primary-color);
     text-shadow: 0 0 8px var(--primary-color);
     word-break: break-word;
     text-align: center; /* Garante que o título esteja centralizado */
-    line-height: 1.2; /* Ajusta a altura da linha para títulos grandes */
 }
 
-.card-content p {
+.card p {
     font-size: 1rem;
-    margin-bottom: 25px; /* Espaço antes do botão */
+    margin-bottom: 25px;
+    flex-grow: 1;
     color: rgba(255, 255, 255, 0.8);
     text-align: center; /* Garante que a descrição esteja centralizada */
-    line-height: 1.4;
-    flex-grow: 1; /* Permite que o parágrafo ocupe o espaço restante, empurrando o botão para baixo */
 }
 
 .card-button {
@@ -229,8 +212,7 @@ h1, h2, h3 {
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
     box-shadow: 0 0 10px var(--primary-color);
-    width: auto; /* Para o botão não esticar em 100% */
-    margin-top: auto; /* Empurra o botão para o final do flex container */
+    width: auto;
 }
 
 .card-button:hover {
@@ -257,7 +239,7 @@ h1, h2, h3 {
 }
 
 /* ==================================== */
-/* Responsividade para a página de Jogos (AJUSTADA) */
+/* Responsividade para a página de Jogos */
 /* ==================================== */
 
 /* Para telas menores que 1024px */
@@ -272,10 +254,11 @@ h1, h2, h3 {
 
     .section-title { font-size: 2.2rem; margin-bottom: 30px; }
     .card-container { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; }
-    .card { min-height: 350px; }
-    .card-image-wrapper { width: 120px; height: 120px; border-radius: 10px; }
-    .card-content h3 { font-size: 1.6rem; }
-    .card-content p { font-size: 0.95rem; }
+    .card { padding: 25px; min-height: 220px; }
+    .card-icon { width: 120px; height: 120px; border-radius: 10px; } /* Ajuste de tamanho para tablet */
+    .card-icon img { border-radius: inherit; }
+    .card h3 { font-size: 1.6rem; }
+    .card p { font-size: 0.95rem; }
 }
 
 /* Para telas menores que 768px (Tablets em retrato, Celulares grandes) */
@@ -306,10 +289,11 @@ h1, h2, h3 {
     .content-wrapper { padding: 30px 2%; gap: 30px; }
     .section-title { font-size: 1.6rem; margin-bottom: 20px; letter-spacing: 2px; }
     .card-container { grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; }
-    .card { padding: 10px; min-height: 280px; } /* Ajuste de padding e altura para celular */
-    .card-image-wrapper { width: 90px; height: 90px; margin-bottom: 10px; border-radius: 8px; }
-    .card-content h3 { font-size: 1.3rem; }
-    .card-content p { font-size: 0.85rem; margin-bottom: 15px; }
+    .card { padding: 18px; min-height: 180px; }
+    .card-icon { width: 90px; height: 90px; margin-bottom: 10px; border-radius: 8px; } /* Ajuste de tamanho para celular */
+    .card-icon img { border-radius: inherit; }
+    .card h3 { font-size: 1.3rem; }
+    .card p { font-size: 0.85rem; margin-bottom: 15px; }
     .card-button { padding: 8px 18px; font-size: 0.9rem; }
 }
 
@@ -327,10 +311,11 @@ h1, h2, h3 {
 
     .content-wrapper { padding: 20px 1%; gap: 25px; }
     .section-title { font-size: 1.4rem; margin-bottom: 15px; letter-spacing: 1px; }
-    .card-container { grid-template-columns: 1fr; gap: 10px; } /* Em celulares muito pequenos, 1 coluna */
-    .card { padding: 8px; min-height: 250px; } /* Mais ajustes para celular */
-    .card-image-wrapper { width: 70px; height: 70px; border-radius: 6px; }
-    .card-content h3 { font-size: 1.1rem; }
-    .card-content p { font-size: 0.8rem; margin-bottom: 10px; }
+    .card-container { grid-template-columns: 1fr; gap: 10px; }
+    .card { padding: 15px; min-height: auto; }
+    .card-icon { width: 70px; height: 70px; border-radius: 6px; } /* Ajuste final para telas muito pequenas */
+    .card-icon img { border-radius: inherit; }
+    .card h3 { font-size: 1.1rem; }
+    .card p { font-size: 0.8rem; margin-bottom: 10px; }
     .card-button { padding: 6px 15px; font-size: 0.85rem; }
 }
