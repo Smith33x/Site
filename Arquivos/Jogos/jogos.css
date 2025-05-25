@@ -16,8 +16,6 @@
 body {
     margin: 0;
     /* AJUSTE O CAMINHO DA IMAGEM DE FUNDO AQUI */
-    /* Exemplo: Se 'jogos.css' estiver em 'Arquivos/jogos/', e 'background.jpg' em 'config/',
-       o caminho seria '../../config/background.jpg' */
     background: url('../../config/background.jpg') no-repeat center center fixed;
     background-size: cover;
     background-color: var(--bg-dark);
@@ -160,31 +158,38 @@ h1, h2, h3 {
 /* ÍCONES/IMAGENS DOS CARDS (capas de jogos) */
 .card-icon {
     margin-bottom: 15px;
-    /* Manter um tamanho fixo para o container do ícone/capa */
-    width: 150px; /* Aumentado um pouco para preencher melhor o espaço */
-    height: 150px; /* Mantido igual para criar um container quadrado */
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    /* Tamanho do container da imagem */
+    width: 140px; /* Reduzi ligeiramente, experimente para ver qual fica melhor */
+    height: 140px; /* Quadrado perfeito */
+    /* Centralização e corte */
+    display: flex; /* Garante que os filhos (img) possam ser centralizados */
+    justify-content: center; /* Centraliza horizontalmente */
+    align-items: center; /* Centraliza verticalmente */
+    overflow: hidden; /* CORTA QUALQUER EXCEDENTE DA IMAGEM */
     flex-shrink: 0; /* Impede que o item encolha */
-    overflow: hidden; /* Importante para cortar as partes da imagem que ultrapassem o container */
-    border-radius: 15px; /* Bordas suaves para o container */
+    /* Estilo do container */
+    border-radius: 15px; /* Bordas arredondadas para o container */
+    background-color: rgba(0, 0, 0, 0.1); /* Um leve fundo para o container caso a imagem não preencha tudo (o que não deve acontecer com object-fit: cover) */
 }
 
 .card-icon img {
-    width: 100%; /* Faz a imagem preencher a largura do container */
-    height: 100%; /* Faz a imagem preencher a altura do container */
-    object-fit: cover; /* ESSA É A MUDANÇA PRINCIPAL: Faz a imagem "cobrir" o container, cortando o que sobra */
-    object-position: center; /* Garante que o centro da imagem esteja no centro do container */
-    border-radius: 8px; /* Bordas mais quadradas para a imagem em si */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    width: 100%; /* Preenche a largura do container */
+    height: 100%; /* Preenche a altura do container */
+    object-fit: cover; /* ESSA É A CHAVE: Faz a imagem cobrir o container, cortando as bordas */
+    object-position: center; /* Garante que o centro da imagem fique no centro do container */
+    display: block; /* Remove possíveis espaços extras de elementos inline */
+    border-radius: 10px; /* Bordas arredondadas para a IMAGEM em si, ligeiramente menor que o container */
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.5); /* Sombra para a imagem */
 }
+
 
 .card h3 {
     font-size: 1.8rem;
     margin-bottom: 10px;
     color: var(--primary-color);
     text-shadow: 0 0 8px var(--primary-color);
+    word-break: break-word; /* Permite que o texto quebre linhas se for muito longo */
+    text-align: center; /* Garante que o título esteja centralizado */
 }
 
 .card p {
@@ -192,6 +197,7 @@ h1, h2, h3 {
     margin-bottom: 25px;
     flex-grow: 1;
     color: rgba(255, 255, 255, 0.8);
+    text-align: center; /* Garante que a descrição esteja centralizada */
 }
 
 .card-button {
@@ -249,7 +255,7 @@ h1, h2, h3 {
     .section-title { font-size: 2.2rem; margin-bottom: 30px; }
     .card-container { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; }
     .card { padding: 25px; min-height: 220px; }
-    .card-icon { width: 120px; height: 120px; border-radius: 12px; } /* Ajuste de tamanho para tablet */
+    .card-icon { width: 110px; height: 110px; border-radius: 12px; }
     .card-icon img { border-radius: 7px; }
     .card h3 { font-size: 1.6rem; }
     .card p { font-size: 0.95rem; }
@@ -284,7 +290,7 @@ h1, h2, h3 {
     .section-title { font-size: 1.6rem; margin-bottom: 20px; letter-spacing: 2px; }
     .card-container { grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; }
     .card { padding: 18px; min-height: 180px; }
-    .card-icon { width: 90px; height: 90px; margin-bottom: 10px; border-radius: 10px; } /* Ajuste de tamanho para celular */
+    .card-icon { width: 80px; height: 80px; margin-bottom: 10px; border-radius: 10px; }
     .card-icon img { border-radius: 5px; }
     .card h3 { font-size: 1.3rem; }
     .card p { font-size: 0.85rem; margin-bottom: 15px; }
@@ -305,9 +311,9 @@ h1, h2, h3 {
 
     .content-wrapper { padding: 20px 1%; gap: 25px; }
     .section-title { font-size: 1.4rem; margin-bottom: 15px; letter-spacing: 1px; }
-    .card-container { grid-template-columns: 1fr; gap: 10px; } /* Força 1 coluna */
+    .card-container { grid-template-columns: 1fr; gap: 10px; }
     .card { padding: 15px; min-height: auto; }
-    .card-icon { width: 80px; height: 80px; border-radius: 8px; } /* Ajuste final para telas muito pequenas */
+    .card-icon { width: 70px; height: 70px; border-radius: 8px; }
     .card-icon img { border-radius: 4px; }
     .card h3 { font-size: 1.1rem; }
     .card p { font-size: 0.8rem; margin-bottom: 10px; }
