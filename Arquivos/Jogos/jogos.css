@@ -1,205 +1,310 @@
 @import url('https://fonts.googleapis.com/css2?family=Orbitron&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
 
-/* **NOVAS VARIÁVEIS PARA MELHOR CONTROLE** */
 :root {
-    --primary-blue: #7f8cfa;
-    --text-light: #ccd6f6;
-    --text-dark: #000;
-    --background-overlay: rgba(0, 0, 0, 0.4); /* Opacidade para a camada escura sobre o blur */
-    --card-bg: rgba(255, 255, 255, 0.05); /* Fundo dos cards */
-    --hover-bg: #7f8cfa; /* Fundo do card no hover */
-
-    /* Efeitos de sombra e brilho para o texto e cards */
-    --neon-glow: 0 0 5px var(--primary-blue),
-                 0 0 10px var(--primary-blue),
-                 0 0 20px var(--primary-blue),
-                 0 0 40px var(--primary-blue);
-    --shadow-strong: 0 0 8px var(--primary-blue), inset 0 0 10px var(--primary-blue);
-    --shadow-hover: 0 0 20px var(--primary-blue), inset 0 0 15px var(--primary-blue);
+    --primary-color: #7f8cfa;
+    --secondary-color: #5d6edc;
+    --text-color: #ccd6f6;
+    --bg-dark: #0a0a0a;
+    --glass-bg: rgba(255, 255, 255, 0.08);
+    --glass-border: rgba(255, 255, 255, 0.2);
+    --shadow-color: rgba(0, 0, 0, 0.4);
+    --header-height-desktop: 80px;
+    --header-height-mobile: 60px;
 }
 
 body {
     margin: 0;
-    background: url('config/background.jpg') no-repeat center center fixed;
+    /* AJUSTE O CAMINHO DA IMAGEM DE FUNDO AQUI */
+    /* Exemplo: Se 'jogos.css' estiver em 'Arquivos/jogos/', e 'background.jpg' em 'config/',
+       o caminho seria '../../config/background.jpg' */
+    background: url('../../config/background.jpg') no-repeat center center fixed;
     background-size: cover;
-    color: #fff; /* Mantendo o branco original */
-    font-family: 'Orbitron', sans-serif;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
+    background-color: var(--bg-dark);
+    color: var(--text-color);
+    font-family: 'Poppins', sans-serif;
     min-height: 100vh;
-    padding: 20px;
-    box-sizing: border-box;
-    position: relative; /* Necessário para posicionar o pseudo-elemento */
-    overflow-x: hidden; /* Evita rolagem horizontal */
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
 }
 
-/* --- NOVO: Pseudo-elemento para aplicar o BLUR e a CAMADA ESCURA --- */
-body::before {
-    content: '';
-    position: fixed; /* Fixa o elemento na tela */
+h1, h2, h3 {
+    font-family: 'Orbitron', sans-serif;
+    color: var(--text-color);
+    text-shadow:
+        0 0 5px var(--primary-color),
+        0 0 10px var(--primary-color);
+}
+
+/* --- Header Global (reutilizado) --- */
+.main-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 5%;
+    height: var(--header-height-desktop);
+    background-color: rgba(0, 0, 0, 0.6);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    position: sticky;
     top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    /* Aplica o desfoque NA ÁREA ATRÁS DO CONTEÚDO, que é a imagem de fundo do body */
-    backdrop-filter: blur(6px); /* **INTENSIDADE DO BLUR AQUI!** Ajuste (ex: 4px, 8px) */
-    -webkit-backdrop-filter: blur(6px); /* Compatibilidade WebKit */
-    background-color: var(--background-overlay); /* Camada escura SEMI-TRANSPARENTE */
-    z-index: -1; /* Garante que fique abaixo do conteúdo principal */
+    z-index: 1000;
 }
 
-header {
-    width: 100%;
-    text-align: center;
-    margin-bottom: 40px;
-    padding-top: 20px;
-    position: relative; /* Garante que fique acima do pseudo-elemento blur */
-    z-index: 1;
-}
-
-h1 {
-    font-size: 3rem;
-    letter-spacing: 6px;
-    text-transform: uppercase;
-    color: var(--primary-blue); /* Usando a nova variável de cor */
-    text-shadow: var(--neon-glow); /* Usando a nova variável de neon glow */
+/* Título global da página */
+.page-title-global {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2.2rem;
+    color: var(--primary-color);
+    text-shadow: 0 0 10px var(--primary-color);
+    letter-spacing: 2px;
+    white-space: nowrap;
+    flex-grow: 1;
     text-align: center;
 }
 
-main {
-    width: 100%;
-    max-width: 1200px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    position: relative; /* Garante que fique acima do pseudo-elemento blur */
-    z-index: 1;
-}
-
-ul {
-    list-style: none;
-    padding: 0;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 30px;
-    justify-content: center;
-    width: 100%;
-    max-width: 90%;
-}
-
-.game-item {
-    background: var(--card-bg); /* Usando a nova variável para o fundo do card */
-    border: 2px solid var(--primary-blue); /* Usando a nova variável de cor */
-    border-radius: 15px;
-    box-shadow: var(--shadow-strong); /* Usando a nova variável de sombra */
-    transition: all 0.3s ease;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
+/* Botão Voltar Global */
+.back-button-global {
+    color: var(--primary-color);
     text-decoration: none;
-    align-items: stretch;
-    text-align: center;
-}
-
-.game-item:hover {
-    background: var(--hover-bg); /* Usando a nova variável para o hover do card */
-    box-shadow: var(--shadow-hover); /* Usando a nova variável de sombra no hover */
-    transform: scale(1.05);
-}
-
-.game-item a {
+    font-size: 1.1rem;
+    padding: 8px 15px;
+    border: 1px solid var(--primary-color);
+    border-radius: 8px;
+    background-color: rgba(255, 255, 255, 0.05);
+    transition: background-color 0.3s ease, transform 0.2s ease, border-color 0.3s ease;
     display: flex;
-    flex-direction: column;
-    color: var(--text-light); /* Usando a nova variável de cor de texto */
-    text-decoration: none;
-    height: 100%;
-}
-
-.game-image {
-    width: 100%;
-    height: 200px;
-    overflow: hidden;
-    border-bottom: 2px solid var(--primary-blue); /* Usando a nova variável de cor */
-    display: flex;
-    justify-content: center;
     align-items: center;
+    gap: 5px;
 }
 
-.game-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
+.back-button-global i {
+    font-size: 1.2em;
 }
 
-.game-info {
-    padding: 15px;
+.back-button-global:hover {
+    background-color: var(--primary-color);
+    color: var(--bg-dark);
+    transform: translateY(-2px);
+    border-color: var(--secondary-color);
+}
+
+/* --- Conteúdo Principal --- */
+.content-wrapper {
     flex-grow: 1;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    text-align: center;
-}
-
-.game-info h2 {
-    font-size: 1.5rem;
-    margin-top: 0;
-    margin-bottom: 10px;
-    text-align: center;
-    color: var(--text-light); /* Usando a nova variável de cor de texto */
-}
-
-.game-info p {
-    font-size: 1rem;
-    line-height: 1.5;
-    text-align: center;
-    color: rgba(204, 214, 246, 0.7); /* Cor de texto com transparência */
-}
-
-.credits {
-    margin-top: 50px;
-    font-size: 0.9rem;
-    color: rgba(204, 214, 246, 0.6); /* Cor de texto com transparência */
+    align-items: center;
+    padding: 40px 5%;
+    gap: 50px;
     width: 100%;
+    box-sizing: border-box;
+}
+
+.category-section {
+    width: 100%;
+    max-width: 1200px;
     text-align: center;
-    padding-bottom: 20px;
-    position: relative; /* Garante que fique acima do pseudo-elemento blur */
-    z-index: 1;
 }
 
-/* Media Queries para responsividade */
+.section-title {
+    font-size: 2.8rem;
+    margin-bottom: 40px;
+    letter-spacing: 4px;
+    color: var(--text-color);
+    text-shadow: 0 0 15px var(--primary-color);
+}
+
+/* CARD CONTAINER: Display Grid para os cards */
+.card-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    justify-content: center;
+    align-items: stretch;
+    list-style: none; /* REMOVE AS BOLINHAS DA LISTA */
+    padding: 0; /* REMOVE O PADDING PADRÃO DA UL */
+    margin: 0; /* REMOVE A MARGEM PADRÃO DA UL */
+}
+
+/* CARD INDIVIDUAL */
+.card {
+    text-decoration: none;
+    color: var(--text-color);
+    padding: 30px;
+    border-radius: 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 250px; /* Altura mínima para os cards */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+/* Efeito Glassmorphism (Blur) */
+.blur-effect {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 8px 32px var(--shadow-color);
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6), 0 0 20px var(--primary-color);
+}
+
+/* ÍCONES/IMAGENS DOS CARDS (capas de jogos) */
+.card-icon {
+    margin-bottom: 15px;
+    width: 130px; /* Ajustei para um tamanho um pouco maior para as capas de jogos */
+    height: 180px; /* Ajustei para um tamanho um pouco maior para as capas de jogos (proporção de capa de jogo) */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.card-icon img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain; /* Use 'contain' para garantir que a imagem inteira seja visível */
+    border-radius: 8px; /* Bordas mais quadradas para capas de jogo */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.card h3 {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+    color: var(--primary-color);
+    text-shadow: 0 0 8px var(--primary-color);
+}
+
+.card p {
+    font-size: 1rem;
+    margin-bottom: 25px;
+    flex-grow: 1;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.card-button {
+    background-color: var(--primary-color);
+    color: var(--bg-dark);
+    border: none;
+    border-radius: 8px;
+    padding: 12px 25px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    box-shadow: 0 0 10px var(--primary-color);
+    width: auto;
+}
+
+.card-button:hover {
+    background-color: var(--secondary-color);
+    transform: translateY(-2px);
+    box-shadow: 0 0 15px var(--secondary-color);
+}
+
+/* --- Footer Global (reutilizado) --- */
+.site-footer-global {
+    background-color: rgba(0, 0, 0, 0.6);
+    color: rgba(255, 255, 255, 0.7);
+    padding: 20px;
+    text-align: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    margin-top: auto;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.site-footer-global .credits {
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+/* ==================================== */
+/* Responsividade para a página de Jogos */
+/* ==================================== */
+
+/* Para telas menores que 1024px */
+@media (max-width: 1024px) {
+    .main-header {
+        height: var(--header-height-desktop);
+        padding: 0 3%;
+    }
+    .page-title-global { font-size: 1.8rem; }
+    .back-button-global { font-size: 1rem; padding: 6px 12px; }
+    .back-button-global i { font-size: 1.1em; }
+
+    .section-title { font-size: 2.2rem; margin-bottom: 30px; }
+    .card-container { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; }
+    .card { padding: 25px; min-height: 220px; }
+    .card-icon { width: 110px; height: 160px; } /* Ajuste de tamanho para tablet */
+    .card h3 { font-size: 1.6rem; }
+    .card p { font-size: 0.95rem; }
+}
+
+/* Para telas menores que 768px (Tablets em retrato, Celulares grandes) */
 @media (max-width: 768px) {
-    h1 {
-        font-size: 2.5rem;
+    .main-header {
+        height: auto;
+        min-height: var(--header-height-mobile);
+        padding: 10px 2%;
+        flex-direction: column;
+        justify-content: center;
     }
 
-    ul {
-        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-        max-width: 95%;
+    .page-title-global {
+        font-size: 1.6rem;
+        text-align: center;
+        margin-top: 10px;
     }
 
-    .game-image {
-        height: 180px;
+    .back-button-global {
+        font-size: 0.9rem;
+        padding: 6px 12px;
+        order: -1;
+        margin-right: auto;
     }
+    .back-button-global i { font-size: 1em; }
+
+
+    .content-wrapper { padding: 30px 2%; gap: 30px; }
+    .section-title { font-size: 1.6rem; margin-bottom: 20px; letter-spacing: 2px; }
+    .card-container { grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; }
+    .card { padding: 18px; min-height: 180px; }
+    .card-icon { width: 90px; height: 130px; margin-bottom: 10px; } /* Ajuste de tamanho para celular */
+    .card-icon img { border-radius: 6px; }
+    .card h3 { font-size: 1.3rem; }
+    .card p { font-size: 0.85rem; margin-bottom: 15px; }
+    .card-button { padding: 8px 18px; font-size: 0.9rem; }
 }
 
+/* Para telas muito pequenas (celulares menores) */
 @media (max-width: 480px) {
-    h1 {
-        font-size: 2rem;
+    .main-header {
+        padding: 10px 1%;
     }
+    .page-title-global { font-size: 1.4rem; }
+    .back-button-global {
+        font-size: 0.8rem;
+        padding: 5px 10px;
+    }
+    .back-button-global i { font-size: 0.9em; }
 
-    ul {
-        grid-template-columns: 1fr;
-        max-width: 100%;
-    }
-
-    .game-item {
-        margin: 0 auto;
-        width: 90%;
-    }
-    .game-image {
-        height: 160px;
-    }
+    .content-wrapper { padding: 20px 1%; gap: 25px; }
+    .section-title { font-size: 1.4rem; margin-bottom: 15px; letter-spacing: 1px; }
+    .card-container { grid-template-columns: 1fr; gap: 10px; } /* Força 1 coluna */
+    .card { padding: 15px; min-height: auto; }
+    .card-icon { width: 80px; height: 110px; } /* Ajuste final para telas muito pequenas */
+    .card-icon img { border-radius: 4px; }
+    .card h3 { font-size: 1.1rem; }
+    .card p { font-size: 0.8rem; margin-bottom: 10px; }
+    .card-button { padding: 6px 15px; font-size: 0.85rem; }
 }
