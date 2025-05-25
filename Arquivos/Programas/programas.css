@@ -2,20 +2,22 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
 
 :root {
-    --primary-color: #7f8cfa;
-    --secondary-color: #5d6edc;
-    --text-color: #ccd6f6;
-    --bg-dark: #0a0a0a;
-    --glass-bg: rgba(255, 255, 255, 0.08);
-    --glass-border: rgba(255, 255, 255, 0.2);
-    --shadow-color: rgba(0, 0, 0, 0.4);
+    --primary-color: #7f8cfa; /* Seu azul/roxo */
+    --secondary-color: #5d6edc; /* Um tom ligeiramente diferente para detalhes */
+    --text-color: #ccd6f6; /* Cor do texto principal */
+    --bg-dark: #0a0a0a; /* Fundo muito escuro */
+    --glass-bg: rgba(255, 255, 255, 0.08); /* Fundo para o efeito de vidro/blur */
+    --glass-border: rgba(255, 255, 255, 0.2); /* Borda para o efeito de vidro/blur */
+    --shadow-color: rgba(0, 0, 0, 0.4); /* Sombra para profundidade */
     --header-height-desktop: 80px;
     --header-height-mobile: 60px;
 }
 
 body {
     margin: 0;
-    background: url('config/background.jpg') no-repeat center center fixed; /* Verifique o caminho da imagem de fundo */
+    /* Ajuste o caminho da imagem de fundo conforme a localização do seu arquivo 'config/background.jpg' */
+    /* Exemplo: se programas.css estiver em 'Arquivos/Programas/', o caminho seria '../../config/background.jpg' */
+    background: url('../../config/background.jpg') no-repeat center center fixed;
     background-size: cover;
     background-color: var(--bg-dark);
     color: var(--text-color);
@@ -23,9 +25,10 @@ body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    overflow-x: hidden;
+    overflow-x: hidden; /* Garante que não haja scroll horizontal */
 }
 
+/* Geral para todos os títulos */
 h1, h2, h3 {
     font-family: 'Orbitron', sans-serif;
     color: var(--text-color);
@@ -34,13 +37,13 @@ h1, h2, h3 {
         0 0 10px var(--primary-color);
 }
 
-/* --- Header da página de Programas --- */
-.page-header-programas {
+/* --- Header Global (reutilizado do index.html) --- */
+.main-header {
     display: flex;
-    justify-content: center; /* Centraliza o título */
+    justify-content: space-between; /* Mantém o layout de espaços */
     align-items: center;
-    padding: 0 5%;
-    height: var(--header-height-desktop);
+    padding: 0 5%; /* Removido padding vertical fixo */
+    height: var(--header-height-desktop); /* Altura fixa para desktop */
     background-color: rgba(0, 0, 0, 0.6);
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     position: sticky;
@@ -48,9 +51,20 @@ h1, h2, h3 {
     z-index: 1000;
 }
 
-.page-header-programas .back-button-programas {
-    position: absolute; /* Posição absoluta para o botão de voltar */
-    left: 5%;
+/* Título global da página (simulando o logo) */
+.page-title-global {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2.2rem;
+    color: var(--primary-color);
+    text-shadow: 0 0 10px var(--primary-color);
+    letter-spacing: 2px;
+    white-space: nowrap;
+    flex-grow: 1; /* Permite que o título ocupe espaço */
+    text-align: center; /* Centraliza o título */
+}
+
+/* Botão Voltar Global */
+.back-button-global {
     color: var(--primary-color);
     text-decoration: none;
     font-size: 1.1rem;
@@ -59,27 +73,23 @@ h1, h2, h3 {
     border-radius: 8px;
     background-color: rgba(255, 255, 255, 0.05);
     transition: background-color 0.3s ease, transform 0.2s ease, border-color 0.3s ease;
+    display: flex; /* Para alinhar o ícone e o texto */
+    align-items: center;
+    gap: 5px; /* Espaço entre ícone e texto */
 }
 
-.page-header-programas .back-button-programas:hover {
+.back-button-global i {
+    font-size: 1.2em; /* Tamanho do ícone Font Awesome */
+}
+
+.back-button-global:hover {
     background-color: var(--primary-color);
     color: var(--bg-dark);
     transform: translateY(-2px);
     border-color: var(--secondary-color);
 }
 
-.page-title-programas {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 2.2rem;
-    color: var(--primary-color);
-    text-shadow: 0 0 10px var(--primary-color);
-    letter-spacing: 2px;
-    margin: 0; /* Remove margem padrão */
-    text-align: center;
-    flex-grow: 1; /* Permite que o título ocupe espaço */
-}
-
-/* --- Conteúdo Principal (Mesmos estilos do index.html) --- */
+/* --- Conteúdo Principal --- */
 .content-wrapper {
     flex-grow: 1;
     display: flex;
@@ -105,19 +115,21 @@ h1, h2, h3 {
     text-shadow: 0 0 15px var(--primary-color);
 }
 
+/* CARD CONTAINER: Display Grid para os cards */
 .card-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* 280px mínimo, 1fr máximo */
     gap: 30px;
     justify-content: center;
     align-items: stretch;
-    list-style: none; /* Remove bolinhas da lista */
-    padding: 0; /* Remove padding padrão da lista */
-    margin: 0; /* Remove margem padrão da lista */
+    list-style: none; /* REMOVE AS BOLINHAS DA LISTA */
+    padding: 0; /* REMOVE O PADDING PADRÃO DA UL */
+    margin: 0; /* REMOVE A MARGEM PADRÃO DA UL */
 }
 
+/* CARD INDIVIDUAL */
 .card {
-    text-decoration: none;
+    text-decoration: none; /* Remove sublinhado do link */
     color: var(--text-color);
     padding: 30px;
     border-radius: 20px;
@@ -126,17 +138,17 @@ h1, h2, h3 {
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    min-height: 250px;
+    min-height: 250px; /* Altura mínima para os cards */
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     cursor: pointer;
 }
 
 /* Efeito Glassmorphism (Blur) */
 .blur-effect {
-    background: var(--glass-bg);
-    border: 1px solid var(--glass-border);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    background: var(--glass-bg); /* Fundo transparente com opacidade */
+    border: 1px solid var(--glass-border); /* Borda transparente */
+    backdrop-filter: blur(10px); /* O BLUR NO FUNDO */
+    -webkit-backdrop-filter: blur(10px); /* Compatibilidade Safari */
     box-shadow: 0 8px 32px var(--shadow-color);
 }
 
@@ -145,13 +157,15 @@ h1, h2, h3 {
     box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6), 0 0 20px var(--primary-color);
 }
 
+/* ÍCONES DOS CARDS */
 .card-icon {
     margin-bottom: 15px;
-    width: 80px; /* Tamanho fixo para o container do ícone */
+    width: 80px; /* Tamanho fixo para o CONTAINER do ícone */
     height: 80px;
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-shrink: 0; /* Impede que o ícone encolha */
 }
 
 .card-icon img {
@@ -159,6 +173,7 @@ h1, h2, h3 {
     max-height: 100%;
     object-fit: contain; /* Redimensiona a imagem para caber, mantendo proporções */
     border-radius: 10px; /* Bordas suaves para ícones */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Sombra suave para o ícone */
 }
 
 .card h3 {
@@ -171,7 +186,7 @@ h1, h2, h3 {
 .card p {
     font-size: 1rem;
     margin-bottom: 25px;
-    flex-grow: 1;
+    flex-grow: 1; /* Permite que o parágrafo ocupe o espaço restante no card */
     color: rgba(255, 255, 255, 0.8);
 }
 
@@ -187,6 +202,7 @@ h1, h2, h3 {
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
     box-shadow: 0 0 10px var(--primary-color);
+    width: auto; /* Deixa o botão se ajustar ao conteúdo */
 }
 
 .card-button:hover {
@@ -195,21 +211,22 @@ h1, h2, h3 {
     box-shadow: 0 0 15px var(--secondary-color);
 }
 
-/* --- Footer da página de Programas --- */
-.site-footer-programas {
+/* --- Footer Global (reutilizado do index.html) --- */
+.site-footer-global {
     background-color: rgba(0, 0, 0, 0.6);
     color: rgba(255, 255, 255, 0.7);
     padding: 20px;
     text-align: center;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
-    margin-top: auto; /* Empurra o footer para baixo */
+    margin-top: auto; /* Empurra o footer para o final da página */
+    width: 100%; /* Garante que o footer ocupe toda a largura */
+    box-sizing: border-box; /* Inclui padding na largura total */
 }
 
-.site-footer-programas .credits {
+.site-footer-global .credits {
     font-size: 0.9rem;
     margin: 0;
 }
-
 
 /* ==================================== */
 /* Responsividade para a página de Programas */
@@ -217,12 +234,14 @@ h1, h2, h3 {
 
 /* Para telas menores que 1024px */
 @media (max-width: 1024px) {
-    .page-header-programas {
-        height: var(--header-height-desktop);
+    .main-header {
+        height: var(--header-height-desktop); /* Mantém altura para tablets em paisagem */
         padding: 0 3%;
     }
-    .page-title-programas { font-size: 1.8rem; }
-    .page-header-programas .back-button-programas { left: 3%; }
+    .page-title-global { font-size: 1.8rem; }
+    .back-button-global { font-size: 1rem; padding: 6px 12px; }
+    .back-button-global i { font-size: 1.1em; }
+
     .section-title { font-size: 2.2rem; margin-bottom: 30px; }
     .card-container { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; }
     .card { padding: 25px; min-height: 220px; }
@@ -233,32 +252,35 @@ h1, h2, h3 {
 
 /* Para telas menores que 768px (Tablets em retrato, Celulares grandes) */
 @media (max-width: 768px) {
-    .page-header-programas {
-        height: var(--header-height-mobile);
-        padding: 0 2%;
-        flex-direction: column; /* Para empilhar botão e título */
-        justify-content: center; /* Centraliza verticalmente */
-        position: relative; /* Ajuste para o botão de voltar */
+    .main-header {
+        height: auto; /* Altura auto para se ajustar ao conteúdo empilhado */
+        min-height: var(--header-height-mobile); /* Garante uma altura mínima */
+        padding: 10px 2%; /* Adiciona padding vertical para separar */
+        flex-direction: column; /* Empilha botão e título */
+        justify-content: center;
     }
 
-    .page-header-programas .back-button-programas {
-        position: static; /* Volta a ser estático no fluxo */
-        margin-bottom: 10px; /* Espaço entre o botão e o título */
-        font-size: 0.9rem;
-        padding: 6px 12px;
-    }
-
-    .page-title-programas {
+    .page-title-global {
         font-size: 1.6rem;
         text-align: center;
+        margin-top: 10px; /* Espaço entre o botão e o título */
     }
+
+    .back-button-global {
+        font-size: 0.9rem;
+        padding: 6px 12px;
+        order: -1; /* Move o botão para o topo visualmente no header flex */
+        margin-right: auto; /* Empurra para a esquerda */
+    }
+    .back-button-global i { font-size: 1em; }
+
 
     .content-wrapper { padding: 30px 2%; gap: 30px; }
     .section-title { font-size: 1.6rem; margin-bottom: 20px; letter-spacing: 2px; }
     .card-container { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; }
     .card { padding: 18px; min-height: 180px; }
     .card-icon { width: 60px; height: 60px; margin-bottom: 10px; }
-    .card-icon img { border-radius: 8px; } /* Ajuste de borda para mobile */
+    .card-icon img { border-radius: 8px; }
     .card h3 { font-size: 1.3rem; }
     .card p { font-size: 0.85rem; margin-bottom: 15px; }
     .card-button { padding: 8px 18px; font-size: 0.9rem; }
@@ -266,19 +288,19 @@ h1, h2, h3 {
 
 /* Para telas muito pequenas (celulares menores, como 320px de largura) */
 @media (max-width: 480px) {
-    .page-header-programas {
-        height: auto; /* Deixa a altura se ajustar ao conteúdo */
+    .main-header {
         padding: 10px 1%;
     }
-    .page-header-programas .back-button-programas {
+    .page-title-global { font-size: 1.4rem; }
+    .back-button-global {
         font-size: 0.8rem;
         padding: 5px 10px;
     }
-    .page-title-programas { font-size: 1.4rem; }
+    .back-button-global i { font-size: 0.9em; }
 
     .content-wrapper { padding: 20px 1%; gap: 25px; }
     .section-title { font-size: 1.4rem; margin-bottom: 15px; letter-spacing: 1px; }
-    .card-container { grid-template-columns: 1fr; gap: 10px; }
+    .card-container { grid-template-columns: 1fr; gap: 10px; } /* Força 1 coluna */
     .card { padding: 15px; min-height: auto; }
     .card-icon { width: 50px; height: 50px; }
     .card-icon img { border-radius: 5px; }
