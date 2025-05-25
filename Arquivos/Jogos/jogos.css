@@ -122,9 +122,9 @@ h1, h2, h3 {
     gap: 30px;
     justify-content: center;
     align-items: stretch;
-    list-style: none; /* REMOVE AS BOLINHAS DA LISTA */
-    padding: 0; /* REMOVE O PADDING PADRÃO DA UL */
-    margin: 0; /* REMOVE A MARGEM PADRÃO DA UL */
+    list-style: none;
+    padding: 0;
+    margin: 0;
 }
 
 /* CARD INDIVIDUAL */
@@ -138,7 +138,7 @@ h1, h2, h3 {
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    min-height: 250px; /* Altura mínima para os cards */
+    min-height: 250px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     cursor: pointer;
 }
@@ -160,19 +160,23 @@ h1, h2, h3 {
 /* ÍCONES/IMAGENS DOS CARDS (capas de jogos) */
 .card-icon {
     margin-bottom: 15px;
-    width: 130px; /* Ajustei para um tamanho um pouco maior para as capas de jogos */
-    height: 180px; /* Ajustei para um tamanho um pouco maior para as capas de jogos (proporção de capa de jogo) */
+    /* Manter um tamanho fixo para o container do ícone/capa */
+    width: 150px; /* Aumentado um pouco para preencher melhor o espaço */
+    height: 150px; /* Mantido igual para criar um container quadrado */
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-shrink: 0;
+    flex-shrink: 0; /* Impede que o item encolha */
+    overflow: hidden; /* Importante para cortar as partes da imagem que ultrapassem o container */
+    border-radius: 15px; /* Bordas suaves para o container */
 }
 
 .card-icon img {
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: contain; /* Use 'contain' para garantir que a imagem inteira seja visível */
-    border-radius: 8px; /* Bordas mais quadradas para capas de jogo */
+    width: 100%; /* Faz a imagem preencher a largura do container */
+    height: 100%; /* Faz a imagem preencher a altura do container */
+    object-fit: cover; /* ESSA É A MUDANÇA PRINCIPAL: Faz a imagem "cobrir" o container, cortando o que sobra */
+    object-position: center; /* Garante que o centro da imagem esteja no centro do container */
+    border-radius: 8px; /* Bordas mais quadradas para a imagem em si */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
@@ -245,7 +249,8 @@ h1, h2, h3 {
     .section-title { font-size: 2.2rem; margin-bottom: 30px; }
     .card-container { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; }
     .card { padding: 25px; min-height: 220px; }
-    .card-icon { width: 110px; height: 160px; } /* Ajuste de tamanho para tablet */
+    .card-icon { width: 120px; height: 120px; border-radius: 12px; } /* Ajuste de tamanho para tablet */
+    .card-icon img { border-radius: 7px; }
     .card h3 { font-size: 1.6rem; }
     .card p { font-size: 0.95rem; }
 }
@@ -279,8 +284,8 @@ h1, h2, h3 {
     .section-title { font-size: 1.6rem; margin-bottom: 20px; letter-spacing: 2px; }
     .card-container { grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; }
     .card { padding: 18px; min-height: 180px; }
-    .card-icon { width: 90px; height: 130px; margin-bottom: 10px; } /* Ajuste de tamanho para celular */
-    .card-icon img { border-radius: 6px; }
+    .card-icon { width: 90px; height: 90px; margin-bottom: 10px; border-radius: 10px; } /* Ajuste de tamanho para celular */
+    .card-icon img { border-radius: 5px; }
     .card h3 { font-size: 1.3rem; }
     .card p { font-size: 0.85rem; margin-bottom: 15px; }
     .card-button { padding: 8px 18px; font-size: 0.9rem; }
@@ -302,7 +307,7 @@ h1, h2, h3 {
     .section-title { font-size: 1.4rem; margin-bottom: 15px; letter-spacing: 1px; }
     .card-container { grid-template-columns: 1fr; gap: 10px; } /* Força 1 coluna */
     .card { padding: 15px; min-height: auto; }
-    .card-icon { width: 80px; height: 110px; } /* Ajuste final para telas muito pequenas */
+    .card-icon { width: 80px; height: 80px; border-radius: 8px; } /* Ajuste final para telas muito pequenas */
     .card-icon img { border-radius: 4px; }
     .card h3 { font-size: 1.1rem; }
     .card p { font-size: 0.8rem; margin-bottom: 10px; }
