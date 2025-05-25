@@ -134,7 +134,7 @@ h1, h2, h3 {
     text-align: center;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: center; /* ESTE JÁ CENTRALIZA OS ITENS DO CARD, INCLUINDO O .card-icon */
     justify-content: space-between;
     min-height: 250px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -155,20 +155,22 @@ h1, h2, h3 {
     box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6), 0 0 20px var(--primary-color);
 }
 
-/* ÍCONES/IMAGENS DOS CARDS (capas de jogos) - NOVO AJUSTE */
+/* ÍCONES/IMAGENS DOS CARDS (capas de jogos) */
 .card-icon {
     margin-bottom: 15px;
     /* Tamanho do container. Ajuste estes valores para o formato desejado. */
     /* Para um quadrado, width e height devem ser iguais. */
     width: 150px; /* Largura do "quadrado" do ícone */
     height: 150px; /* Altura do "quadrado" do ícone */
+    
+    /* AS SEGUINTES PROPRIEDADES JÁ GARANTEM A CENTRALIZAÇÃO DA IMAGEM DENTRO DESTE CONTAINER */
     display: flex;
-    justify-content: center; /* Centraliza a imagem horizontalmente */
-    align-items: center; /* Centraliza a imagem verticalmente */
+    justify-content: center; /* Centraliza a imagem horizontalmente dentro de .card-icon */
+    align-items: center; /* Centraliza a imagem verticalmente dentro de .card-icon */
+    
     flex-shrink: 0;
     overflow: hidden; /* ESSENCIAL para cortar as partes da imagem que excedem o container */
     border-radius: 12px; /* Cantos arredondados do "quadrado" do ícone */
-    /* background-color: rgba(0, 0, 0, 0.1); */ /* Opcional: um leve fundo para o container */
 }
 
 .card-icon img {
@@ -187,7 +189,7 @@ h1, h2, h3 {
     color: var(--primary-color);
     text-shadow: 0 0 8px var(--primary-color);
     word-break: break-word;
-    text-align: center;
+    text-align: center; /* Garante que o título esteja centralizado */
 }
 
 .card p {
@@ -195,7 +197,7 @@ h1, h2, h3 {
     margin-bottom: 25px;
     flex-grow: 1;
     color: rgba(255, 255, 255, 0.8);
-    text-align: center;
+    text-align: center; /* Garante que a descrição esteja centralizada */
 }
 
 .card-button {
@@ -254,7 +256,7 @@ h1, h2, h3 {
     .card-container { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; }
     .card { padding: 25px; min-height: 220px; }
     .card-icon { width: 120px; height: 120px; border-radius: 10px; } /* Ajuste de tamanho para tablet */
-    .card-icon img { border-radius: inherit; } /* Herda do pai */
+    .card-icon img { border-radius: inherit; }
     .card h3 { font-size: 1.6rem; }
     .card p { font-size: 0.95rem; }
 }
@@ -289,7 +291,7 @@ h1, h2, h3 {
     .card-container { grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; }
     .card { padding: 18px; min-height: 180px; }
     .card-icon { width: 90px; height: 90px; margin-bottom: 10px; border-radius: 8px; } /* Ajuste de tamanho para celular */
-    .card-icon img { border-radius: inherit; } /* Herda do pai */
+    .card-icon img { border-radius: inherit; }
     .card h3 { font-size: 1.3rem; }
     .card p { font-size: 0.85rem; margin-bottom: 15px; }
     .card-button { padding: 8px 18px; font-size: 0.9rem; }
@@ -312,7 +314,7 @@ h1, h2, h3 {
     .card-container { grid-template-columns: 1fr; gap: 10px; }
     .card { padding: 15px; min-height: auto; }
     .card-icon { width: 70px; height: 70px; border-radius: 6px; } /* Ajuste final para telas muito pequenas */
-    .card-icon img { border-radius: inherit; } /* Herda do pai */
+    .card-icon img { border-radius: inherit; }
     .card h3 { font-size: 1.1rem; }
     .card p { font-size: 0.8rem; margin-bottom: 10px; }
     .card-button { padding: 6px 15px; font-size: 0.85rem; }
