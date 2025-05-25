@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Player de Música - Seu Site</title>
+    <link rel="stylesheet" href="music.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    </head>
+<body>
+    <div id="page-transition-overlay">
+        <div class="spinner"></div>
+    </div>
+
+    <header>
+        <h1>Player de Música</h1>
+    </header>
+
+    <main class="music-player-container">
+        <div class="player">
+            <div class="player__list">
+                <i class="fas fa-list player__icon player__icon-list"></i>
+            </div>
+            <div class="player__volume">
+                <i class="fas fa-volume-up player__icon player__icon-volume"></i>
+            </div>
+
+            <div class="player__meta">
+                <div class="player__song">Título da Música</div>
+                <div class="player__artist">Nome do Artista</div>
+            </div>
+
+            <div class="player__bg" style="background-image: url('covers/default_cover.jpg');"></div>
+
+            <div class="player__controls">
+                <div class="player__controls-bg" style="background-image: url('covers/default_cover.jpg');"></div>
+                
+                <div class="player__repeat">
+                    <i class="fas fa-redo player__icon player__icon-repeat"></i>
+                </div>
+                <div class="player__prev">
+                    <i class="fas fa-backward player__icon player__icon-prev"></i>
+                </div>
+                <div class="player__play">
+                    <i class="fas fa-play player__icon player__icon-play" id="play-icon"></i>
+                    <i class="fas fa-pause player__icon player__icon-pause hidden" id="pause-icon"></i>
+                </div>
+                <div class="player__next">
+                    <i class="fas fa-forward player__icon player__icon-next"></i>
+                </div>
+                <div class="player__shuffle">
+                    <i class="fas fa-random player__icon player__icon-shuffle"></i>
+                </div>
+            </div>
+             <div class="progress-bar-container">
+                <input type="range" id="progress-bar" value="0" min="0" max="100">
+                <div class="time-labels">
+                    <span id="current-time">0:00</span>
+                    <span id="duration">0:00</span>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div class="back-to-menu">
+        <a href="../../index.html">Voltar ao Menu Principal</a>
+    </div>
+
+    <div class="credits">Créditos: Smith 33</div>
+
+    <audio id="audio-player" src="../MP3/sua_musica.mp3" preload="metadata"></audio>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const audioPlayer = document.getElementById('audio-player');
+            const playIcon = document.getElementById('play-icon');
+            const pauseIcon = document.getElementById('pause-icon');
+            const playBtn = document.querySelector('.player__play'); // Usando o botão com a classe .player__play
+            const prevBtn = document.querySelector('.player__prev');
+            const nextBtn = document.querySelector('.player__next');
+            const progressBar = document.getElementById('progress-bar');
+            const currentTimeLabel = document.getElementById('current-time');
+            const durationLabel = document.getElementById('duration');
+            const songTitleDisplay = document.querySelector('.player__song');
+            const artistNameDisplay = document.querySelector('.player__artist');
+            const playerBg = document.querySelector('.player__bg');
+            const playerControlsBg = document.querySelector('.player__controls-bg');
+
+            let currentSongIndex = 0;
+            // AQUI VOCÊ INFORMARÁ SUAS MÚSICAS, CAPAS E ARTISTAS
+            const songs = [
+                { title: 'Queenie Eye', artist: 'Paul McCartney', src: '../MP3/musica1.mp3', cover: 'covers/cover1.jpg' },
+                { title: 'Nome da Música 2', artist: 'Artista 2', src: '../MP3/musica2.mp3', cover: 'covers/cover2.jpg' },
+                // Adicione mais músicas aqui...
+            ];
+
+            function loadSong(index) {
+                const currentSong = songs[index];
+                audioPlayer.src = currentSong.src;
+                songTitleDisplay.textContent = currentSong.title;
+                artistNameDisplay.textContent = currentSong.artist;
+
+                const coverPath = currentSong.cover || 'covers/default_cover.jpg';
+                playerBg.style.backgroundImage = `url('${coverPath}')`;
+                playerControlsBg.style.backgroundImage = `url('${coverPath}')`;
+                
+                audioPlayer.load(); // Carrega os metadados da nova música
+                updateDuration();
+            }
+
+            function playSong() {
+                audioPlayer.play();
+                playIcon.classList.add('hidden');
+                pauseIcon.classList.remove('hidden');
+            }
+
+            function pauseSong() {
+                audioPlayer.pause();
+                pauseIcon.classList.add('hidden');
+                playIcon.classList.remove('hidden');
+            }
+
+            playBtn.addEventListener('click', () => {
+                if (audioPlayer.paused) {
+                    playSong();
+                } else {
+                    pauseSong();
+                }
+            });
+
+            prevBtn.addEventListener('click', () => {
+                currentSongIndex--;
+                if (currentSongIndex < 0) {
+                    currentSongIndex = songs.length - 1;
+                }
+                loadSong(currentSongIndex);
+                playSong();
+            });
+
+            nextBtn.addEventListener('click', () => {
+                currentSongIndex++;
+                if (currentSongIndex >= songs.length) {
+                    currentSongIndex = 0;
+                }
+                loadSong(currentSongIndex);
+                playSong();
+            });
+
+            audioPlayer.addEventListener('timeupdate', () => {
+                const currentTime = audioPlayer.currentTime;
+                const duration = audioPlayer.duration;
+                if (isNaN(duration)) {
+                    updateDuration();
+                    return;
+                }
+                const progress = (currentTime / duration) * 100;
+                progressBar.value = progress;
+                currentTimeLabel.textContent = formatTime(currentTime);
+            });
+
+            progressBar.addEventListener('input', () => {
+                const seekTime = (progressBar.value / 100) * audioPlayer.duration;
+                audioPlayer.currentTime = seekTime;
+            });
+
+            function formatTime(seconds) {
+                const minutes = Math.floor(seconds / 60);
+                const remainingSeconds = Math.floor(seconds % 60).toString().padStart(2, '0');
+                return `${minutes}:${remainingSeconds}`;
+            }
+
+            function updateDuration() {
+                if (!isNaN(audioPlayer.duration)) {
+                    durationLabel.textContent = formatTime(audioPlayer.duration);
+                } else {
+                    durationLabel.textContent = '0:00';
+                }
+            }
+
+            audioPlayer.addEventListener('loadedmetadata', updateDuration);
+            audioPlayer.addEventListener('ended', nextSong); // Toca a próxima música automaticamente
+
+            function nextSong() {
+                currentSongIndex++;
+                if (currentSongIndex >= songs.length) {
+                    currentSongIndex = 0; // Volta para a primeira música
+                }
+                loadSong(currentSongIndex);
+                playSong();
+            }
+
+            // Inicializa a primeira música
+            if (songs.length > 0) {
+                loadSong(currentSongIndex);
+            }
+
+            // Você pode adicionar funcionalidade para volume, repeat, shuffle aqui se desejar
+            // Ex: volumeSlider no CSS anterior, ou cliques nos ícones de volume/repeat/shuffle
+            // Por enquanto, os ícones são apenas visuais.
+
+            // Importa o script de transição se existir (ajuste o caminho conforme necessário)
+            // const transitionScript = document.createElement('script');
+            // transitionScript.src = '../../transitions.js';
+            // document.body.appendChild(transitionScript);
+        });
+    </script>
+</body>
+</html>

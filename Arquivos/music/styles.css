@@ -1,0 +1,478 @@
+@import url('https://fonts.com/css2?family=Orbitron&display=swap'); /* Sua fonte */
+
+/* Estilos globais e do corpo */
+html, body {
+    min-height: 100%;
+}
+
+body {
+    margin: 0;
+    /* Caminho para o background: "../../" sai da pasta "Music",
+       depois "../../" sai da pasta "Arquivos", e então entra em "Jogos/config" */
+    background: url('../../Jogos/config/background.jpg') no-repeat center center fixed;
+    background-size: cover;
+    color: #fff;
+    font-family: 'Orbitron', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 20px;
+    box-sizing: border-box;
+    position: relative; /* Para garantir o spinner da transição */
+}
+
+/* Estilos do cabeçalho */
+header {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 40px;
+    padding-top: 20px;
+}
+
+h1 {
+    font-size: 3rem;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    color: #ccd6f6;
+    text-shadow:
+        0 0 5px #7f8cfa,
+        0 0 10px #7f8cfa,
+        0 0 20px #7f8cfa,
+        0 0 40px #7f8cfa;
+    text-align: center;
+}
+
+/* Container principal do player */
+main.music-player-container {
+    width: 100%;
+    max-width: 600px; /* Largura máxima do player */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+/* Estilos do Player principal */
+.player {
+    box-shadow: 0 2px 4px -4px rgba(0, 0, 0, .4), 0 50px 45px -20px rgba(0, 0, 0, .2);
+    border-radius: 30px;
+    height: 400px; /* Altura do player */
+    margin: 0 auto; /* Centraliza horizontalmente */
+    overflow: hidden;
+    position: relative;
+    width: 400px; /* Largura do player */
+    background: rgba(0, 0, 0, 0.4); /* Fundo base para o player */
+    border: 2px solid #7f8cfa; /* Borda do seu site */
+}
+
+/* Informações da música (título e artista) */
+.player__meta {
+    box-sizing: border-box;
+    font-size: 24px;
+    padding: 50px 20px;
+    position: absolute;
+    text-align: center;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, .4); /* Sombra mais escura para texto claro */
+    top: 0;
+    width: 100%;
+    z-index: 1;
+    color: #ccd6f6; /* Cor do seu site */
+}
+
+.player__song {
+    font-size: 1.8em; /* Ajuste para o tamanho da música */
+    margin-bottom: 5px;
+}
+
+.player__artist {
+    font-weight: 300;
+    font-size: 0.8em; /* Ajuste para o tamanho do artista */
+    color: #99a8d4; /* Cor mais suave */
+}
+
+/* Fundo principal do player (Capa da Música) */
+.player__bg {
+    background-position: center; /* Ajuste para 'center' */
+    background-size: cover;
+    height: 100%;
+    position: absolute;
+    width: 100%;
+    filter: brightness(0.7); /* Escurece um pouco a capa para o texto se destacar */
+    transition: background-image 0.5s ease-in-out; /* Transição suave na capa */
+}
+
+.player__bg:before,
+.player__bg:after {
+    content: '';
+    display: block;
+    height: 100%;
+    position: absolute;
+    width: 100%;
+}
+
+/* Sombra na parte superior da capa (para o efeito do Pug) */
+.player__bg:after {
+    background: linear-gradient(to top, rgba(0,0,0,0.5), transparent); /* Fundo gradiente para cima */
+    opacity: .8;
+    mix-blend-mode: soft-light;
+}
+
+/* Controles do Player */
+.player__controls {
+    background-color: rgba(0, 0, 0, .4); /* Fundo semi-transparente para os controles */
+    bottom: 0;
+    box-shadow: inset 0 1px rgba(255, 255, 255, .1); /* Sombra interna sutil */
+    height: 100px; /* Altura da área de controles */
+    position: absolute;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px; /* Espaçamento entre os botões */
+    z-index: 2; /* Acima do fundo desfocado */
+}
+
+.player__controls:before {
+    content: '';
+    height: 100%;
+    display: block;
+    pointer-events: none;
+    position: absolute;
+    width: 100%;
+    box-shadow: 0 -5px 10px 0 rgba(0, 0, 0, .6); /* Sombra externa superior */
+    mix-blend-mode: soft-light;
+}
+
+/* Fundo desfocado dos controles */
+.player__controls-bg {
+    background-position: bottom center;
+    background-size: cover;
+    height: 100%;
+    filter: blur(20px) brightness(0.5); /* Mais blur e escurecimento */
+    overflow: hidden;
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+    transition: background-image 0.5s ease-in-out; /* Transição suave na capa */
+}
+
+.player__controls-bg:before {
+    background: linear-gradient(to top, rgba(0,0,0,0.8), transparent); /* Gradiente para o escurecimento */
+    content: '';
+    display: block;
+    height: 100%;
+    opacity: .6;
+    mix-blend-mode: soft-light;
+    position: absolute;
+    width: 100%;
+}
+
+/* Estilo base para os botões de controle (play, prev, next) */
+.player__play,
+.player__prev,
+.player__next {
+    background: rgba(127, 140, 250, .2); /* Cor base do seu site */
+    border-radius: 50%; /* Agora são círculos */
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .3); /* Sombra suave */
+    cursor: pointer;
+    position: relative; /* Para posicionar o ícone dentro */
+    transition: background .15s linear, transform .1s linear;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.player__icon {
+    color: #ccd6f6; /* Cor do ícone */
+    font-size: 1.8em; /* Tamanho dos ícones */
+    transition: transform .05s linear;
+}
+
+/* Efeito hover nos botões */
+.player__play:hover,
+.player__prev:hover,
+.player__next:hover {
+    background: #7f8cfa; /* Cor principal do seu site no hover */
+    box-shadow: 0 0 15px #7f8cfa; /* Brilho no hover */
+    transform: scale(1.05); /* Leve aumento no tamanho */
+}
+
+.player__play:hover .player__icon,
+.player__prev:hover .player__icon,
+.player__next:hover .player__icon {
+    transform: scale(.9); /* Leve redução do ícone no hover */
+}
+
+/* Tamanhos dos botões */
+.player__play {
+    height: 70px; /* Botão play maior */
+    width: 70px;
+}
+
+.player__prev,
+.player__next {
+    height: 50px; /* Botões prev/next menores */
+    width: 50px;
+}
+
+/* Ícones de repeat e shuffle */
+.player__repeat,
+.player__shuffle {
+    position: absolute;
+    bottom: 25px; /* Ajusta a posição para o centro da área de controles */
+    color: #ccd6f6;
+    font-size: 1.5em; /* Tamanho dos ícones */
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.player__repeat:hover,
+.player__shuffle:hover {
+    color: #7f8cfa; /* Cor do site no hover */
+}
+
+.player__repeat {
+    left: 20px;
+}
+
+.player__shuffle {
+    right: 20px;
+}
+
+/* Ícones de lista e volume (fora da área de controles principal) */
+.player__list,
+.player__volume {
+    position: absolute;
+    top: 30px; /* Posição superior */
+    color: #ccd6f6;
+    font-size: 1.8em; /* Tamanho maior para os ícones */
+    cursor: pointer;
+    z-index: 1; /* Acima da capa */
+    transition: color 0.2s ease;
+}
+
+.player__list:hover,
+.player__volume:hover {
+    color: #7f8cfa;
+}
+
+.player__list {
+    left: 20px;
+}
+
+.player__volume {
+    right: 20px;
+}
+
+/* Barra de progresso */
+.progress-bar-container {
+    width: 100%;
+    position: absolute;
+    bottom: 90px; /* Acima dos controles */
+    left: 0;
+    padding: 0 20px;
+    box-sizing: border-box;
+    z-index: 2; /* Acima do fundo desfocado */
+}
+
+#progress-bar {
+    width: 100%;
+    height: 8px; /* Mais fina */
+    -webkit-appearance: none;
+    background: rgba(255, 255, 255, 0.2); /* Trilha clara e semi-transparente */
+    border-radius: 4px;
+    cursor: pointer;
+    outline: none;
+}
+
+#progress-bar::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 16px; /* Aumenta um pouco */
+    height: 16px; /* Aumenta um pouco */
+    background: #7f8cfa;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 0 8px #7f8cfa; /* Sombra/brilho no thumb */
+}
+
+#progress-bar::-moz-range-thumb {
+    width: 16px;
+    height: 16px;
+    background: #7f8cfa;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 0 8px #7f8cfa;
+    border: none;
+}
+
+.time-labels {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    font-size: 0.75rem; /* Menor */
+    color: #ccc;
+    margin-top: 5px;
+}
+
+/* Estilo para esconder elementos (usado no JavaScript) */
+.hidden {
+    display: none !important;
+}
+
+/* Estilos para o botão "Voltar ao Menu Principal" */
+.back-to-menu {
+    margin-top: 40px;
+    margin-bottom: 20px;
+}
+
+.back-to-menu a {
+    display: inline-block;
+    background: #7f8cfa;
+    color: #fff;
+    padding: 12px 25px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 1.1rem;
+    font-weight: bold;
+    transition: background 0.3s ease, transform 0.3s ease;
+    border: 2px solid #7f8cfa;
+    box-shadow: 0 0 8px #7f8cfa;
+}
+
+.back-to-menu a:hover {
+    background: #5f6bca;
+    transform: translateY(-3px);
+    box-shadow: 0 0 15px #7f8cfa;
+}
+
+/* Créditos */
+.credits {
+    margin-top: 30px;
+    font-size: 0.9rem;
+    color: #aaa;
+    width: 100%;
+    text-align: center;
+    padding-bottom: 20px;
+}
+
+/* Media Queries para responsividade */
+@media (max-width: 600px) {
+    .player {
+        width: 100%;
+        height: 350px;
+        border-radius: 20px;
+    }
+
+    .player__meta {
+        padding: 30px 10px;
+        font-size: 20px;
+    }
+
+    .player__song {
+        font-size: 1.5em;
+    }
+
+    .player__artist {
+        font-size: 0.7em;
+    }
+
+    .player__controls {
+        height: 80px;
+        gap: 15px;
+    }
+
+    .player__play {
+        height: 60px;
+        width: 60px;
+    }
+
+    .player__prev,
+    .player__next {
+        height: 45px;
+        width: 45px;
+    }
+
+    .player__icon {
+        font-size: 1.5em;
+    }
+
+    .player__repeat,
+    .player__shuffle {
+        font-size: 1.3em;
+        bottom: 20px;
+    }
+
+    .player__list,
+    .player__volume {
+        font-size: 1.5em;
+        top: 20px;
+    }
+
+    .progress-bar-container {
+        bottom: 70px;
+        padding: 0 15px;
+    }
+
+    #progress-bar {
+        height: 6px;
+    }
+
+    #progress-bar::-webkit-slider-thumb,
+    #progress-bar::-moz-range-thumb {
+        width: 14px;
+        height: 14px;
+    }
+}
+
+@media (max-width: 400px) {
+    h1 {
+        font-size: 2rem;
+    }
+    .player {
+        height: 300px;
+    }
+    .player__meta {
+        font-size: 18px;
+    }
+    .player__song {
+        font-size: 1.3em;
+    }
+    .player__artist {
+        font-size: 0.6em;
+    }
+    .player__controls {
+        height: 70px;
+        gap: 10px;
+    }
+    .player__play {
+        height: 50px;
+        width: 50px;
+    }
+    .player__prev,
+    .player__next {
+        height: 40px;
+        width: 40px;
+    }
+    .player__icon {
+        font-size: 1.2em;
+    }
+    .player__repeat,
+    .player__shuffle {
+        font-size: 1.1em;
+        left: 10px;
+        right: 10px;
+    }
+    .player__list,
+    .player__volume {
+        font-size: 1.3em;
+        left: 10px;
+        right: 10px;
+    }
+    .back-to-menu a {
+        font-size: 0.9rem;
+        padding: 8px 15px;
+    }
+}
