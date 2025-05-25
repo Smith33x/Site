@@ -1,0 +1,257 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron&family=Share+Tech+Mono&display=swap');
+
+/* Cores e variáveis CSS para o tema hacker */
+:root {
+    --hacker-green: #00ff00; /* Verde vibrante */
+    --hacker-green-light: #00cc00; /* Verde um pouco mais claro para hover */
+    --hacker-dark: #0a0a0a; /* Fundo bem escuro */
+    --hacker-grey: #a0a0a0; /* Texto secundário */
+    --glow-strength: 0 0 5px var(--hacker-green),
+                     0 0 10px var(--hacker-green),
+                     0 0 20px var(--hacker-green),
+                     0 0 40px var(--hacker-green);
+    --inner-glow-strength: inset 0 0 5px var(--hacker-green-light),
+                           inset 0 0 10px var(--hacker-green);
+}
+
+body {
+    margin: 0;
+    /* Wallpaper de fundo do Freepik */
+    background: url('https://img.freepik.com/vector-premium/cyber-hacker-ataque-fondo-craneo-vector_42077-7852.jpg?semt=ais_hybrid&w=740') no-repeat center center fixed;
+    background-size: cover;
+    color: #fff; /* Cor padrão do texto, mas usaremos variáveis para específico */
+    font-family: 'Share Tech Mono', monospace; /* Fonte com estilo de terminal */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 100vh;
+    padding: 20px;
+    box-sizing: border-box;
+    position: relative;
+}
+
+/* Camada escura sobre o fundo para melhorar o contraste */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7); /* Camada escura com mais opacidade para o tema hacker */
+    z-index: -1;
+}
+
+/* Garante que todos os elementos de conteúdo fiquem acima do fundo e da camada escura */
+header, main, .back-to-menu, .credits, .program-category-item {
+    position: relative; /* Permite que z-index funcione */
+    z-index: 1; /* Valor maior que -1 para ficarem visíveis */
+}
+
+header {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 40px;
+    padding-top: 20px;
+}
+
+h1 {
+    font-family: 'Orbitron', sans-serif; /* Mantém Orbitron para o título principal */
+    font-size: 3rem;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    color: var(--hacker-green);
+    text-shadow: var(--glow-strength); /* Efeito de brilho verde */
+    text-align: center;
+}
+
+main.program-category-container {
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.program-category-list {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 30px;
+    justify-content: center;
+    width: 100%;
+    max-width: 90%;
+}
+
+.program-category-item {
+    background-color: var(--hacker-dark); /* Fundo escuro */
+    border: 2px solid var(--hacker-green);
+    border-radius: 15px;
+    box-shadow: var(--glow-strength), var(--inner-glow-strength); /* Brilho externo e interno */
+    transition: all 0.3s ease;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.program-category-item:hover {
+    background-color: rgba(0, 255, 0, 0.2); /* Fundo mais transparente com verde no hover */
+    box-shadow: var(--glow-strength),
+                0 0 30px var(--hacker-green-light), /* Brilho mais forte no hover */
+                var(--inner-glow-strength);
+    transform: translateY(-5px) scale(1.02);
+}
+
+.program-category-item a {
+    display: flex;
+    flex-direction: column;
+    color: var(--hacker-green); /* Cor padrão dos links dos itens */
+    text-decoration: none;
+    height: 100%;
+}
+
+/* ESTILOS PARA DEIXAR OS ÍCONES REDONDOS */
+.program-icon {
+    width: 150px; /* Largura fixa para garantir um círculo perfeito */
+    height: 150px; /* Altura fixa igual à largura */
+    overflow: hidden; /* Corta qualquer parte da imagem que exceda o círculo */
+    border-bottom: none; /* Remove a borda inferior antiga */
+    border-radius: 50%; /* Transforma a div em um círculo */
+    border: 2px solid var(--hacker-green); /* Borda circular verde */
+    box-shadow: 0 0 8px var(--hacker-green), inset 0 0 10px var(--hacker-green-light); /* Brilho inicial para o círculo */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.4); /* Fundo ligeiramente transparente */
+    margin: 15px auto 0; /* Centraliza o ícone dentro do card e adiciona margem superior */
+}
+
+.program-category-item:hover .program-icon {
+    border-color: var(--hacker-green-light); /* Muda a cor da borda no hover */
+    box-shadow: 0 0 20px var(--hacker-green), 0 0 30px var(--hacker-green-light), inset 0 0 15px var(--hacker-green-light); /* Aumenta o glow no hover */
+}
+
+.program-icon img {
+    width: 90%; /* A imagem preencherá 90% do círculo */
+    height: 90%; /* A imagem preencherá 90% do círculo */
+    object-fit: contain; /* Garante que o ícone se ajuste sem cortar ou esticar, mantendo suas proporções */
+    display: block;
+    filter: drop-shadow(0 0 5px var(--hacker-green)); /* Sombra para o ícone */
+    transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.program-category-item:hover .program-icon img {
+    transform: scale(1.05); /* Zoom sutil no ícone no hover */
+    filter: drop_shadow(0 0 15px var(--hacker-green-light)); /* Brilho maior no ícone no hover */
+}
+
+/* FIM DOS ESTILOS PARA ÍCONES REDONDOS */
+
+
+.program-info {
+    padding: 15px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.4); /* Fundo escuro para a área de texto */
+    border-top: 1px solid rgba(0, 255, 0, 0.2);
+}
+
+.program-info h2 {
+    font-size: 1.4rem;
+    margin-top: 0;
+    margin-bottom: 8px;
+    color: var(--hacker-green);
+    text-shadow: var(--glow-strength); /* Brilho verde para o título do programa */
+}
+
+.program-info p {
+    font-size: 0.95rem;
+    line-height: 1.4;
+    color: var(--hacker-grey); /* Cor cinza para a descrição */
+    text-shadow: 0 0 2px rgba(0,0,0,0.8);
+}
+
+.back-to-menu {
+    margin-top: 40px;
+    margin-bottom: 20px;
+}
+
+.back-to-menu a {
+    display: inline-block;
+    background: var(--hacker-green);
+    color: var(--hacker-dark); /* Texto escuro no botão verde */
+    padding: 12px 25px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 1.1rem;
+    font-weight: bold;
+    transition: background 0.3s ease, transform 0.3s ease;
+    border: 2px solid var(--hacker-green);
+    box-shadow: var(--glow-strength);
+}
+
+.back-to-menu a:hover {
+    background: var(--hacker-green-light);
+    transform: translateY(-3px);
+    box-shadow: 0 0 25px var(--hacker-green);
+}
+
+.credits {
+    margin-top: 30px;
+    font-size: 0.9rem;
+    color: var(--hacker-grey);
+    width: 100%;
+    text-align: center;
+    padding-bottom: 20px;
+    text-shadow: 0 0 2px rgba(0,0,0,0.8);
+}
+
+/* Media Queries para responsividade */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2.5rem;
+    }
+    .program-category-list {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        max-width: 95%;
+    }
+    .program-icon {
+        width: 120px; /* Reduz o tamanho do ícone redondo em telas menores */
+        height: 120px;
+    }
+    .program-info h2 {
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 2rem;
+        letter-spacing: 4px;
+    }
+    .program-category-list {
+        grid-template-columns: 1fr;
+        max-width: 100%;
+    }
+    .program-category-item {
+        width: 90%;
+        margin: 0 auto;
+    }
+    .program-icon {
+        width: 100px; /* Reduz mais ainda em telas muito pequenas */
+        height: 100px;
+    }
+    .program-info h2 {
+        font-size: 1.1rem;
+    }
+    .back-to-menu a {
+        font-size: 1rem;
+        padding: 10px 20px;
+    }
+}
