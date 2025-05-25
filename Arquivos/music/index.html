@@ -5,64 +5,58 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Álbuns de Música - Sua Biblioteca</title>
     <link rel="stylesheet" href="music-albums.css">
-    
-    </head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
 <body>
     <div id="page-transition-overlay">
         <div class="spinner"></div>
     </div>
 
-    <header>
-        <h1>Álbuns de Música</h1>
+    <header class="main-header">
+        <a href="../../index.html" class="back-button-global">
+            <i class="fas fa-arrow-left"></i> Voltar
+        </a>
+        <h1 class="page-title-global">Álbuns de Música</h1>
     </header>
 
-    <main class="album-category-container">
-        <ul class="album-category-list">
-            
-            <li class="album-category-item">
-                <a href="../MP3/FromZero_Deluxe.zip" download>
-                    <div class="album-cover">
-                        <img src="img/from_zero_deluxe_cover.jpg" alt="Capa Linkin Park - From Zero (Deluxe)">
-                    </div>
-                    <div class="album-info">
-                        <h2>Linkin Park - From Zero (Deluxe)</h2>
+    <main class="content-wrapper">
+        <section class="category-section">
+            <h2 class="section-title">- Minha Coleção -</h2>
+            <ul class="card-container"> <li class="card blur-effect">
+                    <a href="../MP3/FromZero_Deluxe.zip" download>
+                        <div class="card-icon"> <img src="img/from_zero_deluxe_cover.jpg" alt="Capa Linkin Park - From Zero (Deluxe)">
+                        </div>
+                        <h3>Linkin Park - From Zero (Deluxe)</h3>
                         <p>Clique para baixar o álbum completo.</p>
-                    </div>
-                </a>
-            </li>
+                        <button class="card-button">Download</button>
+                    </a>
+                </li>
 
-            <li class="album-category-item">
-                <a href="../MP3/HybridTheory.zip" download>
-                    <div class="album-cover">
-                        <img src="img/hybridtheory.jpg" alt="Capa Linkin Park - Hybrid Theory">
-                    </div>
-                    <div class="album-info">
-                        <h2>Linkin Park - Hybrid Theory</h2>
+                <li class="card blur-effect">
+                    <a href="../MP3/HybridTheory.zip" download>
+                        <div class="card-icon"> <img src="img/hybridtheory.jpg" alt="Capa Linkin Park - Hybrid Theory">
+                        </div>
+                        <h3>Linkin Park - Hybrid Theory</h3>
                         <p>O álbum de estreia icônico da banda.</p>
-                    </div>
-                </a>
-            </li>
+                        <button class="card-button">Download</button>
+                    </a>
+                </li>
 
-            <li class="album-category-item">
-                <a href="../MP3/Outro_Album.zip" download>
-                    <div class="album-cover">
-                        <img src="img/outro_album_cover.jpg" alt="Capa Outro Álbum">
-                    </div>
-                    <div class="album-info">
-                        <h2>Nome de Outro Álbum</h2>
+                <li class="card blur-effect">
+                    <a href="../MP3/Outro_Album.zip" download>
+                        <div class="card-icon"> <img src="img/outro_album_cover.jpg" alt="Capa Outro Álbum">
+                        </div>
+                        <h3>Nome de Outro Álbum</h3>
                         <p>Descrição ou informações adicionais.</p>
-                    </div>
-                </a>
-            </li>
-            
-            </ul>
+                        <button class="card-button">Download</button>
+                    </a>
+                </li>
+                </ul>
+        </section>
     </main>
 
-    <div class="back-to-menu">
-        <a href="../../index.html">Voltar ao Menu Principal</a>
-    </div>
-
-    <div class="credits">Créditos: Smith 33</div>
-
+    <footer class="site-footer-global">
+        <div class="credits">Créditos: Smith 33</div>
+    </footer>
 </body>
 </html>
