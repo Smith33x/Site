@@ -155,33 +155,28 @@ h1, h2, h3 {
     box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6), 0 0 20px var(--primary-color);
 }
 
-/* ÍCONES/IMAGENS DOS CARDS (capas de jogos) */
+/* ÍCONES/IMAGENS DOS CARDS (capas de jogos) - VOLTOU AO ESTILO ANTERIOR */
 .card-icon {
     margin-bottom: 15px;
-    /* Tamanho do container da imagem */
-    width: 140px; /* Reduzi ligeiramente, experimente para ver qual fica melhor */
-    height: 140px; /* Quadrado perfeito */
-    /* Centralização e corte */
-    display: flex; /* Garante que os filhos (img) possam ser centralizados */
-    justify-content: center; /* Centraliza horizontalmente */
-    align-items: center; /* Centraliza verticalmente */
-    overflow: hidden; /* CORTA QUALQUER EXCEDENTE DA IMAGEM */
-    flex-shrink: 0; /* Impede que o item encolha */
-    /* Estilo do container */
-    border-radius: 15px; /* Bordas arredondadas para o container */
-    background-color: rgba(0, 0, 0, 0.1); /* Um leve fundo para o container caso a imagem não preencha tudo (o que não deve acontecer com object-fit: cover) */
+    width: 130px; /* Restaurado para o tamanho retangular */
+    height: 180px; /* Restaurado para o tamanho retangular */
+    display: flex;
+    justify-content: center; /* Centraliza a imagem horizontalmente */
+    align-items: center; /* Centraliza a imagem verticalmente */
+    flex-shrink: 0;
+    /* Remover overflow: hidden aqui se não quiser que as imagens sejam cortadas */
+    /* Se quiser um container com borda, mantenha border-radius e talvez background-color */
+    border-radius: 8px; /* Bordas suaves para o container, alinhado com as capas de jogo */
 }
 
 .card-icon img {
-    width: 100%; /* Preenche a largura do container */
-    height: 100%; /* Preenche a altura do container */
-    object-fit: cover; /* ESSA É A CHAVE: Faz a imagem cobrir o container, cortando as bordas */
-    object-position: center; /* Garante que o centro da imagem fique no centro do container */
-    display: block; /* Remove possíveis espaços extras de elementos inline */
-    border-radius: 10px; /* Bordas arredondadas para a IMAGEM em si, ligeiramente menor que o container */
-    box-shadow: 0 0 8px rgba(0, 0, 0, 0.5); /* Sombra para a imagem */
+    max-width: 100%; /* Garante que a imagem não transborde */
+    max-height: 100%; /* Garante que a imagem não transborde */
+    object-fit: contain; /* ESSA É A MUDANÇA PRINCIPAL: Faz a imagem se ajustar sem cortar */
+    object-position: center; /* Garante que a imagem seja centralizada dentro do container */
+    border-radius: 8px; /* Bordas mais quadradas para a imagem */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
-
 
 .card h3 {
     font-size: 1.8rem;
@@ -255,7 +250,7 @@ h1, h2, h3 {
     .section-title { font-size: 2.2rem; margin-bottom: 30px; }
     .card-container { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; }
     .card { padding: 25px; min-height: 220px; }
-    .card-icon { width: 110px; height: 110px; border-radius: 12px; }
+    .card-icon { width: 110px; height: 160px; } /* Restaurado */
     .card-icon img { border-radius: 7px; }
     .card h3 { font-size: 1.6rem; }
     .card p { font-size: 0.95rem; }
@@ -290,7 +285,7 @@ h1, h2, h3 {
     .section-title { font-size: 1.6rem; margin-bottom: 20px; letter-spacing: 2px; }
     .card-container { grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; }
     .card { padding: 18px; min-height: 180px; }
-    .card-icon { width: 80px; height: 80px; margin-bottom: 10px; border-radius: 10px; }
+    .card-icon { width: 90px; height: 130px; margin-bottom: 10px; } /* Restaurado */
     .card-icon img { border-radius: 5px; }
     .card h3 { font-size: 1.3rem; }
     .card p { font-size: 0.85rem; margin-bottom: 15px; }
@@ -313,7 +308,7 @@ h1, h2, h3 {
     .section-title { font-size: 1.4rem; margin-bottom: 15px; letter-spacing: 1px; }
     .card-container { grid-template-columns: 1fr; gap: 10px; }
     .card { padding: 15px; min-height: auto; }
-    .card-icon { width: 70px; height: 70px; border-radius: 8px; }
+    .card-icon { width: 80px; height: 110px; } /* Restaurado */
     .card-icon img { border-radius: 4px; }
     .card h3 { font-size: 1.1rem; }
     .card p { font-size: 0.8rem; margin-bottom: 10px; }
