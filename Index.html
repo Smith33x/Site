@@ -3,21 +3,77 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>SMITH33 - MENU PRINCIPAL</title>
+<title>SMITH33 - Menu Principal</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>SMITH33</h1>
-  <nav>
-    <a href="Arquivos/Jogos/Jogos.index.html">Jogos</a>
-    <a href="Arquivos/Arquivos/Emuladores.index.html">Emuladores para Xbox Séries</a>
-    <a href="Arquivos/Programas/index.html">Programas</a>
-    <a href="Arquivos/music/index.html">Músicas</a>
-    <a href="Links/index.html">Redes Sociais</a>
-    <a href="Links/sobre.html">
-    
-    Sobre Mim
-    </a>
-  </nav>
-</body>
+    <header class="main-header">
+        <div class="logo">
+            <span>SMITH33</span>
+        </div>
+        <nav class="main-nav">
+            <a href="index.html">Home</a>
+            <a href="Arquivos/Jogos/Jogos.index.html">Jogos</a>
+            <a href="Arquivos/Arquivos/Emuladores.index.html">Emuladores</a>
+            <a href="Arquivos/Programas/index.html">Programas</a>
+            <a href="Arquivos/music/index.html">Músicas</a>
+            <a href="Links/index.html">Redes Sociais</a>
+            <a href="Links/sobre.html">Sobre Mim</a>
+        </nav>
+        <div class="search-box">
+            <input type="text" placeholder="Search..." aria-label="Search">
+            <button aria-label="Search button">🔍</button>
+        </div>
+    </header>
+
+    <main class="content-wrapper">
+        <section class="category-section">
+            <h2 class="section-title">- Meus Projetos -</h2>
+            <div class="card-container">
+                <a href="#" class="card blur-effect">
+                    <div class="card-icon">🎮</div> <h3>Coleção de Jogos HTML</h3>
+                    <p>Jogue diretamente no navegador, sem instalação.</p>
+                    <button class="card-button">Acessar Jogos</button>
+                </a>
+                <a href="Arquivos/Programas/index.html" class="card blur-effect">
+                    <div class="card-icon">💻</div>
+                    <h3>Programas Úteis</h3>
+                    <p>Ferramentas e utilitários para diversas necessidades.</p>
+                    <button class="card-button">Ver Programas</button>
+                </a>
+            </div>
+        </section>
+
+        <section class="category-section">
+            <h2 class="section-title">- Outros Recursos -</h2>
+            <div class="card-container">
+                <a href="Arquivos/Arquivos/Emuladores.index.html" class="card blur-effect">
+                    <div class="card-icon">🚀</div>
+                    <h3>Emuladores Xbox Series</h3>
+                    <p>Emuladores otimizados para seu console.</p>
+                    <button class="card-button">Explorar Emuladores</button>
+                </a>
+                <a href="Arquivos/music/index.html" class="card blur-effect">
+                    <div class="card-icon">🎶</div>
+                    <h3>Músicas e Playlists</h3>
+                    <p>Sua trilha sonora para o dia a dia.</p>
+                    <button class="card-button">Ouvir Músicas</button>
+                </a>
+                 <a href="Links/index.html" class="card blur-effect">
+                    <div class="card-icon">🔗</div>
+                    <h3>Redes Sociais</h3>
+                    <p>Encontre-me nas minhas plataformas sociais.</p>
+                    <button class="card-button">Conectar</button>
+                </a>
+                 <a href="Links/sobre.html" class="card blur-effect">
+                    <div class="card-icon">👤</div>
+                    <h3>Sobre SMITH33</h3>
+                    <p>Conheça mais sobre o criador e este projeto.</p>
+                    <button class="card-button">Saiba Mais</button>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    </body>
 </html>

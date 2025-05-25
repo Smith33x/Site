@@ -1,71 +1,427 @@
 @import url('https://fonts.googleapis.com/css2?family=Orbitron&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap'); /* Uma fonte mais legível para o corpo */
+
+:root {
+    --primary-color: #7f8cfa; /* Seu azul/roxo */
+    --secondary-color: #5d6edc; /* Um tom ligeiramente diferente para detalhes */
+    --text-color: #ccd6f6; /* Cor do texto principal */
+    --bg-dark: #0a0a0a; /* Fundo muito escuro */
+    --glass-bg: rgba(255, 255, 255, 0.08); /* Fundo para o efeito de vidro/blur */
+    --glass-border: rgba(255, 255, 255, 0.2); /* Borda para o efeito de vidro/blur */
+    --shadow-color: rgba(0, 0, 0, 0.4); /* Sombra para profundidade */
+}
 
 body {
-  margin: 0;
-  background: url('config/background.jpg') no-repeat center center fixed;
-  background-size: cover;
-  color: #fff;
-  font-family: 'Orbitron', sans-serif;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
+    margin: 0;
+    background: url('config/background.jpg') no-repeat center center fixed;
+    background-size: cover;
+    background-color: var(--bg-dark); /* Fallback para caso a imagem não carregue */
+    color: var(--text-color);
+    font-family: 'Poppins', sans-serif; /* Usando Poppins para melhor leitura */
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden; /* Evita scroll horizontal */
 }
 
-h1 {
-  font-size: 3rem;
-  margin-bottom: 40px;
-  /*
-  * Adicionado ou ajustado este valor para abaixar o "SMITH33".
-  * Sinta-se à vontade para mudar "80px" para o valor que melhor se encaixe.
-  */
-  margin-top: 80px;
-  letter-spacing: 6px;
-  text-transform: uppercase;
-  color: #ccd6f6;
-  text-shadow:
-    0 0 5px #7f8cfa,
-    0 0 10px #7f8cfa,
-    0 0 20px #7f8cfa,
-    0 0 40px #7f8cfa;
+/* Geral para todos os títulos */
+h1, h2, h3 {
+    font-family: 'Orbitron', sans-serif;
+    color: var(--text-color);
+    text-shadow:
+        0 0 5px var(--primary-color),
+        0 0 10px var(--primary-color);
 }
 
-nav {
-  display: flex;
-  flex-direction: column;
-  gap: 25px;
-  width: 300px;
+/* --- Header --- */
+.main-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 5%; /* Padding lateral em porcentagem */
+    background-color: rgba(0, 0, 0, 0.6); /* Fundo semi-transparente para o header */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    position: sticky; /* Fixa o header no topo */
+    top: 0;
+    z-index: 1000;
 }
 
-a {
-  background: rgba(255, 255, 255, 0.05);
-  border: 2px solid #7f8cfa;
-  border-radius: 15px;
-  padding: 18px;
-  font-size: 1.4rem;
-  color: #ccd6f6;
-  text-align: center;
-  text-decoration: none;
-  text-transform: uppercase;
-  box-shadow:
-    0 0 8px #7f8cfa,
-    inset 0 0 10px #7f8cfa;
-  transition: all 0.3s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.logo span {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2.2rem;
+    color: var(--primary-color);
+    text-shadow: 0 0 10px var(--primary-color);
+    letter-spacing: 2px;
 }
 
-a img {
-  margin-right: 10px;
+.main-nav {
+    display: flex;
+    gap: 30px; /* Espaço entre os itens do menu */
 }
 
-a:hover {
-  background: #7f8cfa;
-  color: #000;
-  box-shadow:
-    0 0 20px #7f8cfa,
-    inset 0 0 15px #7f8cfa;
-  transform: scale(1.05);
+.main-nav a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-size: 1.1rem;
+    padding: 5px 0;
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+.main-nav a::after { /* Sublinhado animado */
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--primary-color);
+    transition: width 0.3s ease;
+}
+
+.main-nav a:hover::after {
+    width: 100%;
+}
+
+.main-nav a:hover {
+    color: var(--primary-color);
+}
+
+.search-box {
+    display: flex;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 5px 15px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+}
+
+.search-box:focus-within {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-color: var(--primary-color);
+    box-shadow: 0 0 10px var(--primary-color);
+}
+
+.search-box input {
+    background: none;
+    border: none;
+    outline: none;
+    color: var(--text-color);
+    font-size: 1rem;
+    padding: 5px 10px 5px 0;
+    width: 150px; /* Largura inicial */
+    transition: width 0.3s ease;
+}
+
+.search-box input::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.search-box input:focus {
+    width: 200px; /* Aumenta a largura ao focar */
+}
+
+.search-box button {
+    background: none;
+    border: none;
+    color: var(--text-color);
+    font-size: 1.1rem;
+    cursor: pointer;
+    padding-left: 10px;
+}
+
+/* --- Conteúdo Principal --- */
+.content-wrapper {
+    flex-grow: 1; /* Ocupa o espaço restante */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 5%; /* Padding superior/inferior e lateral */
+    gap: 50px; /* Espaço entre as seções de categoria */
+}
+
+.category-section {
+    width: 100%;
+    max-width: 1200px; /* Limita a largura máxima do conteúdo */
+    text-align: center;
+}
+
+.section-title {
+    font-size: 2.8rem;
+    margin-bottom: 40px;
+    letter-spacing: 4px;
+    color: var(--text-color);
+    text-shadow: 0 0 15px var(--primary-color);
+}
+
+.card-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Layout de grade responsivo */
+    gap: 30px; /* Espaço entre os cards */
+    justify-content: center; /* Centraliza os cards quando houver poucos */
+    align-items: stretch; /* Garante que cards da mesma linha tenham a mesma altura */
+}
+
+.card {
+    text-decoration: none;
+    color: var(--text-color);
+    padding: 30px;
+    border-radius: 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between; /* Espaçamento entre icon, título, p e botão */
+    min-height: 250px; /* Altura mínima para os cards */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+/* Efeito Glassmorphism (Blur) */
+.blur-effect {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(10px); /* O principal para o efeito de desfoque */
+    -webkit-backdrop-filter: blur(10px); /* Compatibilidade para navegadores WebKit */
+    box-shadow: 0 8px 32px var(--shadow-color); /* Sombra para profundidade */
+}
+
+.card:hover {
+    transform: translateY(-10px); /* Levanta o card ao passar o mouse */
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6), 0 0 20px var(--primary-color); /* Sombra mais intensa */
+}
+
+.card-icon {
+    font-size: 4rem;
+    color: var(--primary-color);
+    margin-bottom: 15px;
+    /* Se for usar SVG ou imagem, ajuste o tamanho aqui */
+    width: 80px;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card h3 {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+    color: var(--primary-color);
+    text-shadow: 0 0 8px var(--primary-color);
+}
+
+.card p {
+    font-size: 1rem;
+    margin-bottom: 25px;
+    flex-grow: 1; /* Permite que o parágrafo ocupe o espaço */
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.card-button {
+    background-color: var(--primary-color);
+    color: var(--bg-dark);
+    border: none;
+    border-radius: 8px;
+    padding: 12px 25px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    box-shadow: 0 0 10px var(--primary-color);
+}
+
+.card-button:hover {
+    background-color: var(--secondary-color);
+    transform: translateY(-2px);
+    box-shadow: 0 0 15px var(--secondary-color);
+}
+
+/* ==================================== */
+/* Responsividade              */
+/* ==================================== */
+
+/* Para telas menores que 1024px (Laptops, Tablets em paisagem) */
+@media (max-width: 1024px) {
+    .main-header {
+        padding: 15px 3%;
+    }
+
+    .logo span {
+        font-size: 1.8rem;
+    }
+
+    .main-nav {
+        gap: 20px;
+    }
+
+    .main-nav a {
+        font-size: 1rem;
+    }
+
+    .search-box input {
+        width: 120px;
+    }
+    .search-box input:focus {
+        width: 180px;
+    }
+
+    .section-title {
+        font-size: 2.2rem;
+        margin-bottom: 30px;
+    }
+
+    .card-container {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Cards um pouco menores */
+        gap: 25px;
+    }
+
+    .card {
+        padding: 25px;
+        min-height: 220px;
+    }
+
+    .card-icon {
+        font-size: 3.5rem;
+        width: 70px;
+        height: 70px;
+    }
+
+    .card h3 {
+        font-size: 1.6rem;
+    }
+
+    .card p {
+        font-size: 0.95rem;
+    }
+}
+
+/* Para telas menores que 768px (Tablets em retrato, Celulares grandes) */
+@media (max-width: 768px) {
+    .main-header {
+        flex-direction: column; /* Empilha logo, nav e search */
+        padding: 15px 0; /* Menos padding lateral */
+        gap: 15px; /* Espaço entre os elementos do header */
+    }
+
+    .logo {
+        margin-bottom: 10px;
+    }
+
+    .main-nav {
+        flex-wrap: wrap; /* Permite que os links quebrem linha */
+        justify-content: center;
+        gap: 15px; /* Menos espaço entre os links */
+    }
+
+    .main-nav a {
+        font-size: 0.95rem;
+    }
+
+    .search-box {
+        width: 90%; /* Ocupa quase toda a largura */
+        max-width: 300px;
+        justify-content: space-between;
+    }
+    .search-box input {
+        width: 100%; /* Ocupa o espaço dentro do search-box */
+        max-width: 200px;
+    }
+    .search-box input:focus {
+        width: 100%;
+    }
+
+    .content-wrapper {
+        padding: 30px 3%;
+        gap: 40px;
+    }
+
+    .section-title {
+        font-size: 1.8rem;
+        margin-bottom: 25px;
+        letter-spacing: 3px;
+    }
+
+    .card-container {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Cards menores ainda */
+        gap: 20px;
+    }
+
+    .card {
+        padding: 20px;
+        min-height: 200px;
+    }
+
+    .card-icon {
+        font-size: 3rem;
+        width: 60px;
+        height: 60px;
+    }
+
+    .card h3 {
+        font-size: 1.4rem;
+    }
+
+    .card p {
+        font-size: 0.9rem;
+        margin-bottom: 20px;
+    }
+
+    .card-button {
+        padding: 10px 20px;
+        font-size: 1rem;
+    }
+}
+
+/* Para telas menores que 480px (Celulares pequenos) */
+@media (max-width: 480px) {
+    .logo span {
+        font-size: 1.6rem;
+    }
+
+    .main-nav {
+        flex-direction: column; /* Links da nav um abaixo do outro */
+        align-items: center;
+        gap: 10px;
+    }
+
+    .main-nav a {
+        font-size: 0.9rem;
+    }
+
+    .search-box input {
+        width: 100%;
+    }
+
+    .section-title {
+        font-size: 1.5rem;
+        margin-bottom: 20px;
+        letter-spacing: 2px;
+    }
+
+    .card-container {
+        grid-template-columns: 1fr; /* Um card por linha */
+        gap: 15px;
+    }
+
+    .card {
+        min-height: auto; /* Deixa a altura se ajustar ao conteúdo */
+        padding: 15px;
+    }
+
+    .card-icon {
+        font-size: 2.5rem;
+        width: 50px;
+        height: 50px;
+    }
+
+    .card h3 {
+        font-size: 1.2rem;
+    }
+
+    .card p {
+        font-size: 0.85rem;
+        margin-bottom: 15px;
+    }
 }
