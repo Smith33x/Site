@@ -1,27 +1,132 @@
-@import url('https://fonts.googleapis.com/css2?family=Orbitron&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Orbitron&family=Share+Tech+Mono&display=swap'); /* Incluindo Share Tech Mono, caso queira usar */
+
+/* Variáveis para cores e efeitos (boas para manter a consistência) */
+:root {
+    --primary-blue: #7f8cfa;
+    --text-light: #ccd6f6;
+    --text-dark: #000;
+    --background-overlay: rgba(0, 0, 0, 0.6); /* Ajustado para 60% de opacidade */
+    --card-bg: rgba(255, 255, 255, 0.05); /* Fundo dos cards */
+    --hover-bg: #7f8cfa; /* Fundo do card no hover (seu padrão atual) */
+    --glow-light: #7f8cfa; /* Para brilhos mais suaves */
+
+    --neon-glow: 0 0 5px var(--primary-blue),
+                 0 0 10px var(--primary-blue),
+                 0 0 20px var(--primary-blue),
+                 0 0 40px var(--primary-blue);
+    --text-glow: 0 0 3px rgba(255, 255, 255, 0.7),
+                 0 0 8px var(--primary-blue);
+    --shadow-strong: 0 0 8px var(--primary-blue), inset 0 0 10px var(--primary-blue); /* Ajustado para cards */
+    --shadow-hover: 0 0 20px var(--primary-blue), inset 0 0 15px var(--primary-blue); /* Ajustado para cards */
+}
 
 body {
     margin: 0;
+    /* Fundo da imagem original */
     background: url('config/background.jpg') no-repeat center center fixed;
     background-size: cover;
+    
+    /* Aplica o blur diretamente no BODY, desfocando a imagem de fundo */
+    filter: blur(8px); /* Blur forte! Ajuste o valor (ex: 5px, 10px) conforme preferir */
+    -webkit-filter: blur(8px); /* Para compatibilidade com WebKit (Safari, etc.) */
+    transform: scale(1.02); /* Pequeno zoom para esconder as bordas do blur */
+
+    /* Garante que o conteúdo seja renderizado FORA deste body borrado */
+    /* Este body agora será a "camada de fundo borrada" */
+    position: fixed; /* Fixa o body borrado no lugar */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -2; /* Fica abaixo de tudo */
+}
+
+/* Criamos um novo container para o CONTEÚDO REAL do site */
+/* Tudo que estava no body, exceto o background, vai para este container */
+html::before { /* Usamos html::before para cobrir tudo */
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--background-overlay); /* Camada escura sobre o blur */
+    z-index: -1; /* Fica acima do body borrado, mas abaixo do conteúdo */
+}
+
+/* Agora, o conteúdo visível vai em uma nova div ou usamos um elemento root */
+/* Como você não tem um wrapper para o conteúdo, vamos usar um estilo para o html e um novo body */
+/* REMOVA O BODY ACIMA E USE ESTE NOVO BLOCO DE ESTILOS */
+
+html {
+    height: 100%;
+    overflow: hidden; /* Esconde a barra de rolagem do HTML */
+}
+
+body {
+    margin: 0;
+    /* Imagem de fundo e blur aplicados diretamente aqui */
+    background: url('config/background.jpg') no-repeat center center fixed;
+    background-size: cover;
+    filter: blur(8px); /* NOVO: Blur forte na imagem de fundo! */
+    -webkit-filter: blur(8px); /* Para compatibilidade */
+    transform: scale(1.02); /* Pequeno truque para esconder as bordas do blur */
+    position: fixed; /* Fixa o body borrado no lugar */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -2; /* Fica abaixo de tudo */
+}
+
+/* Camada escura sobre o fundo borrado */
+body::before { /* Este será o overlay escuro que você já tinha, mas agora no novo corpo */
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--background-overlay); /* Camada escura sobre o blur */
+    z-index: -1; /* Fica acima do body borrado, mas abaixo do conteúdo */
+}
+
+/* --- REINICIAMOS O LAYOUT DO CONTEÚDO VISÍVEL --- */
+/* Tudo o que era do body e header original, agora precisa estar dentro de um elemento como <div id="content-wrapper"> */
+/* Se você não tem um wrapper, os estilos abaixo são genéricos, mas o IDEAL seria um container. */
+
+/* Ajustando o posicionamento do conteúdo real do site */
+header, main, .credits {
+    position: relative; /* Garante que fiquem acima do overlay */
+    z-index: 1;
+}
+
+body { /* Este é o body para o conteúdo, não o background */
+    /* Remove background, filter, transform de body (já estão no body::before) */
+    background: none;
+    filter: none;
+    transform: none;
+
     color: #fff;
     font-family: 'Orbitron', sans-serif;
     display: flex;
     flex-direction: column;
-    /* Alinha o conteúdo principal do body horizontalmente ao centro */
     align-items: center;
-    /* Adiciona espaço acima e abaixo se a altura for maior que o conteúdo */
-    justify-content: flex-start; /* Alinha o conteúdo ao topo, permitindo scroll se a lista for grande */
+    justify-content: flex-start;
     min-height: 100vh;
     padding: 20px;
     box-sizing: border-box;
+    position: relative; /* Para posicionar elementos filhos */
+    z-index: 0; /* Fica acima do blur e overlay */
+    overflow-y: auto; /* Permite rolagem no conteúdo */
 }
+
 
 header {
     width: 100%;
     text-align: center;
     margin-bottom: 40px;
-    padding-top: 20px; /* Adiciona um pouco de espaço no topo */
+    padding-top: 20px;
 }
 
 h1 {
@@ -29,22 +134,16 @@ h1 {
     letter-spacing: 6px;
     text-transform: uppercase;
     color: #ccd6f6;
-    text-shadow:
-        0 0 5px #7f8cfa,
-        0 0 10px #7f8cfa,
-        0 0 20px #7f8cfa,
-        0 0 40px #7f8cfa;
-    /* Centraliza o texto do H1 */
+    text-shadow: var(--neon-glow); /* Usando a variável de glow */
     text-align: center;
 }
 
 main {
     width: 100%;
-    max-width: 1200px; /* Limita a largura do conteúdo principal */
-    /* Garante que o main também esteja centralizado na página */
+    max-width: 1200px;
     display: flex;
     flex-direction: column;
-    align-items: center; /* Centraliza horizontalmente o conteúdo dentro do main */
+    align-items: center;
 }
 
 ul {
@@ -53,41 +152,35 @@ ul {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 30px;
-    /* Centraliza os itens do grid quando há espaço sobrando */
     justify-content: center;
-    width: 100%; /* Garante que a UL ocupe a largura total disponível */
-    max-width: 90%; /* Adiciona um max-width para não esticar demais em telas muito largas */
+    width: 100%;
+    max-width: 90%;
 }
 
 .game-item {
-    background: rgba(255, 255, 255, 0.05);
-    border: 2px solid #7f8cfa;
+    background: var(--card-bg); /* Usando a variável de fundo do card */
+    border: 2px solid var(--primary-blue);
     border-radius: 15px;
-    box-shadow:
-        0 0 8px #7f8cfa,
-        inset 0 0 10px #7f8cfa;
+    box-shadow: var(--shadow-strong); /* Usando a variável de sombra */
     transition: all 0.3s ease;
     overflow: hidden;
     display: flex;
     flex-direction: column;
     text-decoration: none;
-    /* Garante que o game-item se estenda para alinhar corretamente no grid */
     align-items: stretch;
-    text-align: center; /* Centraliza o texto dentro de cada game-item */
+    text-align: center;
 }
 
 .game-item:hover {
-    background: #7f8cfa;
-    box-shadow:
-        0 0 20px #7f8cfa,
-        inset 0 0 15px #7f8cfa;
+    background: var(--hover-bg); /* Usando a variável de hover */
+    box-shadow: var(--shadow-hover); /* Usando a variável de sombra no hover */
     transform: scale(1.05);
 }
 
 .game-item a {
     display: flex;
     flex-direction: column;
-    color: #ccd6f6;
+    color: var(--text-light); /* Usando a variável de cor de texto */
     text-decoration: none;
     height: 100%;
 }
@@ -96,8 +189,8 @@ ul {
     width: 100%;
     height: 200px;
     overflow: hidden;
-    border-bottom: 2px solid #7f8cfa;
-    display: flex; /* Adiciona flexbox para centralizar a imagem dentro da div */
+    border-bottom: 2px solid var(--primary-blue); /* Usando a variável de cor */
+    display: flex;
     justify-content: center;
     align-items: center;
 }
@@ -115,7 +208,6 @@ ul {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    /* Centraliza o texto horizontalmente dentro do game-info */
     text-align: center;
 }
 
@@ -123,26 +215,24 @@ ul {
     font-size: 1.5rem;
     margin-top: 0;
     margin-bottom: 10px;
-    /* Já estava centralizado, mas reforça */
     text-align: center;
-    color: #fff;
+    color: var(--text-light); /* Usando a variável de cor de texto */
 }
 
 .game-info p {
     font-size: 1rem;
     line-height: 1.5;
-    /* Já estava centralizado, mas reforça */
     text-align: center;
-    color: #ccc;
+    color: rgba(204, 214, 246, 0.7); /* Cor de texto com transparência */
 }
 
 .credits {
     margin-top: 50px;
     font-size: 0.9rem;
-    color: #aaa;
-    width: 100%; /* Garante que os créditos ocupem a largura total */
-    text-align: center; /* Centraliza o texto dos créditos */
-    padding-bottom: 20px; /* Adiciona um pouco de espaço na parte inferior */
+    color: rgba(204, 214, 246, 0.6); /* Cor de texto com transparência */
+    width: 100%;
+    text-align: center;
+    padding-bottom: 20px;
 }
 
 /* Media Queries para responsividade */
@@ -152,8 +242,8 @@ ul {
     }
 
     ul {
-        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); /* Reduz o min-width para mais itens em telas menores */
-        max-width: 95%; /* Permite que ocupe mais espaço em telas menores */
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        max-width: 95%;
     }
 
     .game-image {
@@ -167,13 +257,13 @@ ul {
     }
 
     ul {
-        grid-template-columns: 1fr; /* Uma coluna em telas muito pequenas */
-        max-width: 100%; /* Ocupa a largura total em telas muito pequenas */
+        grid-template-columns: 1fr;
+        max-width: 100%;
     }
 
     .game-item {
-        margin: 0 auto; /* Centraliza o item individualmente em telas muito pequenas */
-        width: 90%; /* Garante que o item não cole nas bordas */
+        margin: 0 auto;
+        width: 90%;
     }
     .game-image {
         height: 160px;
