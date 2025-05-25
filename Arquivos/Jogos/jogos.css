@@ -1,69 +1,181 @@
 @import url('https://fonts.googleapis.com/css2?family=Orbitron&display=swap');
 
 body {
-  margin: 0;
-  background: url('config/background.jpg') no-repeat center center fixed;
-  background-size: cover;
-  color: #fff;
-  font-family: 'Orbitron', sans-serif;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 40px;
+    margin: 0;
+    background: url('config/background.jpg') no-repeat center center fixed;
+    background-size: cover;
+    color: #fff;
+    font-family: 'Orbitron', sans-serif;
+    display: flex;
+    flex-direction: column;
+    /* Alinha o conteúdo principal do body horizontalmente ao centro */
+    align-items: center;
+    /* Adiciona espaço acima e abaixo se a altura for maior que o conteúdo */
+    justify-content: flex-start; /* Alinha o conteúdo ao topo, permitindo scroll se a lista for grande */
+    min-height: 100vh;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+header {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 40px;
+    padding-top: 20px; /* Adiciona um pouco de espaço no topo */
 }
 
 h1 {
-  font-size: 2rem;
-  margin-bottom: 30px;
-  letter-spacing: 4px;
-  text-transform: uppercase;
-  color: #ccd6f6;
-  text-shadow:
-    0 0 4px #7f8cfa,
-    0 0 8px #7f8cfa;
+    font-size: 3rem;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    color: #ccd6f6;
+    text-shadow:
+        0 0 5px #7f8cfa,
+        0 0 10px #7f8cfa,
+        0 0 20px #7f8cfa,
+        0 0 40px #7f8cfa;
+    /* Centraliza o texto do H1 */
+    text-align: center;
 }
 
-nav {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-  gap: 20px;
-  width: 100%;
-  max-width: 1200px;
+main {
+    width: 100%;
+    max-width: 1200px; /* Limita a largura do conteúdo principal */
+    /* Garante que o main também esteja centralizado na página */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centraliza horizontalmente o conteúdo dentro do main */
 }
 
-a {
-  background: rgba(255, 255, 255, 0.05);
-  border: 2px solid #7f8cfa;
-  border-radius: 12px;
-  padding: 10px;
-  font-size: 0.9rem;
-  color: #ccd6f6;
-  text-align: center;
-  text-decoration: none;
-  text-transform: uppercase;
-  box-shadow:
-    0 0 5px #7f8cfa,
-    inset 0 0 7px #7f8cfa;
-  transition: all 0.3s ease;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+ul {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 30px;
+    /* Centraliza os itens do grid quando há espaço sobrando */
+    justify-content: center;
+    width: 100%; /* Garante que a UL ocupe a largura total disponível */
+    max-width: 90%; /* Adiciona um max-width para não esticar demais em telas muito largas */
 }
 
-a img {
-  width: 100%;
-  height: auto;
-  max-height: 200px;
-  border-radius: 8px;
-  margin-bottom: 10px;
-  object-fit: cover;
+.game-item {
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid #7f8cfa;
+    border-radius: 15px;
+    box-shadow:
+        0 0 8px #7f8cfa,
+        inset 0 0 10px #7f8cfa;
+    transition: all 0.3s ease;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    /* Garante que o game-item se estenda para alinhar corretamente no grid */
+    align-items: stretch;
+    text-align: center; /* Centraliza o texto dentro de cada game-item */
 }
 
-a:hover {
-  background: #7f8cfa;
-  color: #000;
-  box-shadow:
-    0 0 10px #7f8cfa,
-    inset 0 0 10px #7f8cfa;
-  transform: scale(1.03);
+.game-item:hover {
+    background: #7f8cfa;
+    box-shadow:
+        0 0 20px #7f8cfa,
+        inset 0 0 15px #7f8cfa;
+    transform: scale(1.05);
+}
+
+.game-item a {
+    display: flex;
+    flex-direction: column;
+    color: #ccd6f6;
+    text-decoration: none;
+    height: 100%;
+}
+
+.game-image {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+    border-bottom: 2px solid #7f8cfa;
+    display: flex; /* Adiciona flexbox para centralizar a imagem dentro da div */
+    justify-content: center;
+    align-items: center;
+}
+
+.game-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.game-info {
+    padding: 15px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    /* Centraliza o texto horizontalmente dentro do game-info */
+    text-align: center;
+}
+
+.game-info h2 {
+    font-size: 1.5rem;
+    margin-top: 0;
+    margin-bottom: 10px;
+    /* Já estava centralizado, mas reforça */
+    text-align: center;
+    color: #fff;
+}
+
+.game-info p {
+    font-size: 1rem;
+    line-height: 1.5;
+    /* Já estava centralizado, mas reforça */
+    text-align: center;
+    color: #ccc;
+}
+
+.credits {
+    margin-top: 50px;
+    font-size: 0.9rem;
+    color: #aaa;
+    width: 100%; /* Garante que os créditos ocupem a largura total */
+    text-align: center; /* Centraliza o texto dos créditos */
+    padding-bottom: 20px; /* Adiciona um pouco de espaço na parte inferior */
+}
+
+/* Media Queries para responsividade */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2.5rem;
+    }
+
+    ul {
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); /* Reduz o min-width para mais itens em telas menores */
+        max-width: 95%; /* Permite que ocupe mais espaço em telas menores */
+    }
+
+    .game-image {
+        height: 180px;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 2rem;
+    }
+
+    ul {
+        grid-template-columns: 1fr; /* Uma coluna em telas muito pequenas */
+        max-width: 100%; /* Ocupa a largura total em telas muito pequenas */
+    }
+
+    .game-item {
+        margin: 0 auto; /* Centraliza o item individualmente em telas muito pequenas */
+        width: 90%; /* Garante que o item não cole nas bordas */
+    }
+    .game-image {
+        height: 160px;
+    }
 }
