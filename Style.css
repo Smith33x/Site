@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Orbitron&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap'); /* Uma fonte mais legível para o corpo */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
 
 :root {
     --primary-color: #7f8cfa; /* Seu azul/roxo */
@@ -15,13 +15,13 @@ body {
     margin: 0;
     background: url('config/background.jpg') no-repeat center center fixed;
     background-size: cover;
-    background-color: var(--bg-dark); /* Fallback para caso a imagem não carregue */
+    background-color: var(--bg-dark);
     color: var(--text-color);
-    font-family: 'Poppins', sans-serif; /* Usando Poppins para melhor leitura */
+    font-family: 'Poppins', sans-serif;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    overflow-x: hidden; /* Evita scroll horizontal */
+    overflow-x: hidden; /* Garante que não haja scroll horizontal */
 }
 
 /* Geral para todos os títulos */
@@ -38,10 +38,10 @@ h1, h2, h3 {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 5%; /* Padding lateral em porcentagem */
-    background-color: rgba(0, 0, 0, 0.6); /* Fundo semi-transparente para o header */
+    padding: 20px 5%;
+    background-color: rgba(0, 0, 0, 0.6);
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    position: sticky; /* Fixa o header no topo */
+    position: sticky;
     top: 0;
     z-index: 1000;
 }
@@ -52,11 +52,12 @@ h1, h2, h3 {
     color: var(--primary-color);
     text-shadow: 0 0 10px var(--primary-color);
     letter-spacing: 2px;
+    white-space: nowrap; /* Evita que o nome quebre em duas linhas */
 }
 
 .main-nav {
     display: flex;
-    gap: 30px; /* Espaço entre os itens do menu */
+    gap: 30px;
 }
 
 .main-nav a {
@@ -66,9 +67,10 @@ h1, h2, h3 {
     padding: 5px 0;
     position: relative;
     transition: color 0.3s ease;
+    white-space: nowrap; /* Impede que os links quebrem de linha no desktop */
 }
 
-.main-nav a::after { /* Sublinhado animado */
+.main-nav a::after {
     content: '';
     position: absolute;
     left: 0;
@@ -95,6 +97,7 @@ h1, h2, h3 {
     padding: 5px 15px;
     border: 1px solid rgba(255, 255, 255, 0.2);
     transition: all 0.3s ease;
+    flex-shrink: 0; /* Impede que a caixa de busca encolha demais */
 }
 
 .search-box:focus-within {
@@ -110,7 +113,7 @@ h1, h2, h3 {
     color: var(--text-color);
     font-size: 1rem;
     padding: 5px 10px 5px 0;
-    width: 150px; /* Largura inicial */
+    width: 150px;
     transition: width 0.3s ease;
 }
 
@@ -119,7 +122,7 @@ h1, h2, h3 {
 }
 
 .search-box input:focus {
-    width: 200px; /* Aumenta a largura ao focar */
+    width: 200px;
 }
 
 .search-box button {
@@ -133,17 +136,19 @@ h1, h2, h3 {
 
 /* --- Conteúdo Principal --- */
 .content-wrapper {
-    flex-grow: 1; /* Ocupa o espaço restante */
+    flex-grow: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 40px 5%; /* Padding superior/inferior e lateral */
-    gap: 50px; /* Espaço entre as seções de categoria */
+    padding: 40px 5%;
+    gap: 50px;
+    width: 100%; /* Garante que o wrapper ocupe a largura total */
+    box-sizing: border-box; /* Inclui padding na largura total */
 }
 
 .category-section {
     width: 100%;
-    max-width: 1200px; /* Limita a largura máxima do conteúdo */
+    max-width: 1200px;
     text-align: center;
 }
 
@@ -157,10 +162,11 @@ h1, h2, h3 {
 
 .card-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Layout de grade responsivo */
-    gap: 30px; /* Espaço entre os cards */
-    justify-content: center; /* Centraliza os cards quando houver poucos */
-    align-items: stretch; /* Garante que cards da mesma linha tenham a mesma altura */
+    /* Alterado para permitir 1 ou 2 colunas dependendo do espaço */
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    justify-content: center;
+    align-items: stretch;
 }
 
 .card {
@@ -172,8 +178,8 @@ h1, h2, h3 {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between; /* Espaçamento entre icon, título, p e botão */
-    min-height: 250px; /* Altura mínima para os cards */
+    justify-content: space-between;
+    min-height: 250px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     cursor: pointer;
 }
@@ -182,21 +188,20 @@ h1, h2, h3 {
 .blur-effect {
     background: var(--glass-bg);
     border: 1px solid var(--glass-border);
-    backdrop-filter: blur(10px); /* O principal para o efeito de desfoque */
-    -webkit-backdrop-filter: blur(10px); /* Compatibilidade para navegadores WebKit */
-    box-shadow: 0 8px 32px var(--shadow-color); /* Sombra para profundidade */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 8px 32px var(--shadow-color);
 }
 
 .card:hover {
-    transform: translateY(-10px); /* Levanta o card ao passar o mouse */
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6), 0 0 20px var(--primary-color); /* Sombra mais intensa */
+    transform: translateY(-10px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6), 0 0 20px var(--primary-color);
 }
 
 .card-icon {
     font-size: 4rem;
     color: var(--primary-color);
     margin-bottom: 15px;
-    /* Se for usar SVG ou imagem, ajuste o tamanho aqui */
     width: 80px;
     height: 80px;
     display: flex;
@@ -214,7 +219,7 @@ h1, h2, h3 {
 .card p {
     font-size: 1rem;
     margin-bottom: 25px;
-    flex-grow: 1; /* Permite que o parágrafo ocupe o espaço */
+    flex-grow: 1;
     color: rgba(255, 255, 255, 0.8);
 }
 
@@ -239,7 +244,7 @@ h1, h2, h3 {
 }
 
 /* ==================================== */
-/* Responsividade              */
+/* Responsividade - Ajustes Finos       */
 /* ==================================== */
 
 /* Para telas menores que 1024px (Laptops, Tablets em paisagem) */
@@ -273,7 +278,7 @@ h1, h2, h3 {
     }
 
     .card-container {
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Cards um pouco menores */
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
         gap: 25px;
     }
 
@@ -301,113 +306,142 @@ h1, h2, h3 {
 @media (max-width: 768px) {
     .main-header {
         flex-direction: column; /* Empilha logo, nav e search */
-        padding: 15px 0; /* Menos padding lateral */
-        gap: 15px; /* Espaço entre os elementos do header */
+        padding: 15px 2%; /* Reduz o padding lateral */
+        gap: 15px;
+        align-items: stretch; /* Garante que os itens se estiquem para preencher a largura */
     }
 
     .logo {
         margin-bottom: 10px;
+        text-align: center; /* Centraliza o logo */
+    }
+    .logo span {
+        font-size: 2rem; /* Aumenta um pouco o logo para celular */
     }
 
     .main-nav {
         flex-wrap: wrap; /* Permite que os links quebrem linha */
-        justify-content: center;
-        gap: 15px; /* Menos espaço entre os links */
+        justify-content: center; /* Centraliza os links */
+        gap: 10px 15px; /* Ajusta o gap vertical e horizontal */
+        width: 100%; /* Ocupa a largura total */
     }
 
     .main-nav a {
-        font-size: 0.95rem;
+        font-size: 0.9rem;
+        padding: 5px 8px; /* Ajusta padding dos links */
+        white-space: normal; /* Permite a quebra de linha em links longos (se necessário) */
+        text-align: center;
+        flex: 1 1 auto; /* Permite que eles se ajustem */
+        max-width: 48%; /* Tenta duas colunas de links */
     }
 
     .search-box {
-        width: 90%; /* Ocupa quase toda a largura */
-        max-width: 300px;
-        justify-content: space-between;
+        width: 90%; /* Ocupa mais largura */
+        max-width: 400px; /* Limita a largura para não ficar gigante em tablets */
+        margin: 0 auto; /* Centraliza a caixa de busca */
+        padding: 8px 15px; /* Mais padding para o toque */
     }
     .search-box input {
-        width: 100%; /* Ocupa o espaço dentro do search-box */
-        max-width: 200px;
+        width: 100%;
+        max-width: none; /* Remove o max-width que estava limitado no desktop */
+        font-size: 0.95rem;
     }
     .search-box input:focus {
         width: 100%;
     }
 
     .content-wrapper {
-        padding: 30px 3%;
-        gap: 40px;
+        padding: 30px 2%; /* Reduz o padding lateral do conteúdo */
+        gap: 30px; /* Reduz o gap entre as seções */
     }
 
     .section-title {
-        font-size: 1.8rem;
-        margin-bottom: 25px;
-        letter-spacing: 3px;
+        font-size: 1.6rem;
+        margin-bottom: 20px;
+        letter-spacing: 2px;
     }
 
     .card-container {
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Cards menores ainda */
-        gap: 20px;
+        /* Para telas menores, talvez 1 ou 2 colunas no máximo, mas garantindo que o card não seja minúsculo */
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 15px; /* Reduz o gap entre os cards */
     }
 
     .card {
-        padding: 20px;
-        min-height: 200px;
+        padding: 18px; /* Reduz padding do card */
+        min-height: 180px; /* Altura mínima ajustada */
     }
 
     .card-icon {
         font-size: 3rem;
         width: 60px;
         height: 60px;
+        margin-bottom: 10px;
     }
 
     .card h3 {
-        font-size: 1.4rem;
+        font-size: 1.3rem;
     }
 
     .card p {
-        font-size: 0.9rem;
-        margin-bottom: 20px;
+        font-size: 0.85rem;
+        margin-bottom: 15px;
     }
 
     .card-button {
-        padding: 10px 20px;
-        font-size: 1rem;
+        padding: 8px 18px;
+        font-size: 0.9rem;
     }
 }
 
-/* Para telas menores que 480px (Celulares pequenos) */
+/* Para telas muito pequenas (celulares menores, como 320px de largura) */
 @media (max-width: 480px) {
+    .main-header {
+        padding: 10px 1%;
+        gap: 10px;
+    }
     .logo span {
-        font-size: 1.6rem;
+        font-size: 1.8rem;
     }
 
     .main-nav {
-        flex-direction: column; /* Links da nav um abaixo do outro */
-        align-items: center;
-        gap: 10px;
+        flex-direction: column; /* Força os links da nav a ficarem um abaixo do outro */
+        align-items: center; /* Centraliza os links */
+        gap: 8px; /* Menos espaço entre os links */
     }
-
     .main-nav a {
-        font-size: 0.9rem;
+        max-width: 90%; /* Links ocupam quase toda a largura */
+        font-size: 0.85rem;
+        padding: 8px 10px;
     }
 
+    .search-box {
+        width: 95%; /* Quase toda a largura */
+    }
     .search-box input {
         width: 100%;
     }
 
+    .content-wrapper {
+        padding: 20px 1%; /* Mais redução de padding */
+        gap: 25px;
+    }
+
     .section-title {
-        font-size: 1.5rem;
-        margin-bottom: 20px;
-        letter-spacing: 2px;
+        font-size: 1.4rem;
+        margin-bottom: 15px;
+        letter-spacing: 1px;
     }
 
     .card-container {
-        grid-template-columns: 1fr; /* Um card por linha */
-        gap: 15px;
+        /* Força uma única coluna para celulares muito pequenos */
+        grid-template-columns: 1fr;
+        gap: 10px;
     }
 
     .card {
-        min-height: auto; /* Deixa a altura se ajustar ao conteúdo */
         padding: 15px;
+        min-height: auto; /* Deixa a altura se ajustar ao conteúdo */
     }
 
     .card-icon {
@@ -417,11 +451,16 @@ h1, h2, h3 {
     }
 
     .card h3 {
-        font-size: 1.2rem;
+        font-size: 1.1rem;
     }
 
     .card p {
+        font-size: 0.8rem;
+        margin-bottom: 10px;
+    }
+
+    .card-button {
+        padding: 6px 15px;
         font-size: 0.85rem;
-        margin-bottom: 15px;
     }
 }
