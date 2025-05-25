@@ -20,7 +20,7 @@ body {
     /* AJUSTE O CAMINHO DA IMAGEM DE FUNDO AQUI */
     background: url('../config/background2.jpg') no-repeat center center fixed;
     background-size: cover;
-    background-color: var(--bg-dark); /* Fallback para cor escura */
+  /
     color: var(--text-color); /* Usando a nova variável */
     font-family: 'Poppins', sans-serif; /* Fonte mais legível para o corpo */
     min-height: 100vh;
