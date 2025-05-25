@@ -1,74 +1,121 @@
 @import url('https://fonts.googleapis.com/css2?family=Orbitron&display=swap');
 
 body {
-  margin: 0;
-  background: url('config/background.jpg') no-repeat center center fixed;
-  background-size: cover;
-  color: #fff;
-  font-family: 'Orbitron', sans-serif;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
+    margin: 0;
+    /* Caminho ajustado para o background da página "Sobre Mim" */
+    /* Assumindo que 'sobre.css' está em 'links/' e o background em 'Arquivos/Jogos/config/' */
+    background: url('../Arquivos/Jogos/config/background.jpg') no-repeat center center fixed;
+    background-size: cover;
+    color: #fff;
+    font-family: 'Orbitron', sans-serif;
+    /* Mude para flex-direction: column para que os itens se empilhem */
+    display: flex;
+    flex-direction: column; /* Agora os itens se empilharão */
+    /* Centraliza os itens na horizontal */
+    align-items: center;
+    /* Alinha os itens ao topo ou permite que eles se distribuam se houver espaço */
+    justify-content: flex-start; /* ou space-between se quiser espaçar tudo */
+    min-height: 100vh;
+    padding: 20px; /* Adiciona padding geral para não colar nas bordas */
+    box-sizing: border-box;
 }
 
 .container {
-  background: rgba(0, 0, 0, 0.6);
-  border: 2px solid #7f8cfa;
-  border-radius: 20px;
-  padding: 40px;
-  max-width: 600px;
-  text-align: center;
-  box-shadow:
-    0 0 10px #7f8cfa,
-    inset 0 0 15px #7f8cfa;
+    background: rgba(0, 0, 0, 0.6);
+    border: 2px solid #7f8cfa;
+    border-radius: 20px;
+    padding: 40px;
+    max-width: 600px;
+    text-align: center;
+    box-shadow:
+        0 0 10px #7f8cfa,
+        inset 0 0 15px #7f8cfa;
+    margin-top: 40px; /* Adiciona um espaço no topo do container */
+    margin-bottom: 40px; /* Adiciona um espaço na parte inferior do container */
+    width: 90%; /* Garante que o container ocupe a largura em telas menores */
+    box-sizing: border-box; /* Inclui padding na largura total */
 }
 
 .foto {
-  width: 150px;
-  height: 150px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 3px solid #7f8cfa;
-  box-shadow: 0 0 15px #7f8cfa;
-  margin-bottom: 20px;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #7f8cfa;
+    box-shadow: 0 0 15px #7f8cfa;
+    margin-bottom: 20px;
 }
 
 h1 {
-  margin-bottom: 20px;
-  letter-spacing: 4px;
-  text-transform: uppercase;
-  color: #ccd6f6;
-  text-shadow:
-    0 0 5px #7f8cfa,
-    0 0 10px #7f8cfa;
+    margin-bottom: 20px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: #ccd6f6;
+    text-shadow:
+        0 0 5px #7f8cfa,
+        0 0 10px #7f8cfa;
 }
 
 p {
-  font-size: 1.1rem;
-  margin-bottom: 30px;
+    font-size: 1.1rem;
+    margin-bottom: 30px;
 }
 
 .btn {
-  background: rgba(255, 255, 255, 0.05);
-  border: 2px solid #7f8cfa;
-  border-radius: 12px;
-  padding: 12px 24px;
-  font-size: 1.1rem;
-  color: #ccd6f6;
-  text-decoration: none;
-  text-transform: uppercase;
-  box-shadow:
-    0 0 8px #7f8cfa,
-    inset 0 0 10px #7f8cfa;
-  transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid #7f8cfa;
+    border-radius: 12px;
+    padding: 12px 24px;
+    font-size: 1.1rem;
+    color: #ccd6f6;
+    text-decoration: none;
+    text-transform: uppercase;
+    box-shadow:
+        0 0 8px #7f8cfa,
+        inset 0 0 10px #7f8cfa;
+    transition: all 0.3s ease;
+    /* Garante que o botão se comporte como um bloco para espaçamento */
+    display: inline-block; /* ou block se quiser que ele ocupe toda a largura */
+    margin-bottom: 20px; /* Espaço abaixo do botão */
 }
 
 .btn:hover {
-  background: #7f8cfa;
-  color: #000;
-  box-shadow:
-    0 0 20px #7f8cfa,
-    inset 0 0 15px #7f8cfa;
-  transform: scale(1.05);
+    background: #7f8cfa;
+    color: #000;
+    box-shadow:
+        0 0 20px #7f8cfa,
+        inset 0 0 15px #7f8cfa;
+    transform: scale(1.05);
+}
+
+/* Estilo para os créditos, se estiverem fora do .container */
+.credits {
+    margin-top: 20px; /* Espaço acima dos créditos */
+    font-size: 0.9rem;
+    color: #aaa;
+    text-align: center;
+    padding-bottom: 20px; /* Espaço na parte inferior da página */
+    width: 100%; /* Garante que ocupe a largura total para centralizar */
+}
+
+/* Media Queries para ajuste em telas menores */
+@media (max-width: 480px) {
+    .container {
+        padding: 20px; /* Reduz o padding em telas muito pequenas */
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+    h1 {
+        font-size: 2rem; /* Reduz o tamanho do título */
+    }
+
+    p {
+        font-size: 1rem; /* Reduz o tamanho do parágrafo */
+    }
+
+    .btn {
+        padding: 10px 20px; /* Reduz o padding do botão */
+        font-size: 1rem; /* Reduz o tamanho da fonte do botão */
+    }
 }
