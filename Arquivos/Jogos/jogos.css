@@ -1,27 +1,47 @@
-@import url('https://fonts.googleapis.com/css2?family=Orbitron&display=swap');
+/* Seu CSS Existente */
 
 body {
     margin: 0;
-    background: url('config/background.jpg') no-repeat center center fixed;
+    /* NOVO CAMINHO PARA O GIF DO BOOT DO PS2 */
+    background: url('ps2boot.gif') no-repeat center center fixed; /* Caminho relativo à pasta "config" */
     background-size: cover;
     color: #fff;
     font-family: 'Orbitron', sans-serif;
     display: flex;
     flex-direction: column;
-    /* Alinha o conteúdo principal do body horizontalmente ao centro */
     align-items: center;
-    /* Adiciona espaço acima e abaixo se a altura for maior que o conteúdo */
-    justify-content: flex-start; /* Alinha o conteúdo ao topo, permitindo scroll se a lista for grande */
+    justify-content: flex-start;
     min-height: 100vh;
     padding: 20px;
     box-sizing: border-box;
+    position: relative;
 }
+
+/* Camada escura sobre o fundo (GIF) para melhorar o contraste geral */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6); /* Aumentei um pouco a opacidade para garantir a leitura sobre o GIF animado */
+    z-index: -1;
+}
+
+/* Garante que o conteúdo (header, main, etc.) esteja acima das camadas de fundo */
+header, main, .back-to-menu, .credits, .category-card {
+    position: relative;
+    z-index: 1;
+}
+
+/* --- O restante do seu CSS (do arquivo style.css da página de jogos) permanece o mesmo abaixo --- */
 
 header {
     width: 100%;
     text-align: center;
     margin-bottom: 40px;
-    padding-top: 20px; /* Adiciona um pouco de espaço no topo */
+    padding-top: 20px;
 }
 
 h1 {
@@ -34,33 +54,30 @@ h1 {
         0 0 10px #7f8cfa,
         0 0 20px #7f8cfa,
         0 0 40px #7f8cfa;
-    /* Centraliza o texto do H1 */
     text-align: center;
 }
 
-main {
+main.category-container {
     width: 100%;
-    max-width: 1200px; /* Limita a largura do conteúdo principal */
-    /* Garante que o main também esteja centralizado na página */
+    max-width: 1200px;
     display: flex;
     flex-direction: column;
-    align-items: center; /* Centraliza horizontalmente o conteúdo dentro do main */
+    align-items: center;
 }
 
-ul {
+.category-list {
     list-style: none;
     padding: 0;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 30px;
-    /* Centraliza os itens do grid quando há espaço sobrando */
     justify-content: center;
-    width: 100%; /* Garante que a UL ocupe a largura total disponível */
-    max-width: 90%; /* Adiciona um max-width para não esticar demais em telas muito largas */
+    width: 100%;
+    max-width: 90%;
 }
 
-.game-item {
-    background: rgba(255, 255, 255, 0.05);
+.category-card {
+    background-color: rgba(0, 0, 0, 0.7);
     border: 2px solid #7f8cfa;
     border-radius: 15px;
     box-shadow:
@@ -70,21 +87,18 @@ ul {
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    text-decoration: none;
-    /* Garante que o game-item se estenda para alinhar corretamente no grid */
-    align-items: stretch;
-    text-align: center; /* Centraliza o texto dentro de cada game-item */
+    text-align: center;
 }
 
-.game-item:hover {
-    background: #7f8cfa;
+.category-card:hover {
+    background-color: rgba(127, 140, 250, 0.4);
     box-shadow:
         0 0 20px #7f8cfa,
         inset 0 0 15px #7f8cfa;
-    transform: scale(1.05);
+    transform: translateY(-5px) scale(1.02);
 }
 
-.game-item a {
+.category-card a {
     display: flex;
     flex-direction: column;
     color: #ccd6f6;
@@ -97,9 +111,10 @@ ul {
     height: 200px;
     overflow: hidden;
     border-bottom: 2px solid #7f8cfa;
-    display: flex; /* Adiciona flexbox para centralizar a imagem dentro da div */
+    display: flex;
     justify-content: center;
     align-items: center;
+    background-color: #1a1a2e;
 }
 
 .game-image img {
@@ -107,6 +122,11 @@ ul {
     height: 100%;
     object-fit: cover;
     display: block;
+    transition: transform 0.3s ease;
+}
+
+.category-card:hover .game-image img {
+    transform: scale(1.05);
 }
 
 .game-info {
@@ -114,35 +134,59 @@ ul {
     flex-grow: 1;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    /* Centraliza o texto horizontalmente dentro do game-info */
+    justify-content: center;
     text-align: center;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-top: 1px solid rgba(127, 140, 250, 0.2);
 }
 
 .game-info h2 {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     margin-top: 0;
-    margin-bottom: 10px;
-    /* Já estava centralizado, mas reforça */
-    text-align: center;
+    margin-bottom: 8px;
     color: #fff;
+    text-shadow: 0 0 5px rgba(0,0,0,0.5);
 }
 
 .game-info p {
-    font-size: 1rem;
-    line-height: 1.5;
-    /* Já estava centralizado, mas reforça */
-    text-align: center;
+    font-size: 0.95rem;
+    line-height: 1.4;
     color: #ccc;
+    text-shadow: 0 0 3px rgba(0,0,0,0.5);
+}
+
+.back-to-menu {
+    margin-top: 40px;
+    margin-bottom: 20px;
+}
+
+.back-to-menu a {
+    display: inline-block;
+    background: #7f8cfa;
+    color: #fff;
+    padding: 12px 25px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 1.1rem;
+    font-weight: bold;
+    transition: background 0.3s ease, transform 0.3s ease;
+    border: 2px solid #7f8cfa;
+    box-shadow: 0 0 8px #7f8cfa;
+}
+
+.back-to-menu a:hover {
+    background: #5f6bca;
+    transform: translateY(-3px);
+    box-shadow: 0 0 15px #7f8cfa;
 }
 
 .credits {
-    margin-top: 50px;
+    margin-top: 30px;
     font-size: 0.9rem;
     color: #aaa;
-    width: 100%; /* Garante que os créditos ocupem a largura total */
-    text-align: center; /* Centraliza o texto dos créditos */
-    padding-bottom: 20px; /* Adiciona um pouco de espaço na parte inferior */
+    width: 100%;
+    text-align: center;
+    padding-bottom: 20px;
 }
 
 /* Media Queries para responsividade */
@@ -150,14 +194,15 @@ ul {
     h1 {
         font-size: 2.5rem;
     }
-
-    ul {
-        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); /* Reduz o min-width para mais itens em telas menores */
-        max-width: 95%; /* Permite que ocupe mais espaço em telas menores */
+    .category-list {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        max-width: 95%;
     }
-
     .game-image {
         height: 180px;
+    }
+    .game-info h2 {
+        font-size: 1.2rem;
     }
 }
 
@@ -165,17 +210,22 @@ ul {
     h1 {
         font-size: 2rem;
     }
-
-    ul {
-        grid-template-columns: 1fr; /* Uma coluna em telas muito pequenas */
-        max-width: 100%; /* Ocupa a largura total em telas muito pequenas */
+    .category-list {
+        grid-template-columns: 1fr;
+        max-width: 100%;
     }
-
-    .game-item {
-        margin: 0 auto; /* Centraliza o item individualmente em telas muito pequenas */
-        width: 90%; /* Garante que o item não cole nas bordas */
+    .category-card {
+        width: 90%;
+        margin: 0 auto;
     }
     .game-image {
         height: 160px;
+    }
+    .game-info h2 {
+        font-size: 1.1rem;
+    }
+    .back-to-menu a {
+        font-size: 0.9rem;
+        padding: 10px 20px;
     }
 }
