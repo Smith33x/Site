@@ -1,23 +1,66 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>SMITH33 - MENU PRINCIPAL</title>
-<link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>SMITH33 - Menu Principal</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-  <h1>SMITH33</h1>
-  <nav>
-    <a href="Arquivos/Jogos/Jogos.index.html">Jogos</a>
-    <a href="Arquivos/Arquivos/Emuladores.index.html">Emuladores para Xbox Séries</a>
-    <a href="Arquivos/Programas/index.html">Programas</a>
-    <a href="Arquivos/music/index.html">Músicas</a>
-    <a href="Links/index.html">Redes Sociais</a>
-    <a href="Links/sobre.html">
-    
-    Sobre Mim
-    </a>
-  </nav>
+    <header class="main-header">
+        <h1 class="site-title">SMITH33</h1>
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="Pesquisar no site...">
+            <button id="searchButton" aria-label="Pesquisar">
+                <i class="fas fa-search"></i> </button>
+        </div>
+    </header>
+
+    <main class="categories-grid">
+        <a href="Arquivos/Jogos/Jogos.index.html" class="category-card">
+            <div class="card-icon">
+                <i class="fas fa-gamepad"></i> </div>
+            <h2 class="card-title">Jogos</h2>
+            <p class="card-description">Explorar minha coleção de games.</p>
+        </a>
+
+        <a href="Arquivos/Arquivos/Emuladores.index.html" class="category-card">
+            <div class="card-icon">
+                <i class="fas fa-desktop"></i> </div>
+            <h2 class="card-title">Emuladores para Xbox Séries</h2>
+            <p class="card-description">Programas para emulação.</p>
+        </a>
+
+        <a href="Arquivos/Programas/index.html" class="category-card">
+            <div class="card-icon">
+                <i class="fas fa-code"></i> </div>
+            <h2 class="card-title">Programas</h2>
+            <p class="card-description">Ferramentas e softwares essenciais.</p>
+        </a>
+
+        <a href="Arquivos/music/index.html" class="category-card">
+            <div class="card-icon">
+                <i class="fas fa-music"></i> </div>
+            <h2 class="card-title">Músicas</h2>
+            <p class="card-description">Coleção de trilhas sonoras e álbuns.</p>
+        </a>
+
+        <a href="Links/index.html" class="category-card">
+            <div class="card-icon">
+                <i class="fas fa-share-alt"></i> </div>
+            <h2 class="card-title">Redes Sociais</h2>
+            <p class="card-description">Conecte-se e me siga online.</p>
+        </a>
+
+        <a href="Links/sobre.html" class="category-card">
+            <div class="card-icon">
+                <i class="fas fa-user-circle"></i> </div>
+            <h2 class="card-title">Sobre Mim</h2>
+            <p class="card-description">Conheça mais sobre o SMITH33.</p>
+        </a>
+    </main>
+
+    <script src="script.js" defer></script>
 </body>
 </html>

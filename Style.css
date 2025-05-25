@@ -1,66 +1,292 @@
-@import url('https://fonts.googleapis.com/css2?family=Orbitron&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Orbitron&family=Share+Tech+Mono&display=swap');
+
+/* Variáveis para cores e efeitos */
+:root {
+    --primary-blue: #7f8cfa;
+    --text-light: #ccd6f6;
+    --text-dark: #000;
+    --background-overlay: rgba(0, 0, 0, 0.7); /* Mais opaco para o fundo */
+    --card-bg: rgba(255, 255, 255, 0.08); /* Fundo dos cards */
+    --hover-bg: rgba(127, 140, 250, 0.8); /* Fundo do card no hover */
+    --glow-light: #7f8cfa; /* Para brilhos mais suaves */
+
+    --neon-glow: 0 0 5px var(--primary-blue),
+                 0 0 10px var(--primary-blue),
+                 0 0 20px var(--primary-blue),
+                 0 0 40px var(--primary-blue);
+    --text-glow: 0 0 3px rgba(255, 255, 255, 0.7),
+                 0 0 8px var(--primary-blue);
+    --shadow-strong: 0 0 15px var(--primary-blue), inset 0 0 10px var(--primary-blue);
+    --shadow-hover: 0 0 30px var(--primary-blue), inset 0 0 15px var(--primary-blue);
+}
 
 body {
-  margin: 0;
-  background: url('config/background.jpg') no-repeat center center fixed;
-  background-size: cover;
-  color: #fff;
-  font-family: 'Orbitron', sans-serif;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
+    margin: 0;
+    background: url('config/background.jpg') no-repeat center center fixed;
+    background-size: cover;
+    color: var(--text-light);
+    font-family: 'Share Tech Mono', monospace; /* Fonte mais "tech" para o corpo */
+    display: flex;
+    flex-direction: column; /* Coloca header e main um abaixo do outro */
+    align-items: center; /* Centraliza conteúdo horizontalmente */
+    min-height: 100vh;
+    padding: 0; /* Remove padding do body, containers terão seu próprio */
+    box-sizing: border-box;
+    position: relative;
+    overflow-x: hidden; /* Evita rolagem horizontal */
 }
 
-h1 {
-  font-size: 3rem;
-  margin-bottom: 40px;
-  letter-spacing: 6px;
-  text-transform: uppercase;
-  color: #ccd6f6;
-  text-shadow:
-    0 0 5px #7f8cfa,
-    0 0 10px #7f8cfa,
-    0 0 20px #7f8cfa,
-    0 0 40px #7f8cfa;
+/* Camada escura sobre o fundo com BLUR! */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--background-overlay); /* Mantém a camada escura */
+    backdrop-filter: blur(8px); /* NOVO: Efeito de desfoque */
+    -webkit-backdrop-filter: blur(8px); /* Compatibilidade com navegadores WebKit */
+    z-index: -1;
 }
 
-nav {
-  display: flex;
-  flex-direction: column;
-  gap: 25px;
-  width: 300px;
+/* Header principal */
+.main-header {
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.6); /* Fundo mais escuro para o header */
+    padding: 20px 40px;
+    display: flex;
+    flex-direction: column; /* Em telas menores, header fica em coluna */
+    align-items: center;   /* Centraliza horizontalmente o conteúdo */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    border-bottom: 2px solid var(--primary-blue);
+    position: sticky; /* Header fixo no topo ao rolar */
+    top: 0;
+    z-index: 1000; /* Garante que o header fique no topo */
 }
 
-a {
-  background: rgba(255, 255, 255, 0.05);
-  border: 2px solid #7f8cfa;
-  border-radius: 15px;
-  padding: 18px;
-  font-size: 1.4rem;
-  color: #ccd6f6;
-  text-align: center;
-  text-decoration: none;
-  text-transform: uppercase;
-  box-shadow:
-    0 0 8px #7f8cfa,
-    inset 0 0 10px #7f8cfa;
-  transition: all 0.3s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.site-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2.5rem; /* Tamanho ajustado para o header */
+    margin: 0 0 20px 0; /* Adiciona margem inferior para separar do search */
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--primary-blue); /* Título do site em azul vibrante */
+    text-shadow: var(--neon-glow);
+    text-align: center; /* Garante que o texto dentro do h1 esteja centralizado */
 }
 
-a img {
-  margin-right: 10px;
+/* Barra de Pesquisa */
+.search-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    max-width: 600px; /* Aumentei a largura máxima para dar mais espaço */
+    /* Remove justify-content para que ele se ajuste dentro do align-items: center do header */
 }
 
-a:hover {
-  background: #7f8cfa;
-  color: #000;
-  box-shadow:
-    0 0 20px #7f8cfa,
-    inset 0 0 15px #7f8cfa;
-  transform: scale(1.05);
+#searchInput {
+    flex-grow: 1; /* Ocupa o máximo de espaço possível */
+    padding: 12px 18px;
+    border: 2px solid var(--primary-blue);
+    border-radius: 25px; /* Bordas arredondadas */
+    background-color: rgba(0, 0, 0, 0.5); /* Fundo escuro transparente */
+    color: var(--text-light);
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 1rem;
+    outline: none;
+    box-shadow: var(--shadow-strong); /* Brilho inicial */
+    transition: all 0.3s ease;
+}
+
+#searchInput::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+#searchInput:focus {
+    border-color: var(--glow-light);
+    box-shadow: 0 0 15px var(--glow-light), inset 0 0 8px var(--glow-light);
+}
+
+#searchButton {
+    background-color: var(--primary-blue);
+    border: none;
+    border-radius: 50%; /* Botão redondo */
+    width: 45px; /* Tamanho do botão */
+    height: 45px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: var(--neon-glow);
+    transition: all 0.3s ease;
+}
+
+#searchButton i {
+    color: var(--text-dark); /* Ícone escuro no botão azul */
+    font-size: 1.2rem;
+}
+
+#searchButton:hover {
+    background-color: var(--glow-light);
+    box-shadow: 0 0 25px var(--glow-light);
+    transform: scale(1.05);
+}
+
+/* Layout dos Cards de Categoria */
+.categories-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Colunas flexíveis */
+    gap: 30px; /* Espaçamento entre os cards */
+    width: 100%;
+    max-width: 1200px; /* Largura máxima para o grid */
+    padding: 50px 20px; /* Padding ao redor do grid */
+    box-sizing: border-box;
+    justify-content: center; /* Centraliza o grid */
+}
+
+.category-card {
+    background: var(--card-bg);
+    border: 2px solid var(--primary-blue);
+    border-radius: 15px;
+    box-shadow: var(--shadow-strong);
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    text-decoration: none;
+    color: var(--text-light);
+    transition: all 0.3s ease;
+    min-height: 220px; /* Altura mínima para os cards */
+}
+
+.category-card:hover {
+    background: var(--hover-bg);
+    box-shadow: var(--shadow-hover);
+    transform: translateY(-8px) scale(1.03); /* Leve elevação e zoom */
+}
+
+.card-icon {
+    font-size: 4rem; /* Tamanho grande para os ícones */
+    margin-bottom: 20px;
+    color: var(--primary-blue);
+    text-shadow: var(--neon-glow);
+}
+
+.card-icon img { /* Se você usar imagens ao invés de Font Awesome */
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    filter: drop-shadow(0 0 10px var(--primary-blue));
+}
+
+.card-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.8rem;
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: var(--text-light);
+    text-shadow: var(--text-glow);
+}
+
+.card-description {
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.5;
+}
+
+/* Media Queries para Responsividade */
+@media (max-width: 1024px) {
+    .main-header {
+        padding: 15px 25px;
+        flex-direction: column; /* Em telas menores, header fica em coluna */
+        gap: 15px;
+    }
+    .site-title {
+        font-size: 2rem;
+        text-align: center;
+        margin-bottom: 15px; /* Ajuste para espaçamento em telas menores */
+    }
+    .search-container {
+        max-width: 100%;
+        justify-content: center;
+    }
+    .categories-grid {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        padding: 30px 15px;
+        gap: 25px;
+    }
+    .category-card {
+        padding: 20px;
+        min-height: 200px;
+    }
+    .card-icon {
+        font-size: 3.5rem;
+    }
+    .card-title {
+        font-size: 1.6rem;
+    }
+}
+
+@media (min-width: 1025px) { /* Acima de 1024px */
+    .main-header {
+        flex-direction: row; /* Volta a ser linha para desktop */
+        justify-content: center; /* Centraliza tudo na linha */
+    }
+
+    .site-title {
+        position: absolute; /* Posiciona o título de forma absoluta */
+        left: 50%; /* No meio */
+        transform: translateX(-50%); /* Ajusta para centralizar */
+        margin: 0; /* Remove margens fixas */
+        width: auto; /* Deixa a largura automática */
+    }
+
+    .search-container {
+        margin-left: auto; /* Empurra a barra de pesquisa para a direita */
+        max-width: 400px; /* Ajuste para caber melhor na direita */
+    }
+}
+
+@media (max-width: 768px) {
+    .main-header {
+        padding: 10px 15px;
+    }
+    .site-title {
+        font-size: 1.8rem;
+        letter-spacing: 4px;
+        margin-bottom: 10px; /* Ajuste final de espaçamento */
+    }
+    #searchInput {
+        padding: 10px 15px;
+        font-size: 0.9rem;
+    }
+    #searchButton {
+        width: 40px;
+        height: 40px;
+    }
+    #searchButton i {
+        font-size: 1rem;
+    }
+    .categories-grid {
+        grid-template-columns: 1fr; /* Uma coluna em telas muito pequenas */
+        padding: 20px 10px;
+        gap: 20px;
+    }
+    .category-card {
+        max-width: 400px; /* Limita a largura do card em mobile */
+        margin: 0 auto; /* Centraliza o card */
+        min-height: 180px;
+    }
+    .card-icon {
+        font-size: 3rem;
+    }
+    .card-title {
+        font-size: 1.4rem;
+    }
+    .card-description {
+        font-size: 0.85rem;
+    }
 }
