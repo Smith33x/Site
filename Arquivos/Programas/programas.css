@@ -18,7 +18,7 @@
 body {
     margin: 0;
     /* AJUSTE O CAMINHO DA IMAGEM DE FUNDO AQUI */
-    background: url('https://wallpapers.com/images/hd/1920x1080-anime-sung-jin-woo-22oq7medj47xfi42.jpg') no-repeat center center fixed;
+    background: url('../config/background2.jpg') no-repeat center center fixed;
     background-size: cover;
     background-color: var(--bg-dark); /* Fallback para cor escura */
     color: var(--text-color); /* Usando a nova variável */
