@@ -3,84 +3,97 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Central de Programas</title>
+    <title>Game Station - Central de Programas</title>
     <link rel="stylesheet" href="programas.css">
-    </head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
 <body>
     <div id="page-transition-overlay">
         <div class="spinner"></div>
     </div>
 
-    <header class="main-header">
+    <header class="main-header blur-effect"> 
         <a href="../../index.html" class="back-button-global">
             <i class="fas fa-arrow-left"></i> Voltar
         </a>
         <h1 class="page-title-global">Central de Programas</h1>
-        </header>
+    </header>
 
     <main class="content-wrapper">
         <section class="category-section">
-            <h2 class="section-title">- Programas e Ferramentas -</h2>
-            <ul class="card-container"> <li class="card blur-effect">
-                    <a href="APK/index.html">
-                        <div class="card-icon">
+            <h2 class="section-title">- Programas Disponíveis -</h2>
+            <ul class="card-container">
+                <li class="card blur-effect">
+                    <a href="APK/index.html" class="program-link">
+                        <div class="card-image-wrapper">
                             <img src="icons/apks.png" alt="Ícone de APKs de Celular">
                         </div>
-                        <h3>APKs de Celular</h3>
-                        <p>Aplicativos para seu dispositivo Android. Clique para ver a lista.</p>
-                        <button class="card-button">Ver APKs</button>
+                        <div class="card-content">
+                            <h3>APKs de Celular</h3>
+                            <p>Aplicativos para seu dispositivo Android. Clique para ver a lista.</p>
+                            <button class="card-button">Ver Programas</button>
+                        </div>
                     </a>
                 </li>
 
                 <li class="card blur-effect">
-                    <a href="https://mega.nz/file/Tlh0AJSC#UYXITH-3c_AtiBJN03onfAC7ZJbTxtCfw6A6kR0zfHM" download>
-                        <div class="card-icon">
+                    <a href="https://mega.nz/file/Tlh0AJSC#UYXITH-3c_AtiBJN03onfAC7ZJbTxtCfw6A6kR0zfHM" download class="program-link">
+                        <div class="card-image-wrapper">
                             <img src="icons/ocam.jpg" alt="Ícone Ocam">
                         </div>
-                        <h3>Ocam</h3>
-                        <p>Gravador de tela e áudio leve e eficiente para Windows.</p>
-                        <button class="card-button">Download</button>
+                        <div class="card-content">
+                            <h3>Ocam</h3>
+                            <p>Gravador de tela e áudio leve e eficiente para Windows.</p>
+                            <button class="card-button">Download</button>
+                        </div>
                     </a>
                 </li>
 
                 <li class="card blur-effect">
-                    <a href="https://cdn-fastly.obsproject.com/downloads/OBS-Studio-31.0.2-Windows-Installer.exe" download>
-                        <div class="card-icon">
+                    <a href="https://cdn-fastly.obsproject.com/downloads/OBS-Studio-31.0.2-Windows-Installer.exe" download class="program-link">
+                        <div class="card-image-wrapper">
                             <img src="icons/OBS_Studio_.png" alt="Ícone OBS Studio">
                         </div>
-                        <h3>OBS Studio</h3>
-                        <p>Software de gravação de vídeo e transmissão ao vivo de código aberto.</p>
-                        <button class="card-button">Download</button>
+                        <div class="card-content">
+                            <h3>OBS Studio</h3>
+                            <p>Software de gravação de vídeo e transmissão ao vivo de código aberto.</p>
+                            <button class="card-button">Download</button>
+                        </div>
                     </a>
                 </li>
 
                 <li class="card blur-effect">
-                    <a href="nolink" target="_blank">
-                        <div class="card-icon">
+                    <a href="nolink" target="_blank" class="program-link">
+                        <div class="card-image-wrapper">
                             <img src="icons/filmora.png" alt="Ícone Wondershare Filmora">
                         </div>
-                        <h3>Wondershare Filmora</h3>
-                        <p>Editor de vídeo intuitivo com recursos avançados para criadores.</p>
-                        <button class="card-button">Saiba Mais</button>
+                        <div class="card-content">
+                            <h3>Wondershare Filmora</h3>
+                            <p>Editor de vídeo intuitivo com recursos avançados para criadores.</p>
+                            <button class="card-button">Download</button>
+                        </div>
                     </a>
                 </li>
 
                 <li class="card blur-effect">
-                    <a href="https://get.videolan.org/vlc/3.0.21/win32/vlc-3.0.21-win32.exe" download>
-                        <div class="card-icon">
+                    <a href="https://get.videolan.org/vlc/3.0.21/win32/vlc-3.0.21-win32.exe" download class="program-link">
+                        <div class="card-image-wrapper">
                             <img src="icons/VLC_Icon.svg" alt="Ícone VLC Media Player">
                         </div>
-                        <h3>VLC Media Player</h3>
-                        <p>Reprodutor multimídia gratuito e de código aberto, compatível com quase todos os formatos.</p>
-                        <button class="card-button">Download</button>
+                        <div class="card-content">
+                            <h3>VLC Media Player</h3>
+                            <p>Reprodutor multimídia gratuito e de código aberto, compatível com quase todos os formatos.</p>
+                            <button class="card-button">Download</button>
+                        </div>
                     </a>
                 </li>
             </ul>
         </section>
     </main>
 
-    <footer class="site-footer-global">
-        <div class="credits">Créditos: Smith 33</div>
+    <footer class="site-footer-global blur-effect">
+        <p class="credits">Créditos: Smith 33</p>
     </footer>
+
 </body>
 </html>
