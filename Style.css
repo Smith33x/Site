@@ -1,163 +1,71 @@
 @import url('https://fonts.googleapis.com/css2?family=Orbitron&display=swap');
 
-:root {
-  /* Color Palette */
-  --primary-color: #7f8cfa; /* A vibrant blue-purple */
-  --secondary-color: #ccd6f6; /* Light, cool off-white */
-  --background-dark-overlay: rgba(10, 10, 15, 0.7); /* Dark overlay for text readability */
-  --text-light: #e0e6f8;
-  --glow-color: #7f8cfa;
-
-  /* Spacing */
-  --spacing-small: 15px;
-  --spacing-medium: 25px;
-  --spacing-large: 40px;
-
-  /* Border Radius */
-  --border-radius-medium: 15px;
-  --border-radius-large: 25px;
-
-  /* Font Sizes */
-  --font-size-h1-desktop: 4rem;
-  --font-size-h1-mobile: 2.5rem;
-  --font-size-link-desktop: 1.6rem;
-  --font-size-link-mobile: 1.2rem;
-}
-
 body {
   margin: 0;
-  /* Retorno do wallpaper de fundo */
   background: url('config/background.jpg') no-repeat center center fixed;
-  background-size: cover; /* Garante que a imagem cubra toda a área */
-  color: var(--text-light);
+  background-size: cover;
+  color: #fff;
   font-family: 'Orbitron', sans-serif;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 100vh;
-  padding: var(--spacing-large) var(--spacing-small);
-  box-sizing: border-box;
-  /* Adiciona um overlay escuro para melhorar a legibilidade do texto sobre a imagem */
-  position: relative; /* Necessário para posicionar o pseudo-elemento */
-  z-index: 1; /* Garante que o conteúdo fique acima do overlay */
-}
-
-/* Pseudo-elemento para criar um overlay escuro sobre o background */
-body::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: var(--background-dark-overlay); /* Usa a variável para a cor do overlay */
-  z-index: -1; /* Fica abaixo do conteúdo, mas acima do background-image */
+  height: 100vh;
 }
 
 h1 {
-  font-size: var(--font-size-h1-desktop);
-  margin-bottom: var(--spacing-large);
+  font-size: 3rem;
+  margin-bottom: 40px;
+  /*
+  * Adicionado ou ajustado este valor para abaixar o "SMITH33".
+  * Sinta-se à vontade para mudar "80px" para o valor que melhor se encaixe.
+  */
+  margin-top: 80px;
   letter-spacing: 6px;
   text-transform: uppercase;
-  color: var(--secondary-color);
-  text-align: center;
+  color: #ccd6f6;
   text-shadow:
-    0 0 8px var(--glow-color),
-    0 0 15px var(--glow-color),
-    0 0 30px var(--glow-color),
-    0 0 60px var(--glow-color);
-  padding: 0 var(--spacing-small);
-  z-index: 2; /* Garante que o H1 fique acima do overlay */
+    0 0 5px #7f8cfa,
+    0 0 10px #7f8cfa,
+    0 0 20px #7f8cfa,
+    0 0 40px #7f8cfa;
 }
 
 nav {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-medium);
-  width: 100%;
-  max-width: 400px;
-  padding: 0 var(--spacing-small);
-  z-index: 2; /* Garante que a navegação fique acima do overlay */
+  gap: 25px;
+  width: 300px;
 }
 
 a {
-  background: rgba(255, 255, 255, 0.08);
-  border: 2px solid var(--primary-color);
-  border-radius: var(--border-radius-large);
-  padding: var(--spacing-medium);
-  font-size: var(--font-size-link-desktop);
-  color: var(--secondary-color);
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid #7f8cfa;
+  border-radius: 15px;
+  padding: 18px;
+  font-size: 1.4rem;
+  color: #ccd6f6;
   text-align: center;
   text-decoration: none;
   text-transform: uppercase;
   box-shadow:
-    0 0 10px var(--glow-color),
-    inset 0 0 12px var(--glow-color);
+    0 0 8px #7f8cfa,
+    inset 0 0 10px #7f8cfa;
   transition: all 0.3s ease;
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-wrap: wrap;
 }
 
 a img {
-  margin-right: 12px;
-  max-height: 1.4em;
+  margin-right: 10px;
 }
 
 a:hover {
-  background: var(--primary-color);
-  color: var(--background-dark-overlay); /* Ajustado para um contraste melhor com o hover */
+  background: #7f8cfa;
+  color: #000;
   box-shadow:
-    0 0 25px var(--glow-color),
-    inset 0 0 20px var(--glow-color);
-  transform: translateY(-3px) scale(1.02);
-}
-
-/* --- Responsive Adjustments --- */
-@media (max-width: 768px) {
-  h1 {
-    font-size: var(--font-size-h1-mobile);
-    margin-bottom: var(--spacing-medium);
-    letter-spacing: 4px;
-  }
-
-  nav {
-    gap: var(--spacing-small);
-  }
-
-  a {
-    font-size: var(--font-size-link-mobile);
-    padding: var(--spacing-small);
-    border-radius: var(--border-radius-medium);
-  }
-
-  a img {
-    margin-right: 8px;
-    max-height: 1.2em;
-  }
-}
-
-@media (max-width: 480px) {
-  body {
-    padding: var(--spacing-medium) var(--spacing-small);
-  }
-
-  h1 {
-    font-size: 2rem;
-    letter-spacing: 3px;
-  }
-
-  a {
-    font-size: 1rem;
-    padding: 12px;
-  }
-}
-
-/* For wider screens, center the main content on a larger canvas */
-@media (min-width: 1200px) {
-  nav {
-    max-width: 500px;
-  }
+    0 0 20px #7f8cfa,
+    inset 0 0 15px #7f8cfa;
+  transform: scale(1.05);
 }
