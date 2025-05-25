@@ -1,310 +1,230 @@
 @import url('https://fonts.googleapis.com/css2?family=Orbitron&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
-
-:root {
-    --primary-color: #7f8cfa;
-    --secondary-color: #5d6edc;
-    --text-color: #ccd6f6;
-    --bg-dark: #0a0a0a;
-    --glass-bg: rgba(255, 255, 255, 0.08);
-    --glass-border: rgba(255, 255, 255, 0.2);
-    --shadow-color: rgba(0, 0, 0, 0.4);
-    --header-height-desktop: 80px;
-    --header-height-mobile: 60px;
-}
 
 body {
     margin: 0;
-    /* AJUSTE O CAMINHO DA IMAGEM DE FUNDO AQUI */
-    /* Exemplo: Se 'music-albums.css' estiver em 'Arquivos/music/', e 'background.jpg' em 'config/',
-       o caminho seria '../../config/background.jpg' */
-    background: url('../../config/background.jpg') no-repeat center center fixed;
+    /* Novo background com a imagem fornecida */
+    background: url('https://rollingstone.com.br/media/uploads/2024/11/linkin-park-2024-james-minchin-iii.jpg') no-repeat center center fixed;
     background-size: cover;
-    background-color: var(--bg-dark);
-    color: var(--text-color);
-    font-family: 'Poppins', sans-serif;
+    color: #fff;
+    font-family: 'Orbitron', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start; /* Permite scroll se houver muitos itens */
     min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    overflow-x: hidden;
-}
-
-h1, h2, h3 {
-    font-family: 'Orbitron', sans-serif;
-    color: var(--text-color);
-    text-shadow:
-        0 0 5px var(--primary-color),
-        0 0 10px var(--primary-color);
-}
-
-/* --- Header Global (reutilizado) --- */
-.main-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 5%;
-    height: var(--header-height-desktop);
-    background-color: rgba(0, 0, 0, 0.6);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-}
-
-/* Título global da página */
-.page-title-global {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 2.2rem;
-    color: var(--primary-color);
-    text-shadow: 0 0 10px var(--primary-color);
-    letter-spacing: 2px;
-    white-space: nowrap;
-    flex-grow: 1;
-    text-align: center;
-}
-
-/* Botão Voltar Global */
-.back-button-global {
-    color: var(--primary-color);
-    text-decoration: none;
-    font-size: 1.1rem;
-    padding: 8px 15px;
-    border: 1px solid var(--primary-color);
-    border-radius: 8px;
-    background-color: rgba(255, 255, 255, 0.05);
-    transition: background-color 0.3s ease, transform 0.2s ease, border-color 0.3s ease;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-}
-
-.back-button-global i {
-    font-size: 1.2em;
-}
-
-.back-button-global:hover {
-    background-color: var(--primary-color);
-    color: var(--bg-dark);
-    transform: translateY(-2px);
-    border-color: var(--secondary-color);
-}
-
-/* --- Conteúdo Principal --- */
-.content-wrapper {
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 40px 5%;
-    gap: 50px;
-    width: 100%;
+    padding: 20px;
     box-sizing: border-box;
+    /* Adiciona uma camada escura sobre o fundo para melhorar o contraste geral */
+    position: relative;
 }
 
-.category-section {
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
-    max-width: 1200px;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Camada escura */
+    z-index: -1; /* Fica atrás do conteúdo, mas na frente da imagem de fundo */
+}
+
+
+header {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 40px;
+    padding-top: 20px;
+    z-index: 1; /* Garante que o header esteja acima da camada escura */
+}
+
+h1 {
+    font-size: 3rem;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    color: #ccd6f6;
+    text-shadow:
+        0 0 5px #7f8cfa,
+        0 0 10px #7f8cfa,
+        0 0 20px #7f8cfa,
+        0 0 40px #7f8cfa;
     text-align: center;
 }
 
-.section-title {
-    font-size: 2.8rem;
-    margin-bottom: 40px;
-    letter-spacing: 4px;
-    color: var(--text-color);
-    text-shadow: 0 0 15px var(--primary-color);
+main.album-category-container {
+    width: 100%;
+    max-width: 1200px; /* Largura máxima para a grade de álbuns */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 1; /* Garante que o conteúdo principal esteja acima da camada escura */
 }
 
-/* CARD CONTAINER: Display Grid para os cards */
-.card-container {
+.album-category-list {
+    list-style: none;
+    padding: 0;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    /* Colunas responsivas: 1, 2 ou 3 álbuns por linha */
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 30px;
     justify-content: center;
-    align-items: stretch;
-    list-style: none; /* REMOVE AS BOLINHAS DA LISTA */
-    padding: 0; /* REMOVE O PADDING PADRÃO DA UL */
-    margin: 0; /* REMOVE A MARGEM PADRÃO DA UL */
+    width: 100%;
+    max-width: 90%; /* Limita a largura da grade */
 }
 
-/* CARD INDIVIDUAL */
-.card {
-    text-decoration: none;
-    color: var(--text-color);
-    padding: 30px;
-    border-radius: 20px;
-    text-align: center;
+.album-category-item {
+    background-color: rgba(0, 0, 0, 0.7); /* Fundo escuro semi-transparente para o item completo */
+    border: 2px solid #7f8cfa;
+    border-radius: 15px;
+    box-shadow:
+        0 0 8px #7f8cfa,
+        inset 0 0 10px #7f8cfa;
+    transition: all 0.3s ease;
+    overflow: hidden;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    min-height: 250px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    cursor: pointer;
+    text-align: center;
 }
 
-/* Efeito Glassmorphism (Blur) */
-.blur-effect {
-    background: var(--glass-bg);
-    border: 1px solid var(--glass-border);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    box-shadow: 0 8px 32px var(--shadow-color);
+.album-category-item:hover {
+    background-color: rgba(127, 140, 250, 0.4); /* Fundo mais claro e vibrante no hover */
+    box-shadow:
+        0 0 20px #7f8cfa,
+        inset 0 0 15px #7f8cfa;
+    transform: translateY(-5px) scale(1.02); /* Levanta e cresce um pouco */
 }
 
-.card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6), 0 0 20px var(--primary-color);
+.album-category-item a {
+    display: flex;
+    flex-direction: column;
+    color: #ccd6f6;
+    text-decoration: none;
+    height: 100%; /* Garante que o link ocupe todo o item */
 }
 
-/* ÍCONES/IMAGENS DOS CARDS (capas de álbum) */
-.card-icon {
-    margin-bottom: 15px;
-    width: 120px; /* Ajustei para um tamanho um pouco maior para as capas de álbum */
-    height: 120px; /* Ajustei para um tamanho um pouco maior para as capas de álbum */
+.album-cover {
+    width: 100%;
+    height: 200px; /* Altura fixa para as capas */
+    overflow: hidden;
+    border-bottom: 2px solid #7f8cfa;
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-shrink: 0;
+    background-color: #1a1a2e; /* Fundo padrão se a imagem não carregar */
 }
 
-.card-icon img {
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: cover; /* Use 'cover' para preencher o container, cortando se necessário */
-    border-radius: 10px; /* Mantenha as bordas suaves */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-}
-
-.card h3 {
-    font-size: 1.8rem;
-    margin-bottom: 10px;
-    color: var(--primary-color);
-    text-shadow: 0 0 8px var(--primary-color);
-}
-
-.card p {
-    font-size: 1rem;
-    margin-bottom: 25px;
-    flex-grow: 1;
-    color: rgba(255, 255, 255, 0.8);
-}
-
-.card-button {
-    background-color: var(--primary-color);
-    color: var(--bg-dark);
-    border: none;
-    border-radius: 8px;
-    padding: 12px 25px;
-    font-size: 1.1rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
-    box-shadow: 0 0 10px var(--primary-color);
-    width: auto;
-}
-
-.card-button:hover {
-    background-color: var(--secondary-color);
-    transform: translateY(-2px);
-    box-shadow: 0 0 15px var(--secondary-color);
-}
-
-/* --- Footer Global (reutilizado) --- */
-.site-footer-global {
-    background-color: rgba(0, 0, 0, 0.6);
-    color: rgba(255, 255, 255, 0.7);
-    padding: 20px;
-    text-align: center;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    margin-top: auto;
+.album-cover img {
     width: 100%;
-    box-sizing: border-box;
+    height: 100%;
+    object-fit: cover; /* Garante que a imagem cubra a área */
+    display: block;
+    transition: transform 0.3s ease;
 }
 
-.site-footer-global .credits {
+.album-category-item:hover .album-cover img {
+    transform: scale(1.05); /* Leve zoom na capa no hover */
+}
+
+.album-info {
+    padding: 15px;
+    flex-grow: 1; /* Permite que o texto ocupe o espaço restante */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    /* Adiciona um background sutilmente mais escuro para o texto dentro do card */
+    background-color: rgba(0, 0, 0, 0.3); /* Uma camada mais escura para o texto */
+    border-top: 1px solid rgba(127, 140, 250, 0.2); /* Linha divisória sutil */
+}
+
+.album-info h2 {
+    font-size: 1.4rem;
+    margin-top: 0;
+    margin-bottom: 8px;
+    color: #fff;
+    text-shadow: 0 0 5px rgba(0,0,0,0.5); /* Sombra para o título */
+}
+
+.album-info p {
+    font-size: 0.95rem;
+    line-height: 1.4;
+    color: #ccc;
+    text-shadow: 0 0 3px rgba(0,0,0,0.5); /* Sombra para o parágrafo */
+}
+
+.back-to-menu {
+    margin-top: 40px;
+    margin-bottom: 20px;
+    z-index: 1; /* Garante que o botão esteja acima da camada escura */
+}
+
+.back-to-menu a {
+    display: inline-block;
+    background: #7f8cfa;
+    color: #fff;
+    padding: 12px 25px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 1.1rem;
+    font-weight: bold;
+    transition: background 0.3s ease, transform 0.3s ease;
+    border: 2px solid #7f8cfa;
+    box-shadow: 0 0 8px #7f8cfa;
+}
+
+.back-to-menu a:hover {
+    background: #5f6bca;
+    transform: translateY(-3px);
+    box-shadow: 0 0 15px #7f8cfa;
+}
+
+.credits {
+    margin-top: 30px;
     font-size: 0.9rem;
-    margin: 0;
+    color: #aaa;
+    width: 100%;
+    text-align: center;
+    padding-bottom: 20px;
+    z-index: 1; /* Garante que os créditos estejam acima da camada escura */
 }
 
-/* ==================================== */
-/* Responsividade para a página de Música */
-/* ==================================== */
-
-/* Para telas menores que 1024px */
-@media (max-width: 1024px) {
-    .main-header {
-        height: var(--header-height-desktop);
-        padding: 0 3%;
-    }
-    .page-title-global { font-size: 1.8rem; }
-    .back-button-global { font-size: 1rem; padding: 6px 12px; }
-    .back-button-global i { font-size: 1.1em; }
-
-    .section-title { font-size: 2.2rem; margin-bottom: 30px; }
-    .card-container { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; }
-    .card { padding: 25px; min-height: 220px; }
-    .card-icon { width: 100px; height: 100px; } /* Ajuste de tamanho para tablet */
-    .card h3 { font-size: 1.6rem; }
-    .card p { font-size: 0.95rem; }
-}
-
-/* Para telas menores que 768px (Tablets em retrato, Celulares grandes) */
+/* Media Queries para responsividade */
 @media (max-width: 768px) {
-    .main-header {
-        height: auto;
-        min-height: var(--header-height-mobile);
-        padding: 10px 2%;
-        flex-direction: column;
-        justify-content: center;
+    h1 {
+        font-size: 2.5rem;
     }
-
-    .page-title-global {
-        font-size: 1.6rem;
-        text-align: center;
-        margin-top: 10px;
+    .album-category-list {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        max-width: 95%;
     }
-
-    .back-button-global {
-        font-size: 0.9rem;
-        padding: 6px 12px;
-        order: -1;
-        margin-right: auto;
+    .album-cover {
+        height: 180px;
     }
-    .back-button-global i { font-size: 1em; }
-
-
-    .content-wrapper { padding: 30px 2%; gap: 30px; }
-    .section-title { font-size: 1.6rem; margin-bottom: 20px; letter-spacing: 2px; }
-    .card-container { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; }
-    .card { padding: 18px; min-height: 180px; }
-    .card-icon { width: 80px; height: 80px; margin-bottom: 10px; } /* Ajuste de tamanho para celular */
-    .card-icon img { border-radius: 8px; }
-    .card h3 { font-size: 1.3rem; }
-    .card p { font-size: 0.85rem; margin-bottom: 15px; }
-    .card-button { padding: 8px 18px; font-size: 0.9rem; }
+    .album-info h2 {
+        font-size: 1.2rem;
+    }
 }
 
-/* Para telas muito pequenas (celulares menores) */
 @media (max-width: 480px) {
-    .main-header {
-        padding: 10px 1%;
+    h1 {
+        font-size: 2rem;
     }
-    .page-title-global { font-size: 1.4rem; }
-    .back-button-global {
-        font-size: 0.8rem;
-        padding: 5px 10px;
+    .album-category-list {
+        grid-template-columns: 1fr; /* Uma coluna em telas muito pequenas */
+        max-width: 100%;
     }
-    .back-button-global i { font-size: 0.9em; }
-
-    .content-wrapper { padding: 20px 1%; gap: 25px; }
-    .section-title { font-size: 1.4rem; margin-bottom: 15px; letter-spacing: 1px; }
-    .card-container { grid-template-columns: 1fr; gap: 10px; } /* Força 1 coluna */
-    .card { padding: 15px; min-height: auto; }
-    .card-icon { width: 70px; height: 70px; } /* Ajuste final para telas muito pequenas */
-    .card-icon img { border-radius: 5px; }
-    .card h3 { font-size: 1.1rem; }
-    .card p { font-size: 0.8rem; margin-bottom: 10px; }
-    .card-button { padding: 6px 15px; font-size: 0.85rem; }
+    .album-category-item {
+        width: 90%; /* Ajusta a largura do item */
+        margin: 0 auto; /* Centraliza */
+    }
+    .album-cover {
+        height: 160px;
+    }
+    .album-info h2 {
+        font-size: 1.1rem;
+    }
+    .back-to-menu a {
+        font-size: 1rem;
+        padding: 10px 20px;
+    }
 }
