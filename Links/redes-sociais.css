@@ -1,0 +1,206 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron&display=swap');
+
+body {
+    margin: 0;
+    /* Aqui o background vai usar o mesmo da página de jogos, subindo duas pastas para chegar na config */
+    background: url('../Arquivos/Jogos/config/background.jpg') no-repeat center center fixed;
+    background-size: cover;
+    color: #fff;
+    font-family: 'Orbitron', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start; /* Permite scroll se houver muitos itens */
+    min-height: 100vh;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+header {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 40px;
+    padding-top: 20px;
+}
+
+h1 {
+    font-size: 3rem;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    color: #ccd6f6;
+    text-shadow:
+        0 0 5px #7f8cfa,
+        0 0 10px #7f8cfa,
+        0 0 20px #7f8cfa,
+        0 0 40px #7f8cfa;
+    text-align: center;
+}
+
+main {
+    width: 100%;
+    max-width: 900px; /* Largura um pouco menor para as redes sociais */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.social-list {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    /* Adapta o grid para ter 1 ou 2 colunas dependendo do espaço */
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 30px;
+    justify-content: center;
+    width: 100%;
+    max-width: 90%;
+}
+
+.social-item {
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid #7f8cfa;
+    border-radius: 15px;
+    box-shadow:
+        0 0 8px #7f8cfa,
+        inset 0 0 10px #7f8cfa;
+    transition: all 0.3s ease;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    align-items: stretch;
+    text-align: center;
+}
+
+.social-item:hover {
+    background: #7f8cfa;
+    box-shadow:
+        0 0 20px #7f8cfa,
+        inset 0 0 15px #7f8cfa;
+    transform: scale(1.05);
+}
+
+.social-item a {
+    display: flex;
+    flex-direction: column;
+    color: #ccd6f6;
+    text-decoration: none;
+    height: 100%;
+    align-items: center; /* Centraliza o conteúdo (ícone e info) dentro do item */
+}
+
+.social-icon {
+    width: 100%;
+    height: 150px; /* Altura fixa para os ícones */
+    overflow: hidden;
+    border-bottom: 2px solid #7f8cfa;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px; /* Espaço interno para o ícone */
+    box-sizing: border-box;
+}
+
+.social-icon img {
+    max-width: 80%; /* Ícone não ocupa 100% para não "colar" nas bordas */
+    max-height: 80%;
+    object-fit: contain; /* Garante que o ícone inteiro seja visível */
+    display: block;
+}
+
+.social-info {
+    padding: 15px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centraliza verticalmente o texto */
+    text-align: center;
+}
+
+.social-info h2 {
+    font-size: 1.5rem;
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: #fff;
+}
+
+.social-info p {
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #ccc;
+}
+
+.back-to-menu {
+    margin-top: 40px;
+    margin-bottom: 20px; /* Espaço entre o botão e os créditos */
+}
+
+.back-to-menu a {
+    display: inline-block;
+    background: #7f8cfa;
+    color: #fff;
+    padding: 12px 25px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 1.1rem;
+    font-weight: bold;
+    transition: background 0.3s ease, transform 0.3s ease;
+    border: 2px solid #7f8cfa;
+    box-shadow: 0 0 8px #7f8cfa;
+}
+
+.back-to-menu a:hover {
+    background: #5f6bca;
+    transform: translateY(-3px);
+    box-shadow: 0 0 15px #7f8cfa;
+}
+
+
+.credits {
+    margin-top: 30px; /* Ajustado para estar após o botão de voltar */
+    font-size: 0.9rem;
+    color: #aaa;
+    width: 100%;
+    text-align: center;
+    padding-bottom: 20px;
+}
+
+
+/* Media Queries para responsividade */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2.5rem;
+    }
+
+    .social-list {
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        max-width: 95%;
+    }
+
+    .social-icon {
+        height: 120px;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 2rem;
+    }
+
+    .social-list {
+        grid-template-columns: 1fr;
+        max-width: 100%;
+    }
+
+    .social-item {
+        margin: 0 auto;
+        width: 90%;
+    }
+    .social-icon {
+        height: 100px;
+    }
+    .back-to-menu a {
+        font-size: 1rem;
+        padding: 10px 20px;
+    }
+}
