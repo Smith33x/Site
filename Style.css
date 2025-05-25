@@ -2,60 +2,61 @@
 
 body {
   margin: 0;
-  padding: 0;
   background: url('config/background.jpg') no-repeat center center fixed;
   background-size: cover;
   color: #fff;
   font-family: 'Orbitron', sans-serif;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
-  min-height: 100vh;
-}
-
-.container {
-  background: rgba(0, 0, 0, 0.6);
-  border: 2px solid #7f8cfa;
-  border-radius: 20px;
-  padding: 40px;
-  max-width: 600px;
-  text-align: center;
-  box-shadow:
-    0 0 10px #7f8cfa,
-    inset 0 0 15px #7f8cfa;
+  justify-content: center;
+  height: 100vh;
 }
 
 h1 {
-  margin-bottom: 20px;
-  letter-spacing: 4px;
+  font-size: 3rem;
+  margin-bottom: 40px;
+  letter-spacing: 6px;
   text-transform: uppercase;
   color: #ccd6f6;
   text-shadow:
     0 0 5px #7f8cfa,
-    0 0 10px #7f8cfa;
+    0 0 10px #7f8cfa,
+    0 0 20px #7f8cfa,
+    0 0 40px #7f8cfa;
 }
 
-p {
-  font-size: 1.1rem;
-  margin-bottom: 30px;
+nav {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  width: 300px;
 }
 
-.btn {
+a {
   background: rgba(255, 255, 255, 0.05);
   border: 2px solid #7f8cfa;
-  border-radius: 12px;
-  padding: 12px 24px;
-  font-size: 1.1rem;
+  border-radius: 15px;
+  padding: 18px;
+  font-size: 1.4rem;
   color: #ccd6f6;
+  text-align: center;
   text-decoration: none;
   text-transform: uppercase;
   box-shadow:
     0 0 8px #7f8cfa,
     inset 0 0 10px #7f8cfa;
   transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.btn:hover {
+a img {
+  margin-right: 10px;
+}
+
+a:hover {
   background: #7f8cfa;
   color: #000;
   box-shadow:
