@@ -57,7 +57,14 @@ main {
 }
 
 .social-item {
-    background: rgba(255, 255, 255, 0.05);
+    /* --- AS MUDANÇAS SÃO AQUI --- */
+    background-image: url('../Arquivos/Jogos/config/background.jpg'); /* Adiciona a imagem de fundo */
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: rgba(0, 0, 0, 0.5); /* Adiciona uma camada de cor escura */
+    background-blend-mode: overlay; /* Combina a cor com a imagem */
+    /* -------------------------- */
     border: 2px solid #7f8cfa;
     border-radius: 15px;
     box-shadow:
@@ -73,7 +80,10 @@ main {
 }
 
 .social-item:hover {
-    background: #7f8cfa;
+    /* --- AS MUDANÇAS SÃO AQUI --- */
+    background-color: rgba(127, 140, 250, 0.8); /* Tom mais claro ao passar o mouse */
+    background-blend-mode: normal; /* Remove a blend ao passar o mouse para o destaque */
+    /* -------------------------- */
     box-shadow:
         0 0 20px #7f8cfa,
         inset 0 0 15px #7f8cfa;
@@ -120,11 +130,11 @@ main {
     flex-direction: column;
     justify-content: center; /* Centraliza verticalmente o texto */
     text-align: center;
-    /* --- AS MUDANÇAS SÃO AQUI --- */
-    background-color: rgba(0, 0, 0, 0.5); /* Fundo semi-transparente escuro */
+    /* --- LINHAS REMOVIDAS AQUI --- */
+    /* background-color: rgba(0, 0, 0, 0.5); REMOVA ESTA LINHA */
+    /* -------------------------- */
     border-bottom-left-radius: 13px; /* Arredonda as bordas inferiores */
     border-bottom-right-radius: 13px; /* Arredonda as bordas inferiores */
-    /* -------------------------- */
 }
 
 .social-info h2 {
