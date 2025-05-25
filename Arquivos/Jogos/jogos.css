@@ -2,44 +2,26 @@
 
 body {
     margin: 0;
-    /* NOVO BACKGROUND: GIF do boot do PS2 na mesma pasta do CSS */
-    background: url('ps2boot.gif') no-repeat center center fixed;
-    background-size: cover; /* Garante que o GIF cubra toda a tela */
+    background: url('config/background.jpg') no-repeat center center fixed;
+    background-size: cover;
     color: #fff;
     font-family: 'Orbitron', sans-serif;
     display: flex;
     flex-direction: column;
+    /* Alinha o conteúdo principal do body horizontalmente ao centro */
     align-items: center;
+    /* Adiciona espaço acima e abaixo se a altura for maior que o conteúdo */
     justify-content: flex-start; /* Alinha o conteúdo ao topo, permitindo scroll se a lista for grande */
     min-height: 100vh;
     padding: 20px;
     box-sizing: border-box;
-    position: relative; /* Essencial para posicionar a camada escura ::before */
-}
-
-/* Camada escura sobre o fundo (GIF) para melhorar o contraste geral */
-body::before {
-    content: '';
-    position: fixed; /* 'fixed' para cobrir a tela inteira, mesmo com scroll */
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.6); /* Camada preta com 60% de opacidade */
-    z-index: -1; /* Garante que essa camada fique atrás de todo o conteúdo, mas acima do GIF */
-}
-
-/* Garante que todos os elementos de conteúdo fiquem acima do fundo e da camada escura */
-header, main, .back-to-menu, .credits, .game-item {
-    position: relative; /* Permite que z-index funcione */
-    z-index: 1; /* Valor maior que -1 para ficarem visíveis */
 }
 
 header {
     width: 100%;
     text-align: center;
     margin-bottom: 40px;
-    padding-top: 20px;
+    padding-top: 20px; /* Adiciona um pouco de espaço no topo */
 }
 
 h1 {
@@ -52,15 +34,17 @@ h1 {
         0 0 10px #7f8cfa,
         0 0 20px #7f8cfa,
         0 0 40px #7f8cfa;
+    /* Centraliza o texto do H1 */
     text-align: center;
 }
 
 main {
     width: 100%;
-    max-width: 1200px;
+    max-width: 1200px; /* Limita a largura do conteúdo principal */
+    /* Garante que o main também esteja centralizado na página */
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: center; /* Centraliza horizontalmente o conteúdo dentro do main */
 }
 
 ul {
@@ -69,13 +53,14 @@ ul {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 30px;
+    /* Centraliza os itens do grid quando há espaço sobrando */
     justify-content: center;
-    width: 100%;
-    max-width: 90%;
+    width: 100%; /* Garante que a UL ocupe a largura total disponível */
+    max-width: 90%; /* Adiciona um max-width para não esticar demais em telas muito largas */
 }
 
 .game-item {
-    background: rgba(0, 0, 0, 0.7); /* Fundo dos cards de jogo mais escuro para melhor contraste */
+    background: rgba(255, 255, 255, 0.05);
     border: 2px solid #7f8cfa;
     border-radius: 15px;
     box-shadow:
@@ -86,12 +71,13 @@ ul {
     display: flex;
     flex-direction: column;
     text-decoration: none;
+    /* Garante que o game-item se estenda para alinhar corretamente no grid */
     align-items: stretch;
-    text-align: center;
+    text-align: center; /* Centraliza o texto dentro de cada game-item */
 }
 
 .game-item:hover {
-    background: rgba(127, 140, 250, 0.4); /* Levemente mais claro e vibrante no hover */
+    background: #7f8cfa;
     box-shadow:
         0 0 20px #7f8cfa,
         inset 0 0 15px #7f8cfa;
@@ -111,7 +97,7 @@ ul {
     height: 200px;
     overflow: hidden;
     border-bottom: 2px solid #7f8cfa;
-    display: flex;
+    display: flex; /* Adiciona flexbox para centralizar a imagem dentro da div */
     justify-content: center;
     align-items: center;
 }
@@ -129,34 +115,34 @@ ul {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    /* Centraliza o texto horizontalmente dentro do game-info */
     text-align: center;
-    background-color: rgba(0, 0, 0, 0.3); /* Camada extra de escurecimento para o texto do card */
 }
 
 .game-info h2 {
     font-size: 1.5rem;
     margin-top: 0;
     margin-bottom: 10px;
+    /* Já estava centralizado, mas reforça */
     text-align: center;
     color: #fff;
-    text-shadow: 0 0 5px rgba(0,0,0,0.5); /* Sombra para o título */
 }
 
 .game-info p {
     font-size: 1rem;
     line-height: 1.5;
+    /* Já estava centralizado, mas reforça */
     text-align: center;
     color: #ccc;
-    text-shadow: 0 0 3px rgba(0,0,0,0.5); /* Sombra para o parágrafo */
 }
 
 .credits {
     margin-top: 50px;
     font-size: 0.9rem;
     color: #aaa;
-    width: 100%;
-    text-align: center;
-    padding-bottom: 20px;
+    width: 100%; /* Garante que os créditos ocupem a largura total */
+    text-align: center; /* Centraliza o texto dos créditos */
+    padding-bottom: 20px; /* Adiciona um pouco de espaço na parte inferior */
 }
 
 /* Media Queries para responsividade */
@@ -166,8 +152,8 @@ ul {
     }
 
     ul {
-        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-        max-width: 95%;
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); /* Reduz o min-width para mais itens em telas menores */
+        max-width: 95%; /* Permite que ocupe mais espaço em telas menores */
     }
 
     .game-image {
@@ -181,13 +167,13 @@ ul {
     }
 
     ul {
-        grid-template-columns: 1fr;
-        max-width: 100%;
+        grid-template-columns: 1fr; /* Uma coluna em telas muito pequenas */
+        max-width: 100%; /* Ocupa a largura total em telas muito pequenas */
     }
 
     .game-item {
-        margin: 0 auto;
-        width: 90%;
+        margin: 0 auto; /* Centraliza o item individualmente em telas muito pequenas */
+        width: 90%; /* Garante que o item não cole nas bordas */
     }
     .game-image {
         height: 160px;
