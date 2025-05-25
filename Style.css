@@ -1,13 +1,65 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron&display=swap');
+
 body {
   margin: 0;
+  padding: 0;
   background: url('config/background.jpg') no-repeat center center fixed;
   background-size: cover;
   color: #fff;
   font-family: 'Orbitron', sans-serif;
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   min-height: 100vh;
+}
+
+.container {
+  background: rgba(0, 0, 0, 0.6);
+  border: 2px solid #7f8cfa;
+  border-radius: 20px;
+  padding: 40px;
+  max-width: 600px;
   text-align: center;
+  box-shadow:
+    0 0 10px #7f8cfa,
+    inset 0 0 15px #7f8cfa;
+}
+
+h1 {
+  margin-bottom: 20px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: #ccd6f6;
+  text-shadow:
+    0 0 5px #7f8cfa,
+    0 0 10px #7f8cfa;
+}
+
+p {
+  font-size: 1.1rem;
+  margin-bottom: 30px;
+}
+
+.btn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid #7f8cfa;
+  border-radius: 12px;
+  padding: 12px 24px;
+  font-size: 1.1rem;
+  color: #ccd6f6;
+  text-decoration: none;
+  text-transform: uppercase;
+  box-shadow:
+    0 0 8px #7f8cfa,
+    inset 0 0 10px #7f8cfa;
+  transition: all 0.3s ease;
+}
+
+.btn:hover {
+  background: #7f8cfa;
+  color: #000;
+  box-shadow:
+    0 0 20px #7f8cfa,
+    inset 0 0 15px #7f8cfa;
+  transform: scale(1.05);
 }
