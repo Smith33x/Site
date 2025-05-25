@@ -1,66 +1,164 @@
 @import url('https://fonts.googleapis.com/css2?family=Orbitron&display=swap');
 
+:root {
+  /* Color Palette */
+  --primary-color: #7f8cfa; /* A vibrant blue-purple */
+  --secondary-color: #ccd6f6; /* Light, cool off-white */
+  --background-dark: #0a0a0f; /* Very dark background */
+  --text-light: #e0e6f8;
+  --glow-color: #7f8cfa;
+
+  /* Spacing */
+  --spacing-small: 15px;
+  --spacing-medium: 25px;
+  --spacing-large: 40px;
+
+  /* Border Radius */
+  --border-radius-medium: 15px;
+  --border-radius-large: 25px;
+
+  /* Font Sizes */
+  --font-size-h1-desktop: 4rem;
+  --font-size-h1-mobile: 2.5rem;
+  --font-size-link-desktop: 1.6rem;
+  --font-size-link-mobile: 1.2rem;
+}
+
 body {
   margin: 0;
-  background: url('config/background.jpg') no-repeat center center fixed;
-  background-size: cover;
-  color: #fff;
+  background: var(--background-dark); /* Solid dark background for better contrast */
+  color: var(--text-light);
   font-family: 'Orbitron', sans-serif;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh;
+  min-height: 100vh; /* Use min-height to allow content to expand */
+  padding: var(--spacing-large) var(--spacing-small); /* Add padding for small screens */
+  box-sizing: border-box; /* Include padding in element's total width and height */
 }
 
+/* Optional: If you still want a background image, consider this: */
+/*
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('config/background.jpg') no-repeat center center fixed;
+  background-size: cover;
+  opacity: 0.2; // Make it subtle
+  z-index: -1; // Keep it behind content
+}
+*/
+
 h1 {
-  font-size: 3rem;
-  margin-bottom: 40px;
+  font-size: var(--font-size-h1-desktop);
+  margin-bottom: var(--spacing-large);
   letter-spacing: 6px;
   text-transform: uppercase;
-  color: #ccd6f6;
+  color: var(--secondary-color);
+  text-align: center; /* Center text for responsiveness */
   text-shadow:
-    0 0 5px #7f8cfa,
-    0 0 10px #7f8cfa,
-    0 0 20px #7f8cfa,
-    0 0 40px #7f8cfa;
+    0 0 8px var(--glow-color),
+    0 0 15px var(--glow-color),
+    0 0 30px var(--glow-color),
+    0 0 60px var(--glow-color);
+  padding: 0 var(--spacing-small); /* Add horizontal padding */
 }
 
 nav {
   display: flex;
   flex-direction: column;
-  gap: 25px;
-  width: 300px;
+  gap: var(--spacing-medium);
+  width: 100%; /* Full width on smaller screens */
+  max-width: 400px; /* Max width for desktop to keep it focused */
+  padding: 0 var(--spacing-small); /* Add horizontal padding */
 }
 
 a {
-  background: rgba(255, 255, 255, 0.05);
-  border: 2px solid #7f8cfa;
-  border-radius: 15px;
-  padding: 18px;
-  font-size: 1.4rem;
-  color: #ccd6f6;
+  background: rgba(255, 255, 255, 0.08); /* Slightly more opaque background */
+  border: 2px solid var(--primary-color);
+  border-radius: var(--border-radius-large); /* Slightly larger border-radius for softer look */
+  padding: var(--spacing-medium);
+  font-size: var(--font-size-link-desktop);
+  color: var(--secondary-color);
   text-align: center;
   text-decoration: none;
   text-transform: uppercase;
   box-shadow:
-    0 0 8px #7f8cfa,
-    inset 0 0 10px #7f8cfa;
+    0 0 10px var(--glow-color),
+    inset 0 0 12px var(--glow-color);
   transition: all 0.3s ease;
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-wrap: wrap; /* Allow content to wrap if icons are too wide */
 }
 
 a img {
-  margin-right: 10px;
+  margin-right: 12px; /* Slightly increased margin for icons */
+  max-height: 1.4em; /* Ensure icons scale with font size */
 }
 
 a:hover {
-  background: #7f8cfa;
-  color: #000;
+  background: var(--primary-color);
+  color: var(--background-dark); /* Darker text on hover */
   box-shadow:
-    0 0 20px #7f8cfa,
-    inset 0 0 15px #7f8cfa;
-  transform: scale(1.05);
+    0 0 25px var(--glow-color),
+    inset 0 0 20px var(--glow-color);
+  transform: translateY(-3px) scale(1.02); /* Subtle lift and slight scale */
+}
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 768px) {
+  h1 {
+    font-size: var(--font-size-h1-mobile);
+    margin-bottom: var(--spacing-medium);
+    letter-spacing: 4px;
+  }
+
+  nav {
+    gap: var(--spacing-small);
+  }
+
+  a {
+    font-size: var(--font-size-link-mobile);
+    padding: var(--spacing-small);
+    border-radius: var(--border-radius-medium); /* Smaller radius for mobile */
+  }
+
+  a img {
+    margin-right: 8px;
+    max-height: 1.2em;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    padding: var(--spacing-medium) var(--spacing-small);
+  }
+
+  h1 {
+    font-size: 2rem;
+    letter-spacing: 3px;
+  }
+
+  a {
+    font-size: 1rem;
+    padding: 12px;
+  }
+}
+
+/* For wider screens, center the main content on a larger canvas */
+@media (min-width: 1200px) {
+  body {
+    background-size: contain; /* Adjust if background image is used */
+  }
+
+  nav {
+    max-width: 500px; /* Allow navigation to be a bit wider on large screens */
+  }
 }
