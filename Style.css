@@ -1,257 +1,164 @@
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Orbitron&display=swap');
 
 :root {
-    /* Color Palette */
-    --primary-color: #7f8cfa; /* Vibrante Blue-Purple */
-    --secondary-color: #ccd6f6; /* Light, Cool Off-White */
-    --accent-color: #3498db; /* Um azul mais forte para detalhes */
-    --dark-overlay: rgba(5, 5, 10, 0.75); /* Overlay escuro para leitura */
-    --text-light: #e0e6f8;
-    --glow-color-soft: rgba(127, 140, 250, 0.5); /* Brilho mais suave */
-    --glow-color-strong: #7f8cfa; /* Brilho forte */
-    --glass-background: rgba(255, 255, 255, 0.08); /* Fundo do glassmorphism */
-    --glass-border: rgba(127, 140, 250, 0.4); /* Borda do glassmorphism */
+  /* Color Palette */
+  --primary-color: #7f8cfa; /* A vibrant blue-purple */
+  --secondary-color: #ccd6f6; /* Light, cool off-white */
+  --background-dark: #0a0a0f; /* Very dark background */
+  --text-light: #e0e6f8;
+  --glow-color: #7f8cfa;
 
-    /* Spacing */
-    --spacing-xs: 10px;
-    --spacing-small: 15px;
-    --spacing-medium: 25px;
-    --spacing-large: 40px;
+  /* Spacing */
+  --spacing-small: 15px;
+  --spacing-medium: 25px;
+  --spacing-large: 40px;
 
-    /* Border Radius */
-    --border-radius-soft: 10px;
-    --border-radius-card: 20px;
+  /* Border Radius */
+  --border-radius-medium: 15px;
+  --border-radius-large: 25px;
 
-    /* Font Sizes */
-    --font-size-h1-desktop: 4.5rem;
-    --font-size-h1-mobile: 2.8rem;
-    --font-size-time-desktop: 3rem;
-    --font-size-time-mobile: 2rem;
-    --font-size-date-desktop: 1.5rem;
-    --font-size-date-mobile: 1.1rem;
-    --font-size-link-desktop: 1.5rem;
-    --font-size-link-mobile: 1.1rem;
-    --font-size-icon-desktop: 1.8rem;
-    --font-size-icon-mobile: 1.4rem;
+  /* Font Sizes */
+  --font-size-h1-desktop: 4rem;
+  --font-size-h1-mobile: 2.5rem;
+  --font-size-link-desktop: 1.6rem;
+  --font-size-link-mobile: 1.2rem;
 }
 
 body {
-    margin: 0;
-    background: url('config/background.jpg') no-repeat center center fixed;
-    background-size: cover;
-    color: var(--text-light);
-    font-family: 'Orbitron', sans-serif;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    padding: var(--spacing-large) var(--spacing-xs); /* Padding horizontal menor */
-    box-sizing: border-box;
-    position: relative;
-    overflow: hidden; /* Garante que nada transborde */
+  margin: 0;
+  background: var(--background-dark); /* Solid dark background for better contrast */
+  color: var(--text-light);
+  font-family: 'Orbitron', sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh; /* Use min-height to allow content to expand */
+  padding: var(--spacing-large) var(--spacing-small); /* Add padding for small screens */
+  box-sizing: border-box; /* Include padding in element's total width and height */
 }
 
-/* Overlay de fundo */
-.background-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: var(--dark-overlay);
-    backdrop-filter: blur(3px); /* Um blur suave no fundo */
-    z-index: -1;
+/* Optional: If you still want a background image, consider this: */
+/*
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('config/background.jpg') no-repeat center center fixed;
+  background-size: cover;
+  opacity: 0.2; // Make it subtle
+  z-index: -1; // Keep it behind content
+}
+*/
+
+h1 {
+  font-size: var(--font-size-h1-desktop);
+  margin-bottom: var(--spacing-large);
+  letter-spacing: 6px;
+  text-transform: uppercase;
+  color: var(--secondary-color);
+  text-align: center; /* Center text for responsiveness */
+  text-shadow:
+    0 0 8px var(--glow-color),
+    0 0 15px var(--glow-color),
+    0 0 30px var(--glow-color),
+    0 0 60px var(--glow-color);
+  padding: 0 var(--spacing-small); /* Add horizontal padding */
 }
 
-.container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 90%; /* Ocupa mais largura em telas menores */
-    max-width: 600px; /* Largura máxima para desktop */
-    padding: var(--spacing-medium);
-    z-index: 1; /* Garante que o conteúdo fique acima do overlay */
+nav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-medium);
+  width: 100%; /* Full width on smaller screens */
+  max-width: 400px; /* Max width for desktop to keep it focused */
+  padding: 0 var(--spacing-small); /* Add horizontal padding */
 }
 
-/* Header Section */
-.header-section {
-    text-align: center;
-    margin-bottom: var(--spacing-large);
-    width: 100%;
+a {
+  background: rgba(255, 255, 255, 0.08); /* Slightly more opaque background */
+  border: 2px solid var(--primary-color);
+  border-radius: var(--border-radius-large); /* Slightly larger border-radius for softer look */
+  padding: var(--spacing-medium);
+  font-size: var(--font-size-link-desktop);
+  color: var(--secondary-color);
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  box-shadow:
+    0 0 10px var(--glow-color),
+    inset 0 0 12px var(--glow-color);
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap; /* Allow content to wrap if icons are too wide */
 }
 
-.main-title {
-    font-size: var(--font-size-h1-desktop);
-    margin: 0 0 var(--spacing-medium);
-    letter-spacing: 7px;
-    text-transform: uppercase;
-    color: var(--secondary-color);
-    text-shadow:
-        0 0 10px var(--glow-color-strong),
-        0 0 20px var(--glow-color-strong),
-        0 0 40px var(--glow-color-strong),
-        0 0 80px var(--glow-color-strong);
-    white-space: nowrap; /* Evita quebra de linha em telas maiores */
-    overflow: hidden; /* Esconde overflow se o texto for muito longo */
-    text-overflow: ellipsis; /* Adiciona '...' se o texto for cortado */
+a img {
+  margin-right: 12px; /* Slightly increased margin for icons */
+  max-height: 1.4em; /* Ensure icons scale with font size */
 }
 
-/* DateTime Display */
-.datetime-display {
-    background: var(--glass-background);
-    border: 1px solid var(--glass-border);
-    backdrop-filter: blur(15px); /* Efeito de vidro fosco */
-    -webkit-backdrop-filter: blur(15px); /* Suporte para Safari */
-    border-radius: var(--border-radius-card);
-    padding: var(--spacing-small) var(--spacing-medium);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: var(--spacing-medium);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3), inset 0 0 10px var(--glow-color-soft);
-}
-
-.datetime-display .time {
-    font-size: var(--font-size-time-desktop);
-    font-weight: 700;
-    color: var(--accent-color);
-    text-shadow: 0 0 8px var(--accent-color);
-    margin-bottom: var(--spacing-xs);
-    letter-spacing: 2px;
-}
-
-.datetime-display .date {
-    font-size: var(--font-size-date-desktop);
-    color: var(--secondary-color);
-    letter-spacing: 1px;
-}
-
-/* Navigation Links */
-.main-nav {
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-medium);
-    width: 100%;
-}
-
-.nav-link {
-    background: var(--glass-background);
-    border: 1px solid var(--glass-border);
-    backdrop-filter: blur(15px); /* Efeito de vidro fosco */
-    -webkit-backdrop-filter: blur(15px); /* Suporte para Safari */
-    border-radius: var(--border-radius-card);
-    padding: var(--spacing-small) var(--spacing-medium);
-    font-size: var(--font-size-link-desktop);
-    color: var(--secondary-color);
-    text-align: center;
-    text-decoration: none;
-    text-transform: uppercase;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3), inset 0 0 10px var(--glow-color-soft);
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start; /* Alinha ícones e texto à esquerda */
-    gap: var(--spacing-small); /* Espaçamento entre ícone e texto */
-}
-
-.nav-link .icon {
-    font-size: var(--font-size-icon-desktop);
-    color: var(--primary-color);
-    text-shadow: 0 0 5px var(--primary-color);
-    min-width: 30px; /* Garante que o ícone tenha um espaço mínimo */
-    text-align: center;
-}
-
-.nav-link .link-text {
-    flex-grow: 1; /* Permite que o texto ocupe o espaço restante */
-    text-align: left;
-}
-
-.nav-link:hover {
-    background: var(--primary-color);
-    color: var(--dark-overlay); /* Texto escuro no hover */
-    border-color: var(--glow-color-strong);
-    box-shadow:
-        0 0 25px var(--glow-color-strong),
-        inset 0 0 15px var(--glow-color-strong);
-    transform: translateY(-5px) scale(1.02); /* Efeito de elevação */
-}
-
-.nav-link:hover .icon {
-    color: var(--dark-overlay); /* Ícone escuro no hover */
-    text-shadow: none; /* Remove brilho do ícone no hover */
+a:hover {
+  background: var(--primary-color);
+  color: var(--background-dark); /* Darker text on hover */
+  box-shadow:
+    0 0 25px var(--glow-color),
+    inset 0 0 20px var(--glow-color);
+  transform: translateY(-3px) scale(1.02); /* Subtle lift and slight scale */
 }
 
 /* --- Responsive Adjustments --- */
 @media (max-width: 768px) {
-    .container {
-        padding: var(--spacing-small);
-    }
+  h1 {
+    font-size: var(--font-size-h1-mobile);
+    margin-bottom: var(--spacing-medium);
+    letter-spacing: 4px;
+  }
 
-    .main-title {
-        font-size: var(--font-size-h1-mobile);
-        letter-spacing: 5px;
-        margin-bottom: var(--spacing-small);
-    }
+  nav {
+    gap: var(--spacing-small);
+  }
 
-    .datetime-display {
-        padding: var(--spacing-xs) var(--spacing-small);
-        flex-direction: column; /* Em colunas para telas pequenas */
-    }
+  a {
+    font-size: var(--font-size-link-mobile);
+    padding: var(--spacing-small);
+    border-radius: var(--border-radius-medium); /* Smaller radius for mobile */
+  }
 
-    .datetime-display .time {
-        font-size: var(--font-size-time-mobile);
-        margin-bottom: 5px;
-    }
-
-    .datetime-display .date {
-        font-size: var(--font-size-date-mobile);
-    }
-
-    .nav-link {
-        font-size: var(--font-size-link-mobile);
-        padding: var(--spacing-xs) var(--spacing-small);
-        border-radius: var(--border-radius-card); /* Mantém o border-radius */
-    }
-
-    .nav-link .icon {
-        font-size: var(--font-size-icon-mobile);
-        min-width: 25px;
-    }
+  a img {
+    margin-right: 8px;
+    max-height: 1.2em;
+  }
 }
 
 @media (max-width: 480px) {
-    body {
-        padding: var(--spacing-small) var(--spacing-xs);
-    }
+  body {
+    padding: var(--spacing-medium) var(--spacing-small);
+  }
 
-    .main-title {
-        font-size: 2.2rem;
-        letter-spacing: 3px;
-    }
+  h1 {
+    font-size: 2rem;
+    letter-spacing: 3px;
+  }
 
-    .datetime-display {
-        padding: 8px 15px;
-    }
+  a {
+    font-size: 1rem;
+    padding: 12px;
+  }
+}
 
-    .datetime-display .time {
-        font-size: 1.8rem;
-    }
+/* For wider screens, center the main content on a larger canvas */
+@media (min-width: 1200px) {
+  body {
+    background-size: contain; /* Adjust if background image is used */
+  }
 
-    .datetime-display .date {
-        font-size: 1rem;
-    }
-
-    .nav-link {
-        font-size: 1rem;
-        padding: 10px 15px;
-        gap: var(--spacing-small);
-    }
-
-    .nav-link .icon {
-        font-size: 1.2rem;
-        min-width: 20px;
-    }
+  nav {
+    max-width: 500px; /* Allow navigation to be a bit wider on large screens */
+  }
 }
