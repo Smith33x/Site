@@ -1,41 +1,39 @@
-/* Seu CSS Existente */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron&display=swap');
 
 body {
     margin: 0;
-    /* NOVO CAMINHO PARA O GIF DO BOOT DO PS2 */
-    background: url('ps2boot.gif') no-repeat center center fixed; /* Caminho relativo à pasta "config" */
-    background-size: cover;
+    /* NOVO BACKGROUND: GIF do boot do PS2 na mesma pasta do CSS */
+    background: url('ps2boot.gif') no-repeat center center fixed;
+    background-size: cover; /* Garante que o GIF cubra toda a tela */
     color: #fff;
     font-family: 'Orbitron', sans-serif;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: flex-start; /* Alinha o conteúdo ao topo, permitindo scroll se a lista for grande */
     min-height: 100vh;
     padding: 20px;
     box-sizing: border-box;
-    position: relative;
+    position: relative; /* Essencial para posicionar a camada escura ::before */
 }
 
 /* Camada escura sobre o fundo (GIF) para melhorar o contraste geral */
 body::before {
     content: '';
-    position: fixed;
+    position: fixed; /* 'fixed' para cobrir a tela inteira, mesmo com scroll */
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.6); /* Aumentei um pouco a opacidade para garantir a leitura sobre o GIF animado */
-    z-index: -1;
+    background-color: rgba(0, 0, 0, 0.6); /* Camada preta com 60% de opacidade */
+    z-index: -1; /* Garante que essa camada fique atrás de todo o conteúdo, mas acima do GIF */
 }
 
-/* Garante que o conteúdo (header, main, etc.) esteja acima das camadas de fundo */
-header, main, .back-to-menu, .credits, .category-card {
-    position: relative;
-    z-index: 1;
+/* Garante que todos os elementos de conteúdo fiquem acima do fundo e da camada escura */
+header, main, .back-to-menu, .credits, .game-item {
+    position: relative; /* Permite que z-index funcione */
+    z-index: 1; /* Valor maior que -1 para ficarem visíveis */
 }
-
-/* --- O restante do seu CSS (do arquivo style.css da página de jogos) permanece o mesmo abaixo --- */
 
 header {
     width: 100%;
@@ -57,7 +55,7 @@ h1 {
     text-align: center;
 }
 
-main.category-container {
+main {
     width: 100%;
     max-width: 1200px;
     display: flex;
@@ -65,7 +63,7 @@ main.category-container {
     align-items: center;
 }
 
-.category-list {
+ul {
     list-style: none;
     padding: 0;
     display: grid;
@@ -76,8 +74,8 @@ main.category-container {
     max-width: 90%;
 }
 
-.category-card {
-    background-color: rgba(0, 0, 0, 0.7);
+.game-item {
+    background: rgba(0, 0, 0, 0.7); /* Fundo dos cards de jogo mais escuro para melhor contraste */
     border: 2px solid #7f8cfa;
     border-radius: 15px;
     box-shadow:
@@ -87,18 +85,20 @@ main.category-container {
     overflow: hidden;
     display: flex;
     flex-direction: column;
+    text-decoration: none;
+    align-items: stretch;
     text-align: center;
 }
 
-.category-card:hover {
-    background-color: rgba(127, 140, 250, 0.4);
+.game-item:hover {
+    background: rgba(127, 140, 250, 0.4); /* Levemente mais claro e vibrante no hover */
     box-shadow:
         0 0 20px #7f8cfa,
         inset 0 0 15px #7f8cfa;
-    transform: translateY(-5px) scale(1.02);
+    transform: scale(1.05);
 }
 
-.category-card a {
+.game-item a {
     display: flex;
     flex-direction: column;
     color: #ccd6f6;
@@ -114,7 +114,6 @@ main.category-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #1a1a2e;
 }
 
 .game-image img {
@@ -122,11 +121,6 @@ main.category-container {
     height: 100%;
     object-fit: cover;
     display: block;
-    transition: transform 0.3s ease;
-}
-
-.category-card:hover .game-image img {
-    transform: scale(1.05);
 }
 
 .game-info {
@@ -134,54 +128,30 @@ main.category-container {
     flex-grow: 1;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
     text-align: center;
-    background-color: rgba(0, 0, 0, 0.3);
-    border-top: 1px solid rgba(127, 140, 250, 0.2);
+    background-color: rgba(0, 0, 0, 0.3); /* Camada extra de escurecimento para o texto do card */
 }
 
 .game-info h2 {
-    font-size: 1.4rem;
+    font-size: 1.5rem;
     margin-top: 0;
-    margin-bottom: 8px;
+    margin-bottom: 10px;
+    text-align: center;
     color: #fff;
-    text-shadow: 0 0 5px rgba(0,0,0,0.5);
+    text-shadow: 0 0 5px rgba(0,0,0,0.5); /* Sombra para o título */
 }
 
 .game-info p {
-    font-size: 0.95rem;
-    line-height: 1.4;
+    font-size: 1rem;
+    line-height: 1.5;
+    text-align: center;
     color: #ccc;
-    text-shadow: 0 0 3px rgba(0,0,0,0.5);
-}
-
-.back-to-menu {
-    margin-top: 40px;
-    margin-bottom: 20px;
-}
-
-.back-to-menu a {
-    display: inline-block;
-    background: #7f8cfa;
-    color: #fff;
-    padding: 12px 25px;
-    border-radius: 8px;
-    text-decoration: none;
-    font-size: 1.1rem;
-    font-weight: bold;
-    transition: background 0.3s ease, transform 0.3s ease;
-    border: 2px solid #7f8cfa;
-    box-shadow: 0 0 8px #7f8cfa;
-}
-
-.back-to-menu a:hover {
-    background: #5f6bca;
-    transform: translateY(-3px);
-    box-shadow: 0 0 15px #7f8cfa;
+    text-shadow: 0 0 3px rgba(0,0,0,0.5); /* Sombra para o parágrafo */
 }
 
 .credits {
-    margin-top: 30px;
+    margin-top: 50px;
     font-size: 0.9rem;
     color: #aaa;
     width: 100%;
@@ -194,15 +164,14 @@ main.category-container {
     h1 {
         font-size: 2.5rem;
     }
-    .category-list {
-        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+
+    ul {
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
         max-width: 95%;
     }
+
     .game-image {
         height: 180px;
-    }
-    .game-info h2 {
-        font-size: 1.2rem;
     }
 }
 
@@ -210,22 +179,17 @@ main.category-container {
     h1 {
         font-size: 2rem;
     }
-    .category-list {
+
+    ul {
         grid-template-columns: 1fr;
         max-width: 100%;
     }
-    .category-card {
-        width: 90%;
+
+    .game-item {
         margin: 0 auto;
+        width: 90%;
     }
     .game-image {
         height: 160px;
-    }
-    .game-info h2 {
-        font-size: 1.1rem;
-    }
-    .back-to-menu a {
-        font-size: 0.9rem;
-        padding: 10px 20px;
     }
 }
