@@ -122,6 +122,7 @@ body::before {
     width: 100%;
     max-width: 1200px;
     text-align: center;
+    margin-bottom: 40px; /* Adicionado margem para separar da paginação */
 }
 
 .section-title {
@@ -257,6 +258,64 @@ body::before {
     box-shadow: 0 0 15px var(--secondary-color);
 }
 
+/* --- Paginação (Novos Estilos) --- */
+.pagination-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px; /* Espaço entre os botões e info da página */
+    margin-top: 40px; /* Espaço acima da paginação */
+    margin-bottom: 40px; /* Espaço abaixo da paginação, antes do footer */
+    padding: 15px 30px;
+    border-radius: 15px; /* Bordas arredondadas para a caixa de paginação */
+    /* Já tem blur-effect no HTML, então não precisa aqui */
+}
+
+.pagination-button {
+    background-color: var(--primary-color);
+    color: var(--bg-dark);
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    box-shadow: 0 0 8px var(--primary-color);
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Espaço entre o ícone e o texto */
+    font-family: 'Poppins', sans-serif;
+}
+
+.pagination-button:hover:not(:disabled) {
+    background-color: var(--secondary-color);
+    transform: translateY(-2px);
+    box-shadow: 0 0 12px var(--secondary-color);
+}
+
+.pagination-button:disabled {
+    background-color: rgba(var(--primary-color-rgb), 0.3); /* Cor mais clara e opaca */
+    color: rgba(255, 255, 255, 0.4);
+    cursor: not-allowed;
+    box-shadow: none;
+    transform: none;
+}
+
+.page-info {
+    font-size: 1.1rem;
+    font-family: 'Orbitron', sans-serif; /* Use Orbitron para a info da página */
+    color: var(--text-color);
+    text-shadow: 0 0 5px var(--primary-color);
+    white-space: nowrap; /* Evita quebra de linha em "Página X de Y" */
+}
+
+.page-info span {
+    color: var(--primary-color);
+    font-weight: bold;
+}
+
+
 /* --- Footer Global (com blur) --- */
 .site-footer-global {
     background-color: rgba(0, 0, 0, 0.6); /* Mantém um fundo escuro */
@@ -334,6 +393,9 @@ body::before {
     .card-content h3 { font-size: 1.6rem; }
     .card-content p { font-size: 0.95rem; }
     .card-button { font-size: 1rem; padding: 10px 20px; }
+
+    .pagination-button { padding: 8px 15px; font-size: 0.95rem; }
+    .page-info { font-size: 1rem; }
 }
 
 /* Para telas menores que 768px (Tablets em retrato, Celulares grandes) */
@@ -344,12 +406,14 @@ body::before {
         padding: 10px 2%;
         flex-direction: column;
         justify-content: center;
+        align-items: flex-start; /* Alinha o conteúdo à esquerda */
     }
 
     .page-title-global {
         font-size: 1.6rem;
         text-align: center;
         margin-top: 10px;
+        width: 100%; /* O título ocupa toda a largura */
     }
 
     .back-button-global {
@@ -370,12 +434,23 @@ body::before {
     .card-content h3 { font-size: 1.3rem; }
     .card-content p { font-size: 0.85rem; margin-bottom: 15px; }
     .card-button { padding: 8px 18px; font-size: 0.9rem; }
+
+    .pagination-controls {
+        flex-direction: column; /* Botões de paginação em coluna */
+        gap: 15px;
+        padding: 10px 20px;
+        margin-top: 30px;
+        margin-bottom: 30px;
+    }
+    .pagination-button { width: 100%; justify-content: center; padding: 10px; font-size: 0.9rem;}
+    .page-info { font-size: 0.9rem; }
 }
 
 /* Para telas muito pequenas (celulares menores) */
 @media (max-width: 480px) {
     .main-header {
         padding: 10px 1%;
+        align-items: flex-start; /* Garante alinhamento à esquerda */
     }
     .page-title-global { font-size: 1.4rem; }
     .back-button-global {
@@ -384,7 +459,7 @@ body::before {
     }
     .back-button-global i { font-size: 0.9em; }
 
-    .content-wrapper { padding: 20px 1%; } /* Removido 'gap' para celulares pequenos */
+    .content-wrapper { padding: 20px 1%; }
     .section-title { font-size: 1.4rem; margin-bottom: 15px; letter-spacing: 1px; }
     .card-container { grid-template-columns: 1fr; gap: 10px; } /* Em celulares muito pequenos, 1 coluna */
     .card { padding: 8px; min-height: 250px; } /* Mais ajustes para celular */
@@ -392,4 +467,13 @@ body::before {
     .card-content h3 { font-size: 1.1rem; }
     .card-content p { font-size: 0.8rem; margin-bottom: 10px; }
     .card-button { padding: 6px 15px; font-size: 0.85rem; }
+
+    .pagination-controls {
+        gap: 10px;
+        padding: 8px 15px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+    .pagination-button { font-size: 0.85rem; }
+    .page-info { font-size: 0.85rem; }
 }

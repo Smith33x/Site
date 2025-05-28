@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jogos PS2 - Página 4</title>
+    <link rel="stylesheet" href="jogos.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div id="page-transition-overlay">
+        <div class="spinner"></div>
+    </div>
+
+    <header class="main-header blur-effect"> 
+        <a href="jogos.index.html" class="back-button-global"> <i class="fas fa-arrow-left"></i> Voltar à Lista Principal
+        </a>
+        <h1 class="page-title-global">Lista de Jogos PS2 - Página 4</h1>
+    </header>
+
+    <main class="content-wrapper">
+        <section class="category-section">
+            <h2 class="section-title"></h2>
+            <ul class="card-container">
+                <li class="card blur-effect">
+                    <a href="https://myrient.erista.me/files/Redump/Sony%20-%20PlayStation%202/PES%202008%20-%20Pro%20Evolution%20Soccer%20%28USA%29.zip" target="_blank" class="game-link">
+                        <div class="card-image-wrapper">
+                            <img src="cov/SLUS-21685.jpg" alt="PES 2008 - Pro Evolution Soccer">
+                        </div>
+                        <div class="card-content">
+                            <h3>PES 2008 - Pro Evolution Soccer</h3>
+                            <p>Mais um ano, mais futebol. Gráficos aprimorados e novas mecânicas.</p>
+                            <button class="card-button">Download</button>
+                        </div>
+                    </a>
+                </li>
+                
+                <li class="card blur-effect">
+                    <a href="https://myrient.erista.me/files/Redump/Sony%20-%20PlayStation%202/PES%202012%20-%20Pro%20Evolution%20Soccer%20%28USA%29.zip" target="_blank" class="game-link">
+                        <div class="card-image-wrapper">
+                            <img src="cov/SLES-55658.jpg">
+                        </div>
+                        <div class="card-content">
+                            <h3>PES 2012 - Pro Evolution Soccer</h3>
+                            <p>A versão 2012 do aclamado simulador de futebol da Konami.</p>
+                            <button class="card-button">Download</button>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </section>
+    </main>
+
+    <div class="pagination-controls blur-effect">
+        <button id="prevPage" class="pagination-button">
+            <i class="fas fa-arrow-left"></i> Anterior
+        </button>
+        <span class="page-info">Página <span id="currentPage">4</span> de <span id="totalPages">X</span></span>
+        <button id="nextPage" class="pagination-button" disabled>
+            Próxima <i class="fas fa-arrow-right"></i>
+        </button>
+    </div>
+
+    <footer class="site-footer-global blur-effect">
+        <p class="credits">&copy; Smith33 YTB. Todos os direitos reservados.</p>
+    </footer>
+
+    <script>
+        // Exemplo básico de script para paginação (não é completo, apenas para demonstração)
+        document.addEventListener('DOMContentLoaded', () => {
+            const currentPageSpan = document.getElementById('currentPage');
+            const totalPagesSpan = document.getElementById('totalPages');
+            const prevButton = document.getElementById('prevPage');
+            const nextButton = document.getElementById('nextPage');
+
+            // Hardcoded para esta página específica
+            const currentPage = 4; // Esta é a página 4
+            const totalPages = 4; // Supondo que você tenha 4 páginas no total
+
+            currentPageSpan.textContent = currentPage;
+            totalPagesSpan.textContent = totalPages;
+
+            // Lógica de desabilitar/habilitar botões
+            if (currentPage === 1) {
+                prevButton.disabled = true;
+            } else {
+                prevButton.disabled = false;
+                // Exemplo: link para a página anterior
+                prevButton.onclick = () => {
+                     // Isso é uma simulação. Na vida real, você calcularia a página anterior
+                    window.location.href = 'jogos.index.html'; // Ou 'jogos_pagina3.html'
+                };
+            }
+
+            if (currentPage === totalPages) {
+                nextButton.disabled = true;
+            } else {
+                nextButton.disabled = false;
+                // Exemplo: link para a próxima página
+                nextButton.onclick = () => {
+                    // Isso é uma simulação. Na vida real, você calcularia a próxima página
+                    window.location.href = 'jogos_pagina' + (currentPage + 1) + '.html';
+                };
+            }
+
+            // Script de transição de página (se você já tem um, mantenha o seu)
+            const overlay = document.getElementById('page-transition-overlay');
+            const links = document.querySelectorAll('a[href]:not([target="_blank"]), button[onclick]'); 
+
+            links.forEach(link => {
+                link.addEventListener('click', function(event) {
+                    if (this.href && !this.getAttribute('target') && this.getAttribute('target') !== '_blank') {
+                        event.preventDefault(); // Impede a navegação padrão
+                        overlay.classList.add('active'); // Ativa a transição
+                        const destination = this.href;
+                        setTimeout(() => {
+                            window.location.href = destination; // Navega após a animação
+                        }, 500); // Duração da transição em milissegundos (0.5s CSS)
+                    } else if (this.tagName === 'BUTTON' && this.getAttribute('onclick')) {
+                        // Se for um botão com onclick, execute a função, mas sem transição
+                        // ou adapte a transição para funcionar com onclick se necessário.
+    <nav class="pagination-buttons">
+            <a href="games_part3.html" class="prev-page-button">
+                <i class="fas fa-arrow-left"></i> Página Anterior
+           
+        </nav>
+    </main>
+
+    <footer class="site-footer-global blur-effect">
+        <p class="credits">Créditos: Smith 33</p>
+    </footer>
+
+</body>
+</html>
