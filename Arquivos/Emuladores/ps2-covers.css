@@ -1,0 +1,229 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron&display=swap');
+
+body {
+    margin: 0;
+    background: url('https://rollingstone.com.br/media/uploads/2024/11/linkin-park-2024-james-minchin-iii.jpg') no-repeat center center fixed;
+    background-size: cover;
+    color: #fff;
+    font-family: 'Orbitron', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 100vh;
+    padding: 20px;
+    box-sizing: border-box;
+    position: relative;
+}
+
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: -1;
+}
+
+header {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 40px;
+    padding-top: 20px;
+    z-index: 1;
+}
+
+h1 {
+    font-size: 3rem;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    color: #ccd6f6;
+    text-shadow:
+        0 0 5px #7f8cfa,
+        0 0 10px #7f8cfa,
+        0 0 20px #7f8cfa,
+        0 0 40px #7f8cfa;
+    text-align: center;
+}
+
+/* --- Project Specific Styles (Updated Class Names) --- */
+
+main.project-category-container { /* Changed */
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 1;
+}
+
+.project-category-list { /* Changed */
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 30px;
+    justify-content: center;
+    width: 100%;
+    max-width: 90%;
+}
+
+.project-category-item { /* Changed */
+    background-color: rgba(0, 0, 0, 0.7);
+    border: 2px solid #7f8cfa;
+    border-radius: 15px;
+    box-shadow:
+        0 0 8px #7f8cfa,
+        inset 0 0 10px #7f8cfa;
+    transition: all 0.3s ease;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.project-category-item:hover { /* Changed */
+    background-color: rgba(127, 140, 250, 0.4);
+    box-shadow:
+        0 0 20px #7f8cfa,
+        inset 0 0 15px #7f8cfa;
+    transform: translateY(-5px) scale(1.02);
+}
+
+.project-category-item a { /* Changed */
+    display: flex;
+    flex-direction: column;
+    color: #ccd6f6;
+    text-decoration: none;
+    height: 100%;
+}
+
+.project-cover { /* Changed */
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+    border-bottom: 2px solid #7f8cfa;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #1a1a2e;
+}
+
+.project-cover img { /* Changed */
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.project-category-item:hover .project-cover img { /* Changed */
+    transform: scale(1.05);
+}
+
+.project-info { /* Changed */
+    padding: 15px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-top: 1px solid rgba(127, 140, 250, 0.2);
+}
+
+.project-info h2 { /* Changed */
+    font-size: 1.4rem;
+    margin-top: 0;
+    margin-bottom: 8px;
+    color: #fff;
+    text-shadow: 0 0 5px rgba(0,0,0,0.5);
+}
+
+.project-info p { /* Changed */
+    font-size: 0.95rem;
+    line-height: 1.4;
+    color: #ccc;
+    text-shadow: 0 0 3px rgba(0,0,0,0.5);
+}
+
+/* --- General Styles (No Change Needed Here) --- */
+
+.back-to-menu {
+    margin-top: 40px;
+    margin-bottom: 20px;
+    z-index: 1;
+}
+
+.back-to-menu a {
+    display: inline-block;
+    background: #7f8cfa;
+    color: #fff;
+    padding: 12px 25px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 1.1rem;
+    font-weight: bold;
+    transition: background 0.3s ease, transform 0.3s ease;
+    border: 2px solid #7f8cfa;
+    box-shadow: 0 0 8px #7f8cfa;
+}
+
+.back-to-menu a:hover {
+    background: #5f6bca;
+    transform: translateY(-3px);
+    box-shadow: 0 0 15px #7f8cfa;
+}
+
+.credits {
+    margin-top: 30px;
+    font-size: 0.9rem;
+    color: #aaa;
+    width: 100%;
+    text-align: center;
+    padding-bottom: 20px;
+    z-index: 1;
+}
+
+/* Media Queries for responsiveness (Updated Class Names) */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2.5rem;
+    }
+    .project-category-list { /* Changed */
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        max-width: 95%;
+    }
+    .project-cover { /* Changed */
+        height: 180px;
+    }
+    .project-info h2 { /* Changed */
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 2rem;
+    }
+    .project-category-list { /* Changed */
+        grid-template-columns: 1fr;
+        max-width: 100%;
+    }
+    .project-category-item { /* Changed */
+        width: 90%;
+        margin: 0 auto;
+    }
+    .project-cover { /* Changed */
+        height: 160px;
+    }
+    .project-info h2 { /* Changed */
+        font-size: 1.1rem;
+    }
+    .back-to-menu a {
+        font-size: 1rem;
+        padding: 10px 20px;
+    }
+}
