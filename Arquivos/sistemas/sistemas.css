@@ -1,0 +1,479 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap'); /* Adicionado para p, button, etc. */
+
+
+/* **NOVAS VARIÁVEIS PARA MELHOR CONTROLE** */
+:root {
+    --primary-color: #7f8cfa; /* Renomeado para consistência */
+    --secondary-color: #5d6edc; /* Adicionado para hover do botão */
+    --text-color: #ccd6f6; /* Usado para texto principal */
+    --bg-dark: #0a0a0a; /* Fundo mais escuro para o body */
+    --glass-bg: rgba(255, 255, 255, 0.08); /* Fundo dos cards com transparência */
+    --glass-border: rgba(255, 255, 255, 0.2); /* Borda dos cards com transparência */
+    --shadow-color: rgba(0, 0, 0, 0.4); /* Sombra para o glassmorphism */
+    --header-height-desktop: 80px;
+    --header-height-mobile: 60px;
+}
+
+body {
+    margin: 0;
+    /* AJUSTE O CAMINHO DA IMAGEM DE FUNDO AQUI */
+    background: url('config/background.jpg') no-repeat center center fixed;
+    background-size: cover;
+    background-color: var(--bg-dark); /* Fallback para cor escura */
+    color: var(--text-color); /* Usando a nova variável */
+    font-family: 'Poppins', sans-serif; /* Fonte mais legível para o corpo */
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+    position: relative; /* Necessário para o backdrop-filter funcionar no body */
+}
+
+/* --- Efeito Glassmorphism (Blur) reutilizável --- */
+.blur-effect {
+    background: var(--glass-bg); /* Fundo glassmorphism */
+    border: 1px solid var(--glass-border); /* Borda glassmorphism */
+    backdrop-filter: blur(10px); /* Efeito blur principal */
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 8px 32px var(--shadow-color); /* Sombra para o glassmorphism */
+}
+
+/* --- Pseudo-elemento para o blur no fundo do body --- */
+/* Isso garante que a imagem de fundo seja borrada através dos elementos transparentes */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.2); /* Uma camada escura sutil */
+    /* Removemos o backdrop-filter daqui para que o blur-effect seja aplicado nos elementos */
+    /* Se você quiser o blur na imagem de fundo em si, sem elementos na frente, coloque aqui */
+    /* Mas para o glassmorphism, o blur deve ser nos elementos */
+    z-index: -1;
+}
+
+/* --- Header Global --- */
+.main-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 5%;
+    height: var(--header-height-desktop);
+    position: sticky; /* Sticky para o header */
+    top: 0;
+    z-index: 1000;
+    width: 100%; /* Garante que o header ocupe 100% da largura */
+    box-sizing: border-box; /* Inclui padding e border na largura */
+}
+
+.page-title-global {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2.2rem;
+    color: var(--primary-color);
+    text-shadow: 0 0 10px var(--primary-color);
+    letter-spacing: 2px;
+    white-space: nowrap;
+    flex-grow: 1;
+    text-align: center;
+    margin: 0; /* Remove margens padrão */
+}
+
+.back-button-global {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-size: 1.1rem;
+    padding: 8px 15px;
+    border: 1px solid var(--primary-color);
+    border-radius: 8px;
+    background-color: rgba(255, 255, 255, 0.05);
+    transition: background-color 0.3s ease, transform 0.2s ease, border-color 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.back-button-global i {
+    font-size: 1.2em;
+}
+
+.back-button-global:hover {
+    background-color: var(--primary-color);
+    color: var(--bg-dark);
+    transform: translateY(-2px);
+    border-color: var(--secondary-color);
+}
+
+/* --- Conteúdo Principal --- */
+.content-wrapper {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 5%;
+    width: 100%;
+    box-sizing: border-box;
+    z-index: 1; /* Garante que o conteúdo esteja acima do body::before */
+}
+
+.category-section {
+    width: 100%;
+    max-width: 1200px;
+    text-align: center;
+    margin-bottom: 40px; /* Adicionado margem para separar da paginação */
+}
+
+.section-title {
+    font-size: 2.8rem;
+    margin-bottom: 40px;
+    letter-spacing: 4px;
+    color: var(--text-color);
+    text-shadow: 0 0 15px var(--primary-color);
+    font-family: 'Orbitron', sans-serif; /* Para garantir a fonte */
+}
+
+/* CARD CONTAINER: Display Grid para os cards */
+.card-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 30px;
+    justify-content: center;
+    align-items: stretch; /* Garante que cards de alturas diferentes se alinhem */
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%; /* Certifica que ocupa a largura disponível */
+}
+
+/* CARD INDIVIDUAL (NOVA ESTRUTURA) */
+.card {
+    border-radius: 20px; /* Bordas arredondadas do card completo */
+    overflow: hidden; /* Garante que nada saia do card */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    display: flex; /* O card em si é um flex container */
+    flex-direction: column; /* Conteúdo em coluna */
+    justify-content: space-between; /* Espaço entre imagem e texto/botão */
+    padding-top: 15px; /* Adiciona um padding em cima para a imagem */
+    padding-bottom: 15px; /* Adiciona um padding em baixo para o botão */
+    padding-left: 15px; /* Adiciona um padding nas laterais para o conteúdo */
+    padding-right: 15px; /* Adiciona um padding nas laterais para o conteúdo */
+    min-height: 380px; /* Altura mínima para o card, ajuste conforme necessário */
+    text-align: center; /* Centraliza texto dentro do card por padrão */
+}
+
+/* Link que envolve o conteúdo do card */
+.game-link {
+    text-decoration: none; /* Remove sublinhado do link */
+    color: inherit; /* Herda a cor do texto */
+    display: flex; /* Transforma o link em um flex container */
+    flex-direction: column; /* Conteúdo em coluna */
+    align-items: center; /* Centraliza tudo horizontalmente (imagem, título, etc.) */
+    flex-grow: 1; /* Ocupa o espaço disponível */
+    width: 100%; /* Ocupa a largura total do card */
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6), 0 0 20px var(--primary-color);
+}
+
+/* NOVO: Wrapper da Imagem (antigo .card-icon) */
+.card-image-wrapper {
+    width: 150px; /* Largura do wrapper da imagem */
+    height: 150px; /* Altura do wrapper da imagem (quadrado) */
+    overflow: hidden; /* Essencial para cortar o que excede */
+    border-radius: 12px; /* Cantos arredondados do wrapper */
+    margin-bottom: 15px; /* Espaço entre a imagem e o texto */
+    flex-shrink: 0; /* Impede que o wrapper da imagem encolha */
+    display: flex; /* Faz este wrapper um flex container */
+    justify-content: center; /* Centraliza horizontalmente o conteúdo (imagem) */
+    align-items: center; /* Centraliza verticalmente o conteúdo (imagem) */
+    /* Removido borda e sombra daqui, o blur-effect já cuida disso se necessário */
+}
+
+.card-image-wrapper img {
+    width: 100%; /* Imagem preenche 100% da largura do wrapper */
+    height: 100%; /* Imagem preenche 100% da altura do wrapper */
+    object-fit: cover; /* Corta a imagem para preencher o wrapper sem distorção */
+    object-position: center; /* Garante que o centro da imagem é o foco */
+    display: block; /* Remove espaços extras */
+    border-radius: inherit; /* Herda o border-radius do pai (.card-image-wrapper) */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Sombra para a imagem */
+}
+
+/* NOVO: Conteúdo de Texto e Botão (antigo .game-info) */
+.card-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centraliza o texto e o botão horizontalmente */
+    flex-grow: 1; /* Permite que o conteúdo ocupe o espaço restante */
+    width: 100%; /* Ocupa a largura total do card */
+    justify-content: space-between; /* Espaçamento entre título, p e botão */
+}
+
+.card-content h3 {
+    font-size: 1.8rem;
+    margin-top: 0; /* Remove margem superior padrão do h3 */
+    margin-bottom: 10px;
+    color: var(--primary-color);
+    text-shadow: 0 0 8px var(--primary-color);
+    word-break: break-word;
+    text-align: center; /* Garante que o título esteja centralizado */
+    line-height: 1.2; /* Ajusta a altura da linha para títulos grandes */
+    font-family: 'Orbitron', sans-serif; /* Para garantir a fonte */
+}
+
+.card-content p {
+    font-size: 1rem;
+    margin-bottom: 25px; /* Espaço antes do botão */
+    color: rgba(255, 255, 255, 0.8);
+    text-align: center; /* Garante que a descrição esteja centralizada */
+    line-height: 1.4;
+    flex-grow: 1; /* Permite que o parágrafo ocupe o espaço restante, empurrando o botão para baixo */
+}
+
+.card-button {
+    background-color: var(--primary-color);
+    color: var(--bg-dark);
+    border: none;
+    border-radius: 8px;
+    padding: 12px 25px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    box-shadow: 0 0 10px var(--primary-color);
+    width: auto; /* Para o botão não esticar em 100% */
+    margin-top: auto; /* Empurra o botão para o final do flex container */
+    font-family: 'Poppins', sans-serif; /* Fonte para o botão */
+}
+
+.card-button:hover {
+    background-color: var(--secondary-color);
+    transform: translateY(-2px);
+    box-shadow: 0 0 15px var(--secondary-color);
+}
+
+/* --- Paginação (Novos Estilos) --- */
+.pagination-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px; /* Espaço entre os botões e info da página */
+    margin-top: 40px; /* Espaço acima da paginação */
+    margin-bottom: 40px; /* Espaço abaixo da paginação, antes do footer */
+    padding: 15px 30px;
+    border-radius: 15px; /* Bordas arredondadas para a caixa de paginação */
+    /* Já tem blur-effect no HTML, então não precisa aqui */
+}
+
+.pagination-button {
+    background-color: var(--primary-color);
+    color: var(--bg-dark);
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    box-shadow: 0 0 8px var(--primary-color);
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Espaço entre o ícone e o texto */
+    font-family: 'Poppins', sans-serif;
+}
+
+.pagination-button:hover:not(:disabled) {
+    background-color: var(--secondary-color);
+    transform: translateY(-2px);
+    box-shadow: 0 0 12px var(--secondary-color);
+}
+
+.pagination-button:disabled {
+    background-color: rgba(var(--primary-color-rgb), 0.3); /* Cor mais clara e opaca */
+    color: rgba(255, 255, 255, 0.4);
+    cursor: not-allowed;
+    box-shadow: none;
+    transform: none;
+}
+
+.page-info {
+    font-size: 1.1rem;
+    font-family: 'Orbitron', sans-serif; /* Use Orbitron para a info da página */
+    color: var(--text-color);
+    text-shadow: 0 0 5px var(--primary-color);
+    white-space: nowrap; /* Evita quebra de linha em "Página X de Y" */
+}
+
+.page-info span {
+    color: var(--primary-color);
+    font-weight: bold;
+}
+
+
+/* --- Footer Global (com blur) --- */
+.site-footer-global {
+    background-color: rgba(0, 0, 0, 0.6); /* Mantém um fundo escuro */
+    color: rgba(255, 255, 255, 0.7);
+    padding: 20px;
+    text-align: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    margin-top: auto;
+    width: 100%;
+    box-sizing: border-box;
+    z-index: 1; /* Garante que o footer esteja acima do body::before */
+}
+
+.site-footer-global .credits {
+    font-size: 0.9rem;
+    margin: 0;
+    color: inherit; /* Herda a cor do footer */
+}
+
+/* --- Estilos de transição de página (se você estiver usando um script para isso) --- */
+#page-transition-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--bg-dark); /* Cor de fundo da transição */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
+}
+
+#page-transition-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.spinner {
+    border: 4px solid rgba(255, 255, 255, 0.3);
+    border-top: 4px solid var(--primary-color);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+
+/* ==================================== */
+/* Responsividade (Ajustada) */
+/* ==================================== */
+
+/* Para telas menores que 1024px */
+@media (max-width: 1024px) {
+    .main-header {
+        height: var(--header-height-desktop);
+        padding: 0 3%;
+    }
+    .page-title-global { font-size: 1.8rem; }
+    .back-button-global { font-size: 1rem; padding: 6px 12px; }
+    .back-button-global i { font-size: 1.1em; }
+
+    .section-title { font-size: 2.2rem; margin-bottom: 30px; }
+    .card-container { grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 25px; }
+    .card { min-height: 350px; }
+    .card-image-wrapper { width: 120px; height: 120px; border-radius: 10px; }
+    .card-content h3 { font-size: 1.6rem; }
+    .card-content p { font-size: 0.95rem; }
+    .card-button { font-size: 1rem; padding: 10px 20px; }
+
+    .pagination-button { padding: 8px 15px; font-size: 0.95rem; }
+    .page-info { font-size: 1rem; }
+}
+
+/* Para telas menores que 768px (Tablets em retrato, Celulares grandes) */
+@media (max-width: 768px) {
+    .main-header {
+        height: auto;
+        min-height: var(--header-height-mobile);
+        padding: 10px 2%;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start; /* Alinha o conteúdo à esquerda */
+    }
+
+    .page-title-global {
+        font-size: 1.6rem;
+        text-align: center;
+        margin-top: 10px;
+        width: 100%; /* O título ocupa toda a largura */
+    }
+
+    .back-button-global {
+        font-size: 0.9rem;
+        padding: 6px 12px;
+        order: -1; /* Mova o botão de voltar para cima no flexbox */
+        margin-right: auto; /* Empurra para a esquerda */
+        margin-bottom: 10px; /* Espaço entre o botão e o título */
+    }
+    .back-button-global i { font-size: 1em; }
+
+
+    .content-wrapper { padding: 30px 2%; gap: 30px; }
+    .section-title { font-size: 1.6rem; margin-bottom: 20px; letter-spacing: 2px; }
+    .card-container { grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 15px; }
+    .card { padding: 10px; min-height: 280px; } /* Ajuste de padding e altura para celular */
+    .card-image-wrapper { width: 90px; height: 90px; margin-bottom: 10px; border-radius: 8px; }
+    .card-content h3 { font-size: 1.3rem; }
+    .card-content p { font-size: 0.85rem; margin-bottom: 15px; }
+    .card-button { padding: 8px 18px; font-size: 0.9rem; }
+
+    .pagination-controls {
+        flex-direction: column; /* Botões de paginação em coluna */
+        gap: 15px;
+        padding: 10px 20px;
+        margin-top: 30px;
+        margin-bottom: 30px;
+    }
+    .pagination-button { width: 100%; justify-content: center; padding: 10px; font-size: 0.9rem;}
+    .page-info { font-size: 0.9rem; }
+}
+
+/* Para telas muito pequenas (celulares menores) */
+@media (max-width: 480px) {
+    .main-header {
+        padding: 10px 1%;
+        align-items: flex-start; /* Garante alinhamento à esquerda */
+    }
+    .page-title-global { font-size: 1.4rem; }
+    .back-button-global {
+        font-size: 0.8rem;
+        padding: 5px 10px;
+    }
+    .back-button-global i { font-size: 0.9em; }
+
+    .content-wrapper { padding: 20px 1%; }
+    .section-title { font-size: 1.4rem; margin-bottom: 15px; letter-spacing: 1px; }
+    .card-container { grid-template-columns: 1fr; gap: 10px; } /* Em celulares muito pequenos, 1 coluna */
+    .card { padding: 8px; min-height: 250px; } /* Mais ajustes para celular */
+    .card-image-wrapper { width: 70px; height: 70px; border-radius: 6px; }
+    .card-content h3 { font-size: 1.1rem; }
+    .card-content p { font-size: 0.8rem; margin-bottom: 10px; }
+    .card-button { padding: 6px 15px; font-size: 0.85rem; }
+
+    .pagination-controls {
+        gap: 10px;
+        padding: 8px 15px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+    .pagination-button { font-size: 0.85rem; }
+    .page-info { font-size: 0.85rem; }
+}
